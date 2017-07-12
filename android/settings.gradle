@@ -1,0 +1,3 @@
+rootProject.name = 'LocapsMobile'
+
+include ':app'
