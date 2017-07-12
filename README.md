@@ -13,6 +13,8 @@ The application sends video straight to S3 and records the metadata to the Rails
 
 ## Installation
 
+This installation has been tested on OSX 10.12.5.
+
 ### Install Xcode and Android 
 
 Follow the installation steps documented on React Native's website for Xcode and Android:
