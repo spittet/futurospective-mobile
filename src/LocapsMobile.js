@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import AppReducer from './reducers';
-import AppWithNavigationState from './navigators/AppNavigator';
+import AppWithNavigationState from './containers/AppNavigator';
 
 export default class LocapsMobileApp extends React.Component {
   store = createStore(AppReducer);

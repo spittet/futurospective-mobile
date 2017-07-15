@@ -5,13 +5,12 @@
 import { combineReducers } from 'redux';
 import { NavigationActions } from 'react-navigation';
 
-import { AppNavigator } from '../navigators/AppNavigator';
+import { AppNavigator } from '../containers/AppNavigator';
 
 const firstAction = AppNavigator.router.getActionForPathAndParams('Main');
 const tempNavState = AppNavigator.router.getStateForAction(firstAction);
 const secondAction = AppNavigator.router.getActionForPathAndParams('Login');
 const initialNavState = AppNavigator.router.getStateForAction(
-  secondAction,
   tempNavState
 );
 
@@ -31,6 +30,7 @@ function nav(state = initialNavState, action) {
       );
       break;
     default:
+      console.log(action);
       nextState = AppNavigator.router.getStateForAction(action, state);
       break;
   }

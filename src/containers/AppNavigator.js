@@ -9,14 +9,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
-import LoginScreen from '../components/LoginScreen';
-import MainScreen from '../components/MainScreen';
-import ProfileScreen from '../components/ProfileScreen';
+import MainScreen from './MainScreen';
+import RecordScreen from './RecordScreen';
 
 export const AppNavigator = StackNavigator({
-  Login: { screen: LoginScreen },
   Main: { screen: MainScreen },
-  Profile: { screen: ProfileScreen },
+  Record: { screen: RecordScreen },
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
