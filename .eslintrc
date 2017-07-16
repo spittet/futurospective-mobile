@@ -12,6 +12,14 @@
         "plugin:react/recommended"
     ],
     "rules": {
-        // overrides
+        "indent": [
+            "error",
+            2,
+            { "SwitchCase": 1 }
+        ],
+        "max-len": [
+            "error",
+            80
+        ]
     }
 }
