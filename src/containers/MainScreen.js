@@ -26,13 +26,9 @@ const MainScreen = ({ navigation, dispatch }: any) => (
       This is the main screen
     </Text>
     <Button
-      onPress={() => navigation.dispatch({ type: 'Record' })}
-      title="Record"
-    />
-    <Button
       onPress={() =>
         dispatch(NavigationActions.navigate({ routeName: 'Record' }))}
-      title="Record 2"
+      title="Go to record screen"
     />
   </View>
 );

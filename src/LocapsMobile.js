@@ -1,4 +1,7 @@
 /**
+ * This is the main application file. I'm not using a single index.js as I'm
+ * not sure yet that the same init can apply for both iOS and Android.
+ * 
  * @flow
  */
 
