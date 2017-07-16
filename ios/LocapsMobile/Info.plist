@@ -52,5 +52,12 @@
 			</dict>
 		</dict>
 	</dict>
+  <!-- Requesting permission to use the camera and microphone --> 
+  <key>NSCameraUsageDescription</key>
+  <string>This app needs access to the camera to take photos.</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string></string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>This app needs access to the microphone to take videos.</string>
 </dict>
 </plist>

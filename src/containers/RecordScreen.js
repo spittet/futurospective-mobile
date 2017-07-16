@@ -5,6 +5,7 @@
  */
 import React from 'react';
 import { Text, View } from 'react-native';
+import Camera from 'react-native-camera';
 
 import styles from './styles';
 

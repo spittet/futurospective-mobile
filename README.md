@@ -47,7 +47,10 @@ The React Native CLI will let you start your mobile client from your terminal.
 $ npm install -g react-native-cli
 
 # Install dependencies
-$ npm install
+$ yarn
+
+#Link the pluging react-native-camera
+$ react-native link react-native-camera
 ```
 
 ### Install 
