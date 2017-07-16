@@ -1,3 +1,6 @@
+/* eslint-env mocha */
+/* eslint-disable */
+
 import 'react-native';
 import React from 'react';
 import Index from '../index.android.js';
