@@ -49,8 +49,8 @@ class RecordScreen extends React.Component {
   startRecording = () => {
     if (this.camera) {
       this.camera.capture({mode: Camera.constants.CaptureMode.video})
-          .then((data) => console.log(data))
-          .catch(err => console.error(err));
+        .then((data) => console.log(data))
+        .catch(err => console.error(err));
       this.setState({
         isRecording: true
       });
@@ -166,19 +166,19 @@ class RecordScreen extends React.Component {
         <View style={[styles.overlay, styles.bottomOverlay]}>
           <View style={styles.buttonsSpace} />
           {
-              !this.state.isRecording
-              &&
-              <LCTouchableImage 
-                buttonStyle={styles.captureButton}
-                buttonAction={this.startRecording}
-                imageSrc={require('../assets/ic_videocam_36pt.png')}
-              />
-              ||
-              <LCTouchableImage 
-                buttonStyle={styles.captureButton}
-                buttonAction={this.stopRecording}
-                imageSrc={require('../assets/ic_stop_36pt.png')}
-              />
+            !this.state.isRecording
+            &&
+            <LCTouchableImage 
+              buttonStyle={styles.captureButton}
+              buttonAction={this.startRecording}
+              imageSrc={require('../assets/ic_videocam_36pt.png')}
+            />
+            ||
+            <LCTouchableImage 
+              buttonStyle={styles.captureButton}
+              buttonAction={this.stopRecording}
+              imageSrc={require('../assets/ic_stop_36pt.png')}
+            />
           }
         </View>
       </View>

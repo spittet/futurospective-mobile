@@ -4,7 +4,6 @@
 
 import { combineReducers } from 'redux';
 
-import Camera from 'react-native-camera';
 import { AppNavigator } from '../containers/AppNavigator';
 
 

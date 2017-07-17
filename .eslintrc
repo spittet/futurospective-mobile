@@ -21,5 +21,8 @@
             "error",
             80
         ]
+    },
+    "globals": {
+      "require": true
     }
 }
