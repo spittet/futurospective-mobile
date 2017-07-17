@@ -22,7 +22,8 @@ class MainScreen extends React.Component {
         </Text>
         <Button
           onPress={() =>
-            this.props.dispatch(NavigationActions.navigate({ routeName: 'Record' }))}
+            this.props
+              .dispatch(NavigationActions.navigate({ routeName: 'Record' }))}
           title="Go to record screen"
         />
       </View>
