@@ -5,17 +5,9 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import {
-  Image,
-  StatusBar,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  View,
-} from 'react-native';
+import { View } from 'react-native';
 import Camera from 'react-native-camera';
+import LCTouchableImage from '../components/LCTouchableImage'
 
 import styles from './styles';
 
@@ -54,14 +46,6 @@ class RecordScreen extends React.Component {
     title: 'Record Screen',
   };
 
-  takePicture = () => {
-    if (this.camera) {
-      this.camera.capture()
-        .then((data) => console.log(data))
-        .catch(err => console.error(err));
-    }
-  }
-
   startRecording = () => {
     if (this.camera) {
       this.camera.capture({mode: Camera.constants.CaptureMode.video})
@@ -92,6 +76,9 @@ class RecordScreen extends React.Component {
       newType = back;
     }
 
+    // Duplicating object to keep state immutable.
+    // See http://redux.js.org/docs/recipes/UsingObjectSpreadOperator.html
+    // Note: I'm adding this to the doc because I keep forgetting.
     this.setState({
       camera: {
         ...this.state.camera,
@@ -165,59 +152,33 @@ class RecordScreen extends React.Component {
           mirrorImage={false}
         />
         <View style={[styles.overlay, styles.topOverlay]}>
-          <TouchableOpacity
-            style={styles.typeButton}
-            onPress={this.switchType}
-          >
-            <Image
-              source={this.typeIcon}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.flashButton}
-            onPress={this.switchFlash}
-          >
-            <Image
-              source={this.flashIcon}
-            />
-          </TouchableOpacity>
+          <LCTouchableImage 
+            buttonStyle={styles.typeButton}
+            buttonAction={this.switchType}
+            imageSrc={this.typeIcon}
+          />
+          <LCTouchableImage 
+            buttonStyle={styles.flashButton}
+            buttonAction={this.switchFlash}
+            imageSrc={this.flashIcon}
+          />
         </View>
         <View style={[styles.overlay, styles.bottomOverlay]}>
-          {
-            !this.state.isRecording
-            &&
-            <TouchableOpacity
-                style={styles.captureButton}
-                onPress={this.takePicture}
-            >
-              <Image
-                  source={require('../assets/ic_photo_camera_36pt.png')}
-              />
-            </TouchableOpacity>
-            ||
-            null
-          }
           <View style={styles.buttonsSpace} />
           {
               !this.state.isRecording
               &&
-              <TouchableOpacity
-                  style={styles.captureButton}
-                  onPress={this.startRecording}
-              >
-                <Image
-                    source={require('../assets/ic_videocam_36pt.png')}
-                />
-              </TouchableOpacity>
+              <LCTouchableImage 
+                buttonStyle={styles.captureButton}
+                buttonAction={this.startRecording}
+                imageSrc={require('../assets/ic_videocam_36pt.png')}
+              />
               ||
-              <TouchableOpacity
-                  style={styles.captureButton}
-                  onPress={this.stopRecording}
-              >
-                <Image
-                    source={require('../assets/ic_stop_36pt.png')}
-                />
-              </TouchableOpacity>
+              <LCTouchableImage 
+                buttonStyle={styles.captureButton}
+                buttonAction={this.stopRecording}
+                imageSrc={require('../assets/ic_stop_36pt.png')}
+              />
           }
         </View>
       </View>
