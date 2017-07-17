@@ -8,25 +8,31 @@ import { NavigationActions } from 'react-navigation';
 
 import styles from './styles';
 
-const MainScreen = ({ dispatch }: any) => (
-  <View style={styles.container}>
-    <Text style={styles.welcome}>
-      This is the main screen
-    </Text>
-    <Button
-      onPress={() =>
-        dispatch(NavigationActions.navigate({ routeName: 'Record' }))}
-      title="Go to record screen"
-    />
-  </View>
-);
+class MainScreen extends React.Component {
+
+  static navigationOptions = {
+    title: 'Home Screen',
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          This is the main screen
+        </Text>
+        <Button
+          onPress={() =>
+            this.props.dispatch(NavigationActions.navigate({ routeName: 'Record' }))}
+          title="Go to record screen"
+        />
+      </View>
+    );
+  }
+
+}
 
 MainScreen.propTypes = {
   dispatch: PropTypes.func.isRequired
-};
-
-MainScreen.navigationOptions = {
-  title: 'Home Screen',
 };
 
 export default connect()(MainScreen);

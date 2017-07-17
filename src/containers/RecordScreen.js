@@ -9,16 +9,20 @@ import Camera from 'react-native-camera';
 
 import styles from './styles';
 
-const RecordScreen = () => (
-  <View style={styles.container}>
-    <Text style={styles.welcome}>
-      This is the record screen
-    </Text>
-  </View>
-);
+class RecordScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Record Screen',
+  };;
 
-RecordScreen.navigationOptions = {
-  title: 'Record Screen',
-};
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          This is the record screen
+        </Text>
+      </View>
+    );
+  }
+}
 
 export default RecordScreen;
