@@ -54,9 +54,9 @@
 	</dict>
   <!-- Requesting permission to use the camera and microphone --> 
   <key>NSCameraUsageDescription</key>
-  <string>This app needs access to the camera to take photos.</string>
-  <key>NSLocationWhenInUseUsageDescription</key>
-  <string></string>
+  <string>This app needs access to the camera to take videos.</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Your message to user when the photo library is accessed for the first time</string>
   <key>NSMicrophoneUsageDescription</key>
   <string>This app needs access to the microphone to take videos.</string>
 </dict>
