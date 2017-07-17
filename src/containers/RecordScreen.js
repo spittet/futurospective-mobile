@@ -53,13 +53,15 @@ class RecordScreen extends React.Component {
     };
   }
 
+
   componentWillUnmount() {
+    // Clearing the timer to prevent leaks when component is unmounted.
     this.clearRecordingTimer();
   }
 
   static navigationOptions = {
     title: 'Record Screen',
-  };
+  }
 
   startRecording = () => {
     if (this.camera) {
@@ -73,8 +75,6 @@ class RecordScreen extends React.Component {
       this.setState({
         isRecording: true
       });
-
-      
     }
   }
 
