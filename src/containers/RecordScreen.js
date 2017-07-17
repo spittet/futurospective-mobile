@@ -1,6 +1,10 @@
 /*
  * This is the screen where the user records a capsule
  *
+ * BIG WARNING! The timeout is likely to fail if you're using Chrome Debug.
+ * Check https://github.com/facebook/react-native/issues/4470 for more details.
+ * Instead you should run it on your mobile and everythign should be fine.
+ *
  * @flow
  */
 
@@ -14,6 +18,8 @@ import styles from './styles';
 class RecordScreen extends React.Component {
 
   camera: any;
+  maxRecordingDuration: number;
+
   state: {
     camera: {
       aspect: number,
@@ -22,24 +28,33 @@ class RecordScreen extends React.Component {
       orientation: number,
       flashMode: number
     },
-    isRecording: boolean
+    isRecording: boolean,
+    recordingTimeoutID: ?number
   };
 
   constructor(props: Object) {
     super(props);
 
     this.camera = null;
+    this.maxRecordingDuration = 10000; // Number of seconds before timing out
+
 
     this.state = {
       camera: {
         aspect: Camera.constants.Aspect.fill,
-        captureTarget: Camera.constants.CaptureTarget.cameraRoll,
+        captureTarget: Camera.constants.CaptureTarget.disk,
         type: Camera.constants.Type.back,
         orientation: Camera.constants.Orientation.auto,
         flashMode: Camera.constants.FlashMode.auto,
       },
-      isRecording: false
+      isRecording: false,
+      recordingTimeoutID: null
+
     };
+  }
+
+  componentWillUnmount() {
+    this.clearRecordingTimer();
   }
 
   static navigationOptions = {
@@ -51,15 +66,41 @@ class RecordScreen extends React.Component {
       this.camera.capture({mode: Camera.constants.CaptureMode.video})
         .then((data) => console.log(data))
         .catch(err => console.error(err));
+      
+      // Start timer to timeout camera
+      this.setRecordingTimer();
+
       this.setState({
         isRecording: true
       });
+
+      
     }
   }
+
+  setRecordingTimer = () => {
+    let recordingTimeoutID = setTimeout(() => {
+      this.stopRecording();
+    }, this.maxRecordingDuration);
+
+    this.setState({
+      recordingTimeoutID: recordingTimeoutID
+    });
+  }
+
+  clearRecordingTimer = () => {
+    this.state.recordingTimeoutID &&
+      clearTimeout(this.state.recordingTimeoutID);
+  }
+
+
 
   stopRecording = () => {
     if (this.camera) {
       this.camera.stopCapture();
+      
+      this.clearRecordingTimer();
+      
       this.setState({
         isRecording: false
       });
