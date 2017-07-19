@@ -12,6 +12,7 @@ import React from 'react';
 import { View } from 'react-native';
 import Camera from 'react-native-camera';
 import LCTouchableImage from '../components/LCTouchableImage'
+import RNFS from 'react-native-fs';
 
 import styles from './styles';
 
@@ -100,6 +101,8 @@ class RecordScreen extends React.Component {
       this.camera.stopCapture();
       
       this.clearRecordingTimer();
+
+      this.deleteOldFiles();
       
       this.setState({
         isRecording: false
@@ -159,6 +162,28 @@ class RecordScreen extends React.Component {
         flashMode: newFlashMode,
       },
     });
+  }
+
+  // I'm using this function to clean up the directory before saving a new video.
+  // This is to avoid having a huge app.
+  deleteOldFiles = () => {
+    RNFS.readDir(RNFS.DocumentDirectoryPath) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
+      .then((result) => {
+        //console.log('GOT RESULT', result);
+        for (let doc of result) {
+          doc['path'] && console.log(doc['path']);
+          doc['path'] && RNFS.unlink(doc['path'])
+            .then(() => {
+              console.log('FILE DELETED');
+            })
+            .catch((err) => {
+              console.log(err.message, err.code);
+            });
+        }
+        // stat the first file
+      }).catch((err) => {
+        console.log(err.message, err.code);
+      });
   }
 
   get flashIcon(): any {
