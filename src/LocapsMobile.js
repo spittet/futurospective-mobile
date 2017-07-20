@@ -7,13 +7,14 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import logger from 'redux-logger';
 
 import AppReducer from './reducers';
 import AppWithNavigationState from './containers/AppNavigator';
 
 export default class LocapsMobileApp extends React.Component {
-  store = createStore(AppReducer);
+  store = createStore(AppReducer, applyMiddleware(logger));
 
   render() {
     return (

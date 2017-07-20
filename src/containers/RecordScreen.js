@@ -66,11 +66,10 @@ class RecordScreen extends React.Component {
 
   startRecording = () => {
     if (this.camera) {
-      this.camera.capture({mode: Camera.constants.CaptureMode.video})
-        .then((data) => console.log(data))
-        .catch(err => console.error(err));
+      this.camera.capture({mode: Camera.constants.CaptureMode.video});
       
-      // Start timer to timeout camera
+      // This function will automatically stop recording after a certain
+      // timeout expires.
       this.setRecordingTimer();
 
       this.setState({
@@ -164,25 +163,14 @@ class RecordScreen extends React.Component {
     });
   }
 
-  // I'm using this function to clean up the directory before saving a new video.
-  // This is to avoid having a huge app.
+  // I'm using this function to clean up the directory before saving a new 
+  // video. This is to avoid having a huge app.
   deleteOldFiles = () => {
-    RNFS.readDir(RNFS.DocumentDirectoryPath) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
+    RNFS.readDir(RNFS.DocumentDirectoryPath)
       .then((result) => {
-        //console.log('GOT RESULT', result);
         for (let doc of result) {
-          doc['path'] && console.log(doc['path']);
-          doc['path'] && RNFS.unlink(doc['path'])
-            .then(() => {
-              console.log('FILE DELETED');
-            })
-            .catch((err) => {
-              console.log(err.message, err.code);
-            });
+          doc['path'] && RNFS.unlink(doc['path']);
         }
-        // stat the first file
-      }).catch((err) => {
-        console.log(err.message, err.code);
       });
   }
 
