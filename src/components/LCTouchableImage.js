@@ -25,7 +25,7 @@ const LCTouchableImage = ({ buttonStyle, buttonAction, imageSrc }: any) => (
 );
 
 LCTouchableImage.propTypes = {
-  buttonStyle: PropTypes.number.isRequired,
+  buttonStyle: PropTypes.object.isRequired,
   buttonAction: PropTypes.func.isRequired,
   imageSrc: PropTypes.number.isRequired
 }
