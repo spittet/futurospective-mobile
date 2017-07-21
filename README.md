@@ -53,15 +53,11 @@ $ yarn
 $ react-native link react-native-camera
 ```
 
-### Install 
-
-## Running the 
-
-
-
 ## Running tests
 
-TODO
+The application is using [Jest](https://facebook.github.io/jest) for testing and I'm currently going through https://medium.com/react-native-training/learning-to-test-react-native-with-jest-part-1-f782c4e30101 to learn how to properly write test for this (Sten speaking).
+
+Note that because we're using React 16+ we can't use enzyme - might understand later what the consequences are.
 
 ## Links
 

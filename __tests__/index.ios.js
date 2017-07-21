@@ -14,5 +14,6 @@ jest.mock('react-native-fs', () => 'RNFS');
 it('renders correctly', () => {
   const tree = renderer.create(
     <Index />
-  );
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
 });
