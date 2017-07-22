@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest",
+		"test": "jest --coverage",
 		"lint": "./node_modules/eslint/bin/eslint.js .",
 		"flow": "flow",
 		"flow-stop": "flow stop"
@@ -24,17 +24,24 @@
 		"babel-eslint": "^7.2.3",
 		"babel-jest": "20.0.3",
 		"babel-preset-react-native": "2.1.0",
-		"eslint": "^4.2.0",
+		"enzyme": "^2.9.1",
+		"eslint": "^3.17.0",
 		"eslint-plugin-react": "^7.1.0",
 		"eslint-plugin-react-native": "^2.3.2",
 		"flow-bin": "0.47.0",
 		"jest": "20.0.4",
-		"react-test-renderer": "16.0.0-alpha.12"
+		"jest-serializer-enzyme": "^1.0.0",
+		"react-dom": "16.0.0-alpha.12",
+		"react-test-renderer": "16.0.0-alpha.12",
+		"sinon": "^2.3.8"
 	},
 	"jest": {
 		"preset": "react-native",
 		"transformIgnorePatterns": [
 			"node_modules/(?!(jest-)?react-native|react-navigation)"
+		],
+		"snapshotSerializers": [
+			"./node_modules/jest-serializer-enzyme"
 		]
 	}
 }

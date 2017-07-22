@@ -39,7 +39,6 @@ class RecordScreen extends React.Component {
     this.camera = null;
     this.maxRecordingDuration = 10000; // Number of seconds before timing out
 
-
     this.state = {
       camera: {
         aspect: Camera.constants.Aspect.fill,
@@ -50,7 +49,6 @@ class RecordScreen extends React.Component {
       },
       isRecording: false,
       recordingTimeoutID: null
-
     };
   }
 
@@ -207,11 +205,13 @@ class RecordScreen extends React.Component {
         />
         <View style={[styles.overlay, styles.topOverlay]}>
           <LCTouchableImage 
+            id="switchTypeButton"
             buttonStyle={styles.typeButton}
             buttonAction={this.switchType}
             imageSrc={this.typeIcon}
           />
           <LCTouchableImage 
+            id="switchFlashButton"
             buttonStyle={styles.flashButton}
             buttonAction={this.switchFlash}
             imageSrc={this.flashIcon}
@@ -222,13 +222,15 @@ class RecordScreen extends React.Component {
           {
             !this.state.isRecording
             &&
-            <LCTouchableImage 
+            <LCTouchableImage
+              id="startRecordingButton"
               buttonStyle={styles.captureButton}
               buttonAction={this.startRecording}
               imageSrc={require('../assets/ic_videocam_36pt.png')}
             />
             ||
             <LCTouchableImage 
+              id="stopRecordingButton"
               buttonStyle={styles.captureButton}
               buttonAction={this.stopRecording}
               imageSrc={require('../assets/ic_stop_36pt.png')}

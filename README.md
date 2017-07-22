@@ -55,9 +55,26 @@ $ react-native link react-native-camera
 
 ## Running tests
 
-The application is using [Jest](https://facebook.github.io/jest) for testing and I'm currently going through https://medium.com/react-native-training/learning-to-test-react-native-with-jest-part-1-f782c4e30101 to learn how to properly write test for this (Sten speaking).
+The application is using [Jest](https://facebook.github.io/jest) for testing and Enzyme.
 
-Note that because we're using React 16+ we can't use enzyme - might understand later what the consequences are.
+Unfortunately Enzyme is not yet compatible with React 16 alpha because it's an alpha and there are some major breakages between React 15 and React 16. You can fix that by changing going to line 205 of /Users/spittet/Developer/locaps/locaps-mobile/node_modules/enzyme/build/ShallowWrapper.js and change the instance function.
+
+```javascript
+  }, {
+    key: 'instance',
+    value: function () {
+      function instance() {
+        if (this.root !== this) {
+          throw new Error('ShallowWrapper::instance() can only be called on the root');
+        }
+        return this.renderer._instance ? this.renderer._instance : null;
+      }
+
+      return instance;
+    }()
+
+```
+
 
 ## Links
 

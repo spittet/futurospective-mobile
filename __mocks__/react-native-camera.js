@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const constants = constants = {
+const constants = {
   Aspect: {},
   BarCodeType: {},
   Type: {},
@@ -18,6 +19,10 @@ class Camera extends React.Component {
   render() {
     return React.createElement('Camera', this.props, this.props.children);
   }
+}
+
+Camera.propTypes = {
+  children: PropTypes.node
 }
 
 Camera.constants = constants;

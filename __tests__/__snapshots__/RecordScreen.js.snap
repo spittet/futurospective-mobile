@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Testing the rendering of the recording Screen renders as expected 1`] = `
+exports[`Testing the rendering of the recording Screen renders default component as expected 1`] = `
 <View
   style={
     Object {
@@ -9,10 +9,7 @@ exports[`Testing the rendering of the recording Screen renders as expected 1`] =
   }
 >
   <Camera
-    aspect={undefined}
-    captureTarget={undefined}
     defaultTouchToFocus={true}
-    flashMode={undefined}
     mirrorImage={false}
     onFocusChanged={[Function]}
     onZoomChanged={[Function]}
@@ -23,7 +20,6 @@ exports[`Testing the rendering of the recording Screen renders as expected 1`] =
         "justifyContent": "flex-end",
       }
     }
-    type={undefined}
   />
   <View
     style={
@@ -45,64 +41,26 @@ exports[`Testing the rendering of the recording Screen renders as expected 1`] =
       ]
     }
   >
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
+    <LCTouchableImage
+      buttonAction={[Function]}
+      buttonStyle={
         Object {
-          "opacity": 1,
           "padding": 5,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Image
-        source={1}
-      />
-    </View>
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
+      id="switchTypeButton"
+      imageSrc={1}
+    />
+    <LCTouchableImage
+      buttonAction={[Function]}
+      buttonStyle={
         Object {
-          "opacity": 1,
           "padding": 5,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Image
-        source={1}
-      />
-    </View>
+      id="switchFlashButton"
+      imageSrc={1}
+    />
   </View>
   <View
     style={
@@ -131,37 +89,18 @@ exports[`Testing the rendering of the recording Screen renders as expected 1`] =
         }
       }
     />
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
+    <LCTouchableImage
+      buttonAction={[Function]}
+      buttonStyle={
         Object {
           "backgroundColor": "white",
           "borderRadius": 40,
-          "opacity": 1,
           "padding": 15,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Image
-        source={1}
-      />
-    </View>
+      id="startRecordingButton"
+      imageSrc={1}
+    />
   </View>
 </View>
 `;
