@@ -66,10 +66,10 @@ class RecordScreen extends React.Component {
   startRecording = () => {
     if (this.camera) {
       this.camera.capture({mode: Camera.constants.CaptureMode.video});
-      
       // This function will automatically stop recording after a certain
       // timeout expires.
       this.setRecordingTimer();
+      
       this.setState({
         isRecording: true
       });
