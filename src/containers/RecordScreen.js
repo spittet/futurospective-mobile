@@ -35,6 +35,7 @@ class RecordScreen extends React.Component {
 
   constructor(props: Object) {
     super(props);
+    //this.startRecording = this.startRecording.bind(this);
 
     this.camera = null;
     this.maxRecordingDuration = 10000; // Number of seconds before timing out
@@ -69,7 +70,6 @@ class RecordScreen extends React.Component {
       // This function will automatically stop recording after a certain
       // timeout expires.
       this.setRecordingTimer();
-
       this.setState({
         isRecording: true
       });
@@ -94,6 +94,7 @@ class RecordScreen extends React.Component {
 
 
   stopRecording = () => {
+
     if (this.camera) {
       this.camera.stopCapture();
       

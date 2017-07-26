@@ -57,7 +57,7 @@ $ react-native link react-native-camera
 
 The application is using [Jest](https://facebook.github.io/jest) for testing and Enzyme.
 
-Unfortunately Enzyme is not yet compatible with React 16 alpha because it's an alpha and there are some major breakages between React 15 and React 16. You can fix that by changing going to line 205 of /Users/spittet/Developer/locaps/locaps-mobile/node_modules/enzyme/build/ShallowWrapper.js and change the instance function.
+Unfortunately Enzyme is not yet compatible with React 16 alpha because it's an alpha and there are some major breakages between React 15 and React 16. To fix that I forked enzyme and changed line 205 of node_modules/enzyme/build/ShallowWrapper.js in the instance function.
 
 ```javascript
   }, {
@@ -74,7 +74,7 @@ Unfortunately Enzyme is not yet compatible with React 16 alpha because it's an a
     }()
 
 ```
-
+In the tests I'm requiring the package spittet-enzyme. This will need to be changed later.
 
 ## Links
 

@@ -27,4 +27,5 @@ Camera.propTypes = {
 
 Camera.constants = constants;
 
+
 export default Camera;
