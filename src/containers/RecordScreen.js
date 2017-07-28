@@ -1,4 +1,4 @@
-/*
+/**
  * This is the screen where the user records a capsule
  *
  * BIG WARNING! The timeout is likely to fail if you're using Chrome Debug.
