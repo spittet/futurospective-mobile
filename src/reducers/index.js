@@ -29,11 +29,36 @@ function nav(state = initialNavState, action) {
 }
 
 // =============================================================================
+// RECORDED VIDEO REDUCER
+// The recorded video reducer contains the infor related to the video we are
+// currently trying to record.
+// =============================================================================
+
+const initialRecordedVideoState = {
+  uri: null,
+  isSaved: false
+}
+function recordedVideo(state = initialRecordedVideoState, action) {
+  let nextState;
+  switch (action.type) {
+    case 'RECORD_VIDEO':
+      return {
+        ...state,
+        uri: action.uri,
+        isSaved: true
+      }
+    default:
+      return state
+  }
+}
+
+// =============================================================================
 // Combining all reducers
 // =============================================================================
 
 const AppReducer = combineReducers({
-  nav
+  nav,
+  recordedVideo
 });
 
 export default AppReducer;

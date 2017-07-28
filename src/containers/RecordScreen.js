@@ -9,10 +9,14 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import Camera from 'react-native-camera';
 import LCTouchableImage from '../components/LCTouchableImage'
 import RNFS from 'react-native-fs';
+
+import { recordVideo } from '../actions';
 
 import styles from './styles';
 
@@ -65,7 +69,10 @@ class RecordScreen extends React.Component {
 
   startRecording = () => {
     if (this.camera) {
-      this.camera.capture({mode: Camera.constants.CaptureMode.video});
+      this.camera.capture({mode: Camera.constants.CaptureMode.video})
+        .then((data) => {
+          this.props.dispatch(recordVideo({uri: data.path}));
+        });
       // This function will automatically stop recording after a certain
       // timeout expires.
       this.setRecordingTimer();
@@ -243,5 +250,16 @@ class RecordScreen extends React.Component {
   }
 }
 
+RecordScreen.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  recordedVideo: PropTypes.object
+}
 
-export default RecordScreen;
+const mapStateToProps = (state) => {
+  return {
+    recordedVideo: state.recordedVideo
+  }
+}
+
+
+export default connect(mapStateToProps)(RecordScreen);
