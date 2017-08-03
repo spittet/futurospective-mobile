@@ -1,4 +1,9 @@
-// @flow
+/**
+ * This is a placeholder screen until we figure out the proper nav of the
+ * application.
+ *
+ * @flow
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';

@@ -1,9 +1,12 @@
 //@flow
 
-export function recordVideo(video) {
+import type {Video} from '../reducers';
+
+export function recordVideo(video: Video) {
   return {
     type: 'RECORD_VIDEO',
     uri: video.uri,
-    isSaved: true
+    isRecorded: video.isRecorded,
+    isPublished: video.isPublished
   };
 }

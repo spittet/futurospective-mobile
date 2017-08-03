@@ -18,6 +18,10 @@ import RNFS from 'react-native-fs';
 
 import { recordVideo } from '../actions';
 
+import type Video from '../reducers';
+
+import { MAX_RECORDING_DURATION } from '../config';
+
 import styles from './styles';
 
 class RecordScreen extends React.Component {
@@ -25,32 +29,46 @@ class RecordScreen extends React.Component {
   camera: any;
   maxRecordingDuration: number;
 
+  // This is the local state of the RecordScreen. We're not using Redux global
+  // state because none of this data matters outside of that screen.
   state: {
     camera: {
+      captureAudio: boolean,
+      captureMode: number,
       aspect: number,
       captureTarget: number,
       type: number,
       orientation: number,
-      flashMode: number
+      flashMode: number,
+      captureQuality: number
     },
     isRecording: boolean,
     recordingTimeoutID: ?number
   };
 
+  // Navigation Options are used by React Native Navigation
+  static navigationOptions = {
+    title: 'Record Screen',
+  }
+
   constructor(props: Object) {
     super(props);
-    //this.startRecording = this.startRecording.bind(this);
-
+    
     this.camera = null;
-    this.maxRecordingDuration = 10000; // Number of seconds before timing out
+    
+    // Number of seconds before timing out
+    this.maxRecordingDuration = MAX_RECORDING_DURATION; 
 
     this.state = {
       camera: {
+        captureAudio: true,
+        captureMode: Camera.constants.CaptureMode.video,
         aspect: Camera.constants.Aspect.fill,
         captureTarget: Camera.constants.CaptureTarget.disk,
         type: Camera.constants.Type.back,
         orientation: Camera.constants.Orientation.auto,
         flashMode: Camera.constants.FlashMode.auto,
+        captureQuality: Camera.constants.CaptureQuality.medium
       },
       isRecording: false,
       recordingTimeoutID: null
@@ -63,16 +81,31 @@ class RecordScreen extends React.Component {
     this.clearRecordingTimer();
   }
 
-  static navigationOptions = {
-    title: 'Record Screen',
-  }
-
   startRecording = () => {
+
     if (this.camera) {
-      this.camera.capture({mode: Camera.constants.CaptureMode.video})
+      // start by deleting previously recorded video.
+      this.deleteOldFiles();
+
+
+      let captureOptions = {
+        mode: this.state.camera.captureMode,
+        audio: this.state.camera.captureAudio
+      }
+
+      // When the recording ends we dispatch an event to save the metadata in
+      // the global state.
+      this.camera.capture(captureOptions)
         .then((data) => {
-          this.props.dispatch(recordVideo({uri: data.path}));
+          let video: Video = {
+            id: null,
+            uri: data.path,
+            isRecorded: true,
+            isPublished: false
+          };
+          this.props.dispatch(recordVideo(video));
         });
+
       // This function will automatically stop recording after a certain
       // timeout expires.
       this.setRecordingTimer();
@@ -93,12 +126,12 @@ class RecordScreen extends React.Component {
     });
   }
 
+  // We use this function to make sure that we clear the timeout timer. It's
+  // used when we stop the recording and when we leave the screen.
   clearRecordingTimer = () => {
     this.state.recordingTimeoutID &&
       clearTimeout(this.state.recordingTimeoutID);
   }
-
-
 
   stopRecording = () => {
 
@@ -107,8 +140,6 @@ class RecordScreen extends React.Component {
       
       this.clearRecordingTimer();
 
-      this.deleteOldFiles();
-      
       this.setState({
         isRecording: false
       });
@@ -206,6 +237,8 @@ class RecordScreen extends React.Component {
           captureTarget={this.state.camera.captureTarget}
           type={this.state.camera.type}
           flashMode={this.state.camera.flashMode}
+          captureAudio={this.state.camera.captureAudio}
+          captureQuality={this.state.camera.captureQuality}
           onFocusChanged={() => {}}
           onZoomChanged={() => {}}
           defaultTouchToFocus
@@ -252,12 +285,12 @@ class RecordScreen extends React.Component {
 
 RecordScreen.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  recordedVideo: PropTypes.object
+  newVideo: PropTypes.object
 }
 
 const mapStateToProps = (state) => {
   return {
-    recordedVideo: state.recordedVideo
+    newVideo: state.newVideo
   }
 }
 

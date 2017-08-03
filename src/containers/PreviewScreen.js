@@ -1,6 +1,15 @@
 /**
  * This is the preview screen where we play the video after it's been recorded.
  *
+ * The user should only get to this screen after recording a vidoe. They can
+ * then preview the result prior to saving it for real.
+ * 
+ * TODO:
+ *   - Remove the use of this.video as we should be using the redux state
+ *     instead.
+ *
+ * 
+ *
  * @flow
  */
 
@@ -19,6 +28,7 @@ class PreviewScreen extends React.Component {
   player: any;
   video: any;
 
+  // Navigation Options are used by React Native Navigation
   static navigationOptions = {
     title: 'Preview Screen',
   };
@@ -30,18 +40,23 @@ class PreviewScreen extends React.Component {
     this.video = null;
   }
 
-  getLastVideo = () => {
-    if (this.props.recordedVideo && this.props.recordedVideo.uri) {
-      this.video = this.props.recordedVideo.uri;
+  // Checks if we have a recorded video in the global state
+  getRecordedVideo = () => {
+    if (this.props.newVideo && this.props.newVideo.uri) {
+      this.video = this.props.newVideo.uri;
     } else return null
   }
 
+  // I should change this to display an error if we don't have a recorded
+  // video.
   render() {
-    this.getLastVideo();
+    this.getRecordedVideo();
     return (
       <View style={styles.container}>
         <Video 
           source={{uri:this.video}}   // Can be a URL or a local file. 
+          volume={1.0}
+          muted={false}
           ref={(ref) => {
             this.player = ref
           }}
@@ -53,12 +68,12 @@ class PreviewScreen extends React.Component {
 }
 
 PreviewScreen.propTypes = {
-  recordedVideo: PropTypes.object
+  newVideo: PropTypes.object
 }
 
 const mapStateToProps = (state) => {
   return {
-    recordedVideo: state.recordedVideo
+    newVideo: state.newVideo
   }
 }
 

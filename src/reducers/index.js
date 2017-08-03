@@ -29,23 +29,37 @@ function nav(state = initialNavState, action) {
 }
 
 // =============================================================================
-// RECORDED VIDEO REDUCER
-// The recorded video reducer contains the infor related to the video we are
-// currently trying to record.
+// NEW VIDEO REDUCER
+// The new video reducer contains the info related to the video we are
+// currently trying to publish.
 // =============================================================================
 
-const initialRecordedVideoState = {
+export type Video = {
+  id: ?number;
+  uri: string;
+  isRecorded: boolean;
+  isPublished: boolean
+};
+
+const initialNewVideoState = {
   uri: null,
-  isSaved: false
+  isRecorded: false,
+  isPublished: false
 }
-function recordedVideo(state = initialRecordedVideoState, action) {
+function newVideo(state = initialNewVideoState, action) {
   let nextState;
   switch (action.type) {
     case 'RECORD_VIDEO':
       return {
         ...state,
-        uri: action.uri,
-        isSaved: true
+        uri: action.uri,                  // path on disk
+        isRecorded: action.isRecorded,    // value will be true
+        isPublished: action.isPublished   // value will be false
+      }
+    case 'PUBLISH_VIDEO':
+      return {
+        ...state,
+        isPublished: true
       }
     default:
       return state
@@ -58,7 +72,7 @@ function recordedVideo(state = initialRecordedVideoState, action) {
 
 const AppReducer = combineReducers({
   nav,
-  recordedVideo
+  newVideo
 });
 
 export default AppReducer;
