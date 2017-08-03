@@ -16,6 +16,8 @@ import Camera from 'react-native-camera';
 import LCTouchableImage from '../components/LCTouchableImage'
 import RNFS from 'react-native-fs';
 
+import { NavigationActions } from 'react-navigation';
+
 import { recordVideo } from '../actions';
 
 import type Video from '../reducers';
@@ -96,14 +98,21 @@ class RecordScreen extends React.Component {
       // When the recording ends we dispatch an event to save the metadata in
       // the global state.
       this.camera.capture(captureOptions)
-        .then((data) => {
+        .then(async (data) => {
           let video: Video = {
             id: null,
             uri: data.path,
             isRecorded: true,
             isPublished: false
           };
-          this.props.dispatch(recordVideo(video));
+
+          // Record the video in the global state. We wait for it to be
+          // finalised before redirecting to the Preview video screen
+          await this.props.dispatch(recordVideo(video));
+
+          this.props.dispatch(
+            NavigationActions.navigate({ routeName: 'Preview' })
+          ); 
         });
 
       // This function will automatically stop recording after a certain
