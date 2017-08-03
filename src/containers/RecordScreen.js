@@ -66,7 +66,7 @@ class RecordScreen extends React.Component {
         captureAudio: true,
         captureMode: Camera.constants.CaptureMode.video,
         aspect: Camera.constants.Aspect.fill,
-        captureTarget: Camera.constants.CaptureTarget.disk,
+        captureTarget: Camera.constants.CaptureTarget.temp,
         type: Camera.constants.Type.back,
         orientation: Camera.constants.Orientation.auto,
         flashMode: Camera.constants.FlashMode.auto,
@@ -212,12 +212,15 @@ class RecordScreen extends React.Component {
   // I'm using this function to clean up the directory before saving a new 
   // video. This is to avoid having a huge app.
   deleteOldFiles = () => {
+    console.log('TODO: IMPLEMENT CLEANUP');
+    /*
     RNFS.readDir(RNFS.DocumentDirectoryPath)
       .then((result) => {
         for (let doc of result) {
           doc['path'] && RNFS.unlink(doc['path']);
         }
       });
+    */
   }
 
   get flashIcon(): any {

@@ -59,8 +59,11 @@ function newVideo(state = initialNewVideoState, action) {
     case 'PUBLISH_VIDEO':
       return {
         ...state,
+        uri: action.uri,
         isPublished: true
       }
+    case 'CANCEL_VIDEO':
+      return initialNewVideoState;
     default:
       return state
   }

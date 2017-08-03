@@ -16,8 +16,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Button } from 'react-native';
 import RNFS from 'react-native-fs';
+
+import { publishVideo, cancelVideo } from '../actions';
 
 import styles from './styles';
 
@@ -39,9 +41,32 @@ class PreviewScreen extends React.Component {
   }
 
   // Navigation Options are used by React Native Navigation
+  /*
   static navigationOptions = {
     title: 'Preview Screen',
-  };
+    headerRight: ({state}) => (
+      <Button title="Publish" />
+    ),
+  }*/
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Preview',
+      headerLeft:
+        <TouchableOpacity
+          onPress={() => {
+            navigation.state.params.handleCancel();
+            navigation.goBack();
+          }}
+        ><Text>Cancel</Text></TouchableOpacity>,
+
+      headerRight: 
+        <Button 
+          title='Publish' 
+          onPress={() => navigation.state.params.handlePublish()} 
+        />
+    }
+  }
 
   constructor(props: Object) {
     super(props);
@@ -57,6 +82,13 @@ class PreviewScreen extends React.Component {
       }
     }
     this.player = null;
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({
+      handlePublish: this.publish,
+      handleCancel: this.cancel
+    });
   }
 
   onLoad = (data) => {
@@ -76,6 +108,14 @@ class PreviewScreen extends React.Component {
         currentTime: data.currentTime
       }
     });
+  }
+
+  publish = () => {
+    this.props.dispatch(publishVideo(this.props.newVideo));
+  }
+
+  cancel = () => {
+    this.props.dispatch(cancelVideo(this.props.newVideo));
   }
 
   onEnd = () => {
