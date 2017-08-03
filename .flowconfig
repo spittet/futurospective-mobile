@@ -18,6 +18,13 @@
 .*/node_modules/react-navigation/
 .*/node_modules/react-native-tab-view/
 
+; Ignore errors due to react-native-windows, we don't need it
+.*/node_modules/react-native-windows/
+
+; Ignore errors due to react-native-fs, we don't need it
+.*/node_modules/react-native-fs/
+
+
 [include]
 
 [libs]
@@ -45,8 +52,9 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 unsafe.enable_getters_and_setters=true
 
-; Need to add this to recognize react-navigation since we've ignored it above
+; Need to add this to recognize react-navigation and react-native-fs since we've ignored it above
 module.name_mapper='^react-navigation$' -> 'emptyObject'
+module.name_mapper='^react-native-fs$' -> 'emptyObject'
 
 [version]
 ^0.47.0
