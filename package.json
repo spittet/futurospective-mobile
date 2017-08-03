@@ -15,7 +15,7 @@
 		"react-native": "0.46.3",
 		"react-native-camera": "^0.9.4",
 		"react-native-fs": "^2.3.3",
-		"react-native-video": "^1.0.0",
+		"react-native-video": "^1.2.0",
 		"react-navigation": "^1.0.0-beta.11",
 		"react-redux": "^5.0.5",
 		"redux": "^3.7.2",

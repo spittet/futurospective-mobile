@@ -50,12 +50,22 @@ const styles = StyleSheet.create({
   buttonsSpace: {
     width: 10,
   },
-  backgroundVideo: {
+  previewVideoBackground: {
     position: 'absolute',
     top: 0,
     left: 0,
     bottom: 0,
     right: 0,
+  },
+  previewVideoControls: {
+    position: 'absolute',
+    padding: 16,
+    right: 0,
+    left: 0,
+    bottom: 30,
+    alignItems: 'center',
+  },
+  previewVideoPlayButton: {
   },
 });
 
