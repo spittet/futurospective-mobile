@@ -49,20 +49,20 @@ const initialNewVideoState = {
 function newVideo(state = initialNewVideoState, action) {
   let nextState;
   switch (action.type) {
-    case 'RECORD_VIDEO':
+    case 'RECORD_NEW_VIDEO':
       return {
         ...state,
         uri: action.uri,                  // path on disk
         isRecorded: action.isRecorded,    // value will be true
         isPublished: action.isPublished   // value will be false
       }
-    case 'PUBLISH_VIDEO':
+    case 'PUBLISH_NEW_VIDEO':
       return {
         ...state,
         uri: action.uri,
         isPublished: true
       }
-    case 'CANCEL_VIDEO':
+    case 'CANCEL_NEW_VIDEO':
       return initialNewVideoState;
     default:
       return state

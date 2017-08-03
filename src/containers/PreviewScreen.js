@@ -4,12 +4,6 @@
  * The user should only get to this screen after recording a vidoe. They can
  * then preview the result prior to saving it for real.
  * 
- * TODO:
- *   - Remove the use of this.video as we should be using the redux state
- *     instead.
- *
- * 
- *
  * @flow
  */
 
@@ -19,7 +13,7 @@ import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity, Button } from 'react-native';
 import RNFS from 'react-native-fs';
 
-import { publishVideo, cancelVideo } from '../actions';
+import { publishNewVideo, cancelNewVideo } from '../actions';
 
 import styles from './styles';
 
@@ -111,11 +105,11 @@ class PreviewScreen extends React.Component {
   }
 
   publish = () => {
-    this.props.dispatch(publishVideo(this.props.newVideo));
+    this.props.dispatch(publishNewVideo(this.props.newVideo));
   }
 
   cancel = () => {
-    this.props.dispatch(cancelVideo(this.props.newVideo));
+    this.props.dispatch(cancelNewVideo(this.props.newVideo));
   }
 
   onEnd = () => {

@@ -6,16 +6,17 @@ import { CAPSULES_DIR } from '../config';
 
 import RNFS from 'react-native-fs';
 
-export function recordVideo(video: Video) {
+
+export function recordNewVideo(video: Video) {
   return {
-    type: 'RECORD_VIDEO',
+    type: 'RECORD_NEW_VIDEO',
     uri: video.uri,
     isRecorded: video.isRecorded,
     isPublished: video.isPublished
   };
 }
 
-export function publishVideo(video: Video) {
+export function publishNewVideo(video: Video) {
   console.log (CAPSULES_DIR);
   // Implement feature to move the video
 
@@ -24,14 +25,14 @@ export function publishVideo(video: Video) {
   
   RNFS.moveFile(video.uri, newPath);
   return {
-    type: 'PUBLISH_VIDEO',
+    type: 'PUBLISH_NEW_VIDEO',
     uri: newPath
   }
 }
 
-export function cancelVideo(video: Video) {
+export function cancelNewVideo(video: Video) {
   RNFS.unlink(video.uri);
   return {
-    type: 'CANCEL_VIDEO'
+    type: 'CANCEL_NEW_VIDEO'
   }
 }

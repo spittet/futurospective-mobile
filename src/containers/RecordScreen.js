@@ -18,7 +18,7 @@ import RNFS from 'react-native-fs';
 
 import { NavigationActions } from 'react-navigation';
 
-import { recordVideo } from '../actions';
+import { recordNewVideo } from '../actions';
 
 import type Video from '../reducers';
 
@@ -108,7 +108,7 @@ class RecordScreen extends React.Component {
 
           // Record the video in the global state. We wait for it to be
           // finalised before redirecting to the Preview video screen
-          await this.props.dispatch(recordVideo(video));
+          await this.props.dispatch(recordNewVideo(video));
 
           this.props.dispatch(
             NavigationActions.navigate({ routeName: 'Preview' })
