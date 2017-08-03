@@ -26,7 +26,17 @@ import Video from 'react-native-video';
 class PreviewScreen extends React.Component {
 
   player: any;
-  video: any;
+  
+  state: {
+    video: {
+      uri: ?string,
+      volume: number,
+      rate: number,
+      currentTime: number,
+      duration: number,
+      resizeMode: string
+    }
+  }
 
   // Navigation Options are used by React Native Navigation
   static navigationOptions = {
@@ -36,27 +46,29 @@ class PreviewScreen extends React.Component {
   constructor(props: Object) {
     super(props);
 
+    this.state = {
+      video: {
+        uri: this.props.newVideo.uri || null,
+        volume: 1,
+        rate: 1,
+        currentTime: 0.0,
+        duration: 0.0,
+        resizeMode: "cover"
+      }
+    }
     this.player = null;
-    this.video = null;
-  }
-
-  // Checks if we have a recorded video in the global state
-  getRecordedVideo = () => {
-    if (this.props.newVideo && this.props.newVideo.uri) {
-      this.video = this.props.newVideo.uri;
-    } else return null
   }
 
   // I should change this to display an error if we don't have a recorded
   // video.
   render() {
-    this.getRecordedVideo();
     return (
       <View style={styles.container}>
         <Video 
-          source={{uri:this.video}}   // Can be a URL or a local file. 
-          volume={1.0}
-          muted={false}
+          source={{uri:this.state.video.uri}}   // Can be a URL or a local file. 
+          volume={this.state.video.volume}
+          rate={this.state.video.rate}
+          resizeMode={this.state.video.resizeMode}
           ref={(ref) => {
             this.player = ref
           }}
