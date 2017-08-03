@@ -2,7 +2,7 @@
 
 import type {Video} from '../reducers';
 
-import { CAPSULES_DIR } from '../config';
+import { config } from '../config';
 
 import RNFS from 'react-native-fs';
 
@@ -17,11 +17,11 @@ export function recordNewVideo(video: Video) {
 }
 
 export function publishNewVideo(video: Video) {
-  console.log (CAPSULES_DIR);
+  // console.log (config.CAPSULES_DIR);
   // Implement feature to move the video
 
   let filename = video.uri.replace(/^.*[\\\/]/, '');
-  let newPath = CAPSULES_DIR + '/' + filename;
+  let newPath = config.CAPSULES_DIR + '/' + filename;
   
   RNFS.moveFile(video.uri, newPath);
   return {

@@ -8,16 +8,22 @@
  */
 
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { View, Text, TouchableOpacity, Button } from 'react-native';
-import RNFS from 'react-native-fs';
+import { connect } from 'react-redux';
 
-import { publishNewVideo, cancelNewVideo } from '../actions';
-
+import { 
+  Button, 
+  Text, 
+  TouchableOpacity, 
+  View 
+} from 'react-native';
+import Video from 'react-native-video';
 import styles from './styles';
 
-import Video from 'react-native-video';
+import { 
+  publishNewVideo,
+  cancelNewVideo 
+} from '../actions';
 
 class PreviewScreen extends React.Component {
 
@@ -26,22 +32,11 @@ class PreviewScreen extends React.Component {
   state: {
     video: {
       uri: ?string,
-      volume: number,
       paused: boolean,
       currentTime: number,
       duration: number,
-      resizeMode: string
     }
   }
-
-  // Navigation Options are used by React Native Navigation
-  /*
-  static navigationOptions = {
-    title: 'Preview Screen',
-    headerRight: ({state}) => (
-      <Button title="Publish" />
-    ),
-  }*/
 
   static navigationOptions = ({ navigation }) => {
     return {
@@ -68,11 +63,9 @@ class PreviewScreen extends React.Component {
     this.state = {
       video: {
         uri: this.props.newVideo.uri || null,
-        volume: 1,
         paused: true,
         currentTime: 0.0,
         duration: 0.0,
-        resizeMode: "cover"
       }
     }
     this.player = null;
@@ -143,11 +136,11 @@ class PreviewScreen extends React.Component {
       return (
         <View style={styles.container}>
           <Video 
-            source={{uri:this.state.video.uri}}   // Can be a URL or a local file. 
-            volume={this.state.video.volume}
+            source={{uri:this.state.video.uri}} 
+            volume={1.0}
             rate={1.0}
             paused={this.state.video.paused}
-            resizeMode={this.state.video.resizeMode}
+            resizeMode="cover"
             onLoad={this.onLoad}
             onProgress={this.onProgress}
             onEnd={this.onEnd}
@@ -187,7 +180,9 @@ class PreviewScreen extends React.Component {
 }
 
 PreviewScreen.propTypes = {
-  newVideo: PropTypes.object
+  dispatch: PropTypes.func.isRequired,
+  newVideo: PropTypes.object,
+  navigation: PropTypes.object
 }
 
 const mapStateToProps = (state) => {

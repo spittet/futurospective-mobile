@@ -9,22 +9,18 @@
  */
 
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import { View } from 'react-native';
 import Camera from 'react-native-camera';
 import LCTouchableImage from '../components/LCTouchableImage'
-import RNFS from 'react-native-fs';
-
-import { NavigationActions } from 'react-navigation';
-
-import { recordNewVideo } from '../actions';
-
-import type Video from '../reducers';
-
-import { MAX_RECORDING_DURATION } from '../config';
-
 import styles from './styles';
+
+import { config } from '../config';
+import { NavigationActions } from 'react-navigation';
+import { recordNewVideo } from '../actions';
+import type Video from '../reducers';
 
 class RecordScreen extends React.Component {
 
@@ -59,7 +55,7 @@ class RecordScreen extends React.Component {
     this.camera = null;
     
     // Number of seconds before timing out
-    this.maxRecordingDuration = MAX_RECORDING_DURATION; 
+    this.maxRecordingDuration = config.MAX_RECORDING_DURATION; 
 
     this.state = {
       camera: {
@@ -86,10 +82,6 @@ class RecordScreen extends React.Component {
   startRecording = () => {
 
     if (this.camera) {
-      // start by deleting previously recorded video.
-      this.deleteOldFiles();
-
-
       let captureOptions = {
         mode: this.state.camera.captureMode,
         audio: this.state.camera.captureAudio
@@ -207,20 +199,6 @@ class RecordScreen extends React.Component {
         flashMode: newFlashMode,
       },
     });
-  }
-
-  // I'm using this function to clean up the directory before saving a new 
-  // video. This is to avoid having a huge app.
-  deleteOldFiles = () => {
-    console.log('TODO: IMPLEMENT CLEANUP');
-    /*
-    RNFS.readDir(RNFS.DocumentDirectoryPath)
-      .then((result) => {
-        for (let doc of result) {
-          doc['path'] && RNFS.unlink(doc['path']);
-        }
-      });
-    */
   }
 
   get flashIcon(): any {
