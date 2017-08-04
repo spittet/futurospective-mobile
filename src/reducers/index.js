@@ -46,6 +46,7 @@ const initialNewVideoState = {
   isRecorded: false,
   isPublished: false
 }
+
 function newVideo(state = initialNewVideoState, action) {
   switch (action.type) {
     case 'RECORD_NEW_VIDEO':

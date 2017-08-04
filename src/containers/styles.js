@@ -1,4 +1,10 @@
-// @flow
+/**
+ * Application styles
+ * 
+ * This file is crap as I haven't spent any time optimizing it.
+ * @flow
+ */
+
 
 import { StyleSheet } from 'react-native';
 

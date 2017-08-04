@@ -25,10 +25,8 @@ import type Video from '../reducers';
 class RecordScreen extends React.Component {
 
   camera: any;
-  maxRecordingDuration: number;
-
-  // This is the local state of the RecordScreen. We're not using Redux global
-  // state because none of this data matters outside of that screen.
+  
+  // Not using Redux global state because we don't need this data elsewhere.
   state: {
     camera: {
       captureAudio: boolean,
@@ -44,7 +42,6 @@ class RecordScreen extends React.Component {
     recordingTimeoutID: ?number
   };
 
-  // Navigation Options are used by React Native Navigation
   static navigationOptions = {
     title: 'Record Screen',
   }
@@ -53,9 +50,6 @@ class RecordScreen extends React.Component {
     super(props);
     
     this.camera = null;
-    
-    // Number of seconds before timing out
-    this.maxRecordingDuration = config.MAX_RECORDING_DURATION; 
 
     this.state = {
       camera: {
@@ -75,22 +69,35 @@ class RecordScreen extends React.Component {
 
 
   componentWillUnmount() {
-    // Clearing the timer to prevent leaks when component is unmounted.
-    this.clearRecordingTimer();
+    this.stopRecording();
+  }
+
+  // Sets a timeout after which the recording is automatically stop
+  setRecordingTimeout = () => {
+    let recordingTimeoutID = setTimeout(() => {
+      this.stopRecording();
+    }, config.MAX_RECORDING_DURATION);
+
+    this.setState({
+      recordingTimeoutID: recordingTimeoutID
+    });
+  }
+
+  // Clears the recording timeout to prevent leaks
+  clearRecordingTimeout = () => {
+    this.state.recordingTimeoutID &&
+      clearTimeout(this.state.recordingTimeoutID);
   }
 
   startRecording = () => {
-
-    if (this.camera) {
+    if (this.camera && !this.state.isRecording) {
       let captureOptions = {
         mode: this.state.camera.captureMode,
         audio: this.state.camera.captureAudio
       }
 
-      // When the recording ends we dispatch an event to save the metadata in
-      // the global state.
       this.camera.capture(captureOptions)
-        .then(async (data) => {
+        .then(async (data) => { // Record new video to global state
           let video: Video = {
             id: null,
             uri: data.path,
@@ -98,18 +105,15 @@ class RecordScreen extends React.Component {
             isPublished: false
           };
 
-          // Record the video in the global state. We wait for it to be
-          // finalised before redirecting to the Preview video screen
           await this.props.dispatch(recordNewVideo(video));
 
+          // Automatically redirects to the Preview page
           this.props.dispatch(
             NavigationActions.navigate({ routeName: 'Preview' })
           ); 
         });
 
-      // This function will automatically stop recording after a certain
-      // timeout expires.
-      this.setRecordingTimer();
+      this.setRecordingTimeout();
       
       this.setState({
         isRecording: true
@@ -117,102 +121,12 @@ class RecordScreen extends React.Component {
     }
   }
 
-  setRecordingTimer = () => {
-    let recordingTimeoutID = setTimeout(() => {
-      this.stopRecording();
-    }, this.maxRecordingDuration);
-
-    this.setState({
-      recordingTimeoutID: recordingTimeoutID
-    });
-  }
-
-  // We use this function to make sure that we clear the timeout timer. It's
-  // used when we stop the recording and when we leave the screen.
-  clearRecordingTimer = () => {
-    this.state.recordingTimeoutID &&
-      clearTimeout(this.state.recordingTimeoutID);
-  }
-
   stopRecording = () => {
-
-    if (this.camera) {
+    if (this.camera && this.state.isRecording) {
       this.camera.stopCapture();
-      
-      this.clearRecordingTimer();
-
-      this.setState({
-        isRecording: false
-      });
+      this.clearRecordingTimeout();
+      this.setState({ isRecording: false });
     }
-  }
-
-  switchType = () => {
-    let newType;
-    const { back, front } = Camera.constants.Type;
-
-    if (this.state.camera.type === back) {
-      newType = front;
-    } else if (this.state.camera.type === front) {
-      newType = back;
-    }
-
-    // Duplicating object to keep state immutable.
-    // See http://redux.js.org/docs/recipes/UsingObjectSpreadOperator.html
-    // Note: I'm adding this to the doc because I keep forgetting.
-    this.setState({
-      camera: {
-        ...this.state.camera,
-        type: newType,
-      },
-    });
-  }
-
-  get typeIcon(): any {
-    let icon;
-    const { back, front } = Camera.constants.Type;
-
-    if (this.state.camera.type === back) {
-      icon = require('../assets/ic_camera_rear_white.png');
-    } else if (this.state.camera.type === front) {
-      icon = require('../assets/ic_camera_front_white.png');
-    }
-
-    return icon;
-  }
-
-  switchFlash = () => {
-    let newFlashMode;
-    const { auto, on, off } = Camera.constants.FlashMode;
-
-    if (this.state.camera.flashMode === auto) {
-      newFlashMode = on;
-    } else if (this.state.camera.flashMode === on) {
-      newFlashMode = off;
-    } else if (this.state.camera.flashMode === off) {
-      newFlashMode = auto;
-    }
-
-    this.setState({
-      camera: {
-        ...this.state.camera,
-        flashMode: newFlashMode,
-      },
-    });
-  }
-
-  get flashIcon(): any {
-    let icon;
-    const { auto, on, off } = Camera.constants.FlashMode;
-    if (this.state.camera.flashMode === auto) {
-      icon = require('../assets/ic_flash_auto_white.png');
-    } else if (this.state.camera.flashMode === on) {
-      icon = require('../assets/ic_flash_on_white.png');
-    } else if (this.state.camera.flashMode === off) {
-      icon = require('../assets/ic_flash_off_white.png');
-    }
-
-    return icon;
   }
 
   render() {
@@ -234,20 +148,6 @@ class RecordScreen extends React.Component {
           defaultTouchToFocus
           mirrorImage={false}
         />
-        <View style={[styles.overlay, styles.topOverlay]}>
-          <LCTouchableImage 
-            id="switchTypeButton"
-            buttonStyle={styles.typeButton}
-            buttonAction={this.switchType}
-            imageSrc={this.typeIcon}
-          />
-          <LCTouchableImage 
-            id="switchFlashButton"
-            buttonStyle={styles.flashButton}
-            buttonAction={this.switchFlash}
-            imageSrc={this.flashIcon}
-          />
-        </View>
         <View style={[styles.overlay, styles.bottomOverlay]}>
           <View style={styles.buttonsSpace} />
           {

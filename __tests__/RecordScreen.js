@@ -1,6 +1,11 @@
 /* eslint-env mocha */
 /* eslint-disable */
 
+//==============================================================================
+//
+//     EVERYTHING IS BROKEN - NEED TO REMOVE ENZYME AND START FROM SCRATCH
+//
+//==============================================================================
 import 'react-native';
 import React from 'react';
 

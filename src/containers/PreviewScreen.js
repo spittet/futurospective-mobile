@@ -38,6 +38,13 @@ class PreviewScreen extends React.Component {
     }
   }
 
+  /**
+   * Changing the default header
+   * React Navigation doesn't allow you to use the state right away so this is
+   * a workaround. 
+   * See https://github.com/react-community/react-navigation/issues/145 for
+   * more details.
+   */
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Preview',
@@ -48,7 +55,6 @@ class PreviewScreen extends React.Component {
             navigation.goBack();
           }}
         ><Text>Cancel</Text></TouchableOpacity>,
-
       headerRight: 
         <Button 
           title='Publish' 
@@ -73,12 +79,12 @@ class PreviewScreen extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
-      handlePublish: this.publish,
-      handleCancel: this.cancel
+      handlePublish: this.publishVideo,
+      handleCancel: this.cancelVideo
     });
   }
 
-  onLoad = (data) => {
+  onVideoLoad = (data) => {
     this.setState({
       video: {
         ...this.state.video,
@@ -88,7 +94,7 @@ class PreviewScreen extends React.Component {
     this.player.seek(0);
   }
 
-  onProgress = (data) => {
+  onVideoProgress = (data) => {
     this.setState({
       video: {
         ...this.state.video,
@@ -97,15 +103,15 @@ class PreviewScreen extends React.Component {
     });
   }
 
-  publish = () => {
+  publishVideo = () => {
     this.props.dispatch(publishNewVideo(this.props.newVideo));
   }
 
-  cancel = () => {
+  cancelVideo = () => {
     this.props.dispatch(cancelNewVideo(this.props.newVideo));
   }
 
-  onEnd = () => {
+  onVideoEnd = () => {
     this.stopPlaying();
   }
 
@@ -128,8 +134,6 @@ class PreviewScreen extends React.Component {
     });  
   }
 
-  // I should change this to display an error if we don't have a recorded
-  // video.
   render() {
     console.log(this.state);
     if (this.state.video.uri) {
@@ -141,9 +145,9 @@ class PreviewScreen extends React.Component {
             rate={1.0}
             paused={this.state.video.paused}
             resizeMode="cover"
-            onLoad={this.onLoad}
-            onProgress={this.onProgress}
-            onEnd={this.onEnd}
+            onLoad={this.onVideoLoad}
+            onProgress={this.onVideoProgress}
+            onEnd={this.onVideoEnd}
             ref={(ref) => {
               this.player = ref
             }}

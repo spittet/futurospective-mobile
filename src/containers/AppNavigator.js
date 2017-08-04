@@ -1,6 +1,10 @@
 /**
  * Application Nav
- *  
+ *
+ * The normal userflow is the following:
+ * MainScreen .-> Record Screen -> Preview Screen -> Capsules list
+ *       (or) |-> Capsules list -> Capsule
+ *
  * @flow
  **/
 

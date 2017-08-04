@@ -16,22 +16,39 @@ export function recordNewVideo(video: Video) {
   };
 }
 
+/**
+ * Publishes the new video
+ * Before saving the video data to the global state we need to move it to the
+ * directory where capsules are persisted.
+ */
 export function publishNewVideo(video: Video) {
-  // console.log (config.CAPSULES_DIR);
-  // Implement feature to move the video
 
-  let filename = video.uri.replace(/^.*[\\\/]/, '');
-  let newPath = config.CAPSULES_DIR + '/' + filename;
+  const videoFilename = video.uri.replace(/^.*[\\\/]/, '');
+  const newVideoPath = config.CAPSULES_DIR + '/' + videoFilename;
   
-  RNFS.moveFile(video.uri, newPath);
+  // Need to handle errors
+  RNFS.moveFile(video.uri, newVideoPath);
+
   return {
     type: 'PUBLISH_NEW_VIDEO',
-    uri: newPath
+    uri: newVideoPath
   }
 }
 
+/**
+ * Cancels a video and deletes the file from disk
+ */
 export function cancelNewVideo(video: Video) {
-  RNFS.unlink(video.uri);
+  if (video && video.uri) {
+    RNFS.unlink(video.uri)
+      .then(() => {
+        // ADD ANALYTICS
+      })
+      .catch((err) => {
+        // ADD ANALYTICS
+      });
+  }
+
   return {
     type: 'CANCEL_NEW_VIDEO'
   }
