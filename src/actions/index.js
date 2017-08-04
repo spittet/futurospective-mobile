@@ -23,8 +23,6 @@ export function recordNewCapsule(capsule: Capsule) {
  * directory where capsules are persisted.
  */
 export function saveNewCapsule(capsule: Capsule) {
-  listFilesInDirsForDebugging();
-
   // Avoid publishing twice
   if (capsule && capsule.status === config.CAPSULE_STATUS_RECORDED) {
     const videoFilename = capsule.uri.replace(/^.*[\\\/]/, '');
@@ -32,6 +30,8 @@ export function saveNewCapsule(capsule: Capsule) {
     
     // Need to handle errors
     RNFS.moveFile(capsule.uri, newVideoPath);
+
+    listFilesInDirsForDebugging();
 
     return {
       type: 'SAVE_NEW_CAPSULE',
@@ -50,7 +50,6 @@ export function saveNewCapsule(capsule: Capsule) {
  */
 export function publishNewCapsule(capsule: Capsule) {
   listFilesInDirsForDebugging();
-
   // Avoid publishing twice
   if (capsule && capsule.status === config.CAPSULE_STATUS_SAVED) {
     return {
@@ -77,7 +76,7 @@ export function cancelNewCapsule(capsule: Capsule) {
         // ADD ANALYTICS
       });
   }
-
+  listFilesInDirsForDebugging();
   return {
     type: 'CANCEL_NEW_CAPSULE'
   }

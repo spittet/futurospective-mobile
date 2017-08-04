@@ -19,7 +19,7 @@ import styles from './styles';
 
 import { config } from '../config';
 import { NavigationActions } from 'react-navigation';
-import { recordNewCapsule } from '../actions';
+import { recordNewCapsule, cancelNewCapsule } from '../actions';
 import type Capsule from '../reducers';
 
 class RecordScreen extends React.Component {
@@ -39,6 +39,7 @@ class RecordScreen extends React.Component {
       captureQuality: number
     },
     isRecording: boolean,
+    recordStoppedByUser: boolean,
     recordingTimeoutID: ?number
   };
 
@@ -63,13 +64,15 @@ class RecordScreen extends React.Component {
         captureQuality: Camera.constants.CaptureQuality.medium
       },
       isRecording: false,
+      recordStoppedByUser: false,
       recordingTimeoutID: null
     };
   }
 
 
   componentWillUnmount() {
-    this.stopRecording();
+    // It seems that the camera automatically stop capturing when Unmounting
+    //this.cancelRecording();
   }
 
   // Sets a timeout after which the recording is automatically stop
@@ -98,31 +101,44 @@ class RecordScreen extends React.Component {
 
       this.camera.capture(captureOptions)
         .then(async (data) => { // Record new video to global state
+
+          this.clearRecordingTimeout();
+
           let capsule: Capsule = {
-            uri: data.path
-          };
+              uri: data.path
+            };
+          
+          // If the users presses the back button we don't record video
+          if (this.state.recordStoppedByUser) {
+            await this.props.dispatch(recordNewCapsule(capsule));
 
-          await this.props.dispatch(recordNewCapsule(capsule));
-
-          // Automatically redirects to the Preview page
-          this.props.dispatch(
-            NavigationActions.navigate({ routeName: 'Preview' })
-          ); 
+            // Automatically redirects to the Preview page
+            this.props.dispatch(
+              NavigationActions.navigate({ routeName: 'Preview' })
+            ); 
+          } else {  // This happens if user presses the back button
+            this.props.dispatch(cancelNewCapsule(capsule));
+          }
         });
 
       this.setRecordingTimeout();
       
       this.setState({
-        isRecording: true
-      });
+        isRecording: true,
+        recordStoppedByUser: false
+      });    
     }
   }
 
   stopRecording = () => {
     if (this.camera && this.state.isRecording) {
-      this.camera.stopCapture();
-      this.clearRecordingTimeout();
-      this.setState({ isRecording: false });
+      this.setState({ 
+        isRecording: false,
+        recordStoppedByUser: true   // Video 
+      }, () => {
+        this.camera.stopCapture();
+      });
+      
     }
   }
 

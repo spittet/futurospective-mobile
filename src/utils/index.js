@@ -21,8 +21,7 @@ export function listFilesInDirsForDebugging(){
     if (path) {
       RNFS.readDir(path)
         .then((result) => {
-          console.log ('.: Listing files in ' + path + ' :.');
-
+          console.log ('= ' + result.length + ' files in ' + path + ' =======');
           for (let doc of result) {
             console.log(doc['path']);
           } 
@@ -32,6 +31,6 @@ export function listFilesInDirsForDebugging(){
         });
     }
   }
-  
+
   /* eslint-enable no-alert, no-console */
 }
