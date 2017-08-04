@@ -16,7 +16,7 @@ function createCapsulesDirectory() {
     if (!result) {
       RNFS.mkdir(config.CAPSULES_DIR);
     } else {
-      console.log('dir found');
+      
     }
   });
 }

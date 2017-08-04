@@ -1,46 +1,58 @@
 //@flow
 
-import type {Video} from '../reducers';
+import type {Capsule} from '../reducers';
 
 import { config } from '../config';
 
 import RNFS from 'react-native-fs';
 
+import { listFilesInDirsForDebugging } from '../utils';
 
-export function recordNewVideo(video: Video) {
+
+export function recordNewCapsule(capsule: Capsule) {
+  listFilesInDirsForDebugging();
   return {
-    type: 'RECORD_NEW_VIDEO',
-    uri: video.uri,
-    isRecorded: video.isRecorded,
-    isPublished: video.isPublished
+    type: 'RECORD_NEW_CAPSULE',
+    uri: capsule.uri,
+    isRecorded: capsule.isRecorded,
+    isPublished: capsule.isPublished
   };
 }
 
 /**
- * Publishes the new video
- * Before saving the video data to the global state we need to move it to the
+ * Publishes the new capsule
+ * Before saving the capsule data to the global state we need to move it to the
  * directory where capsules are persisted.
  */
-export function publishNewVideo(video: Video) {
-
-  const videoFilename = video.uri.replace(/^.*[\\\/]/, '');
-  const newVideoPath = config.CAPSULES_DIR + '/' + videoFilename;
+export function publishNewCapsule(capsule: Capsule) {
+  listFilesInDirsForDebugging();
   
-  // Need to handle errors
-  RNFS.moveFile(video.uri, newVideoPath);
+  // Avoid publishing twice
+  if (capsule && !capsule.isPublished) {
+    const videoFilename = capsule.uri.replace(/^.*[\\\/]/, '');
+    const newVideoPath = config.CAPSULES_DIR + '/' + videoFilename;
+    
+    // Need to handle errors
+    RNFS.moveFile(capsule.uri, newVideoPath);
 
-  return {
-    type: 'PUBLISH_NEW_VIDEO',
-    uri: newVideoPath
+    return {
+      type: 'PUBLISH_NEW_CAPSULE',
+      uri: newVideoPath
+    }
+  } else {
+    return {
+      type: 'PUBLISH_NEW_CAPSULE',
+      uri: capsule.uri
+    }
   }
 }
 
 /**
- * Cancels a video and deletes the file from disk
+ * Cancels a capsule and deletes the file from disk
  */
-export function cancelNewVideo(video: Video) {
-  if (video && video.uri) {
-    RNFS.unlink(video.uri)
+export function cancelNewCapsule(capsule: Capsule) {
+  if (capsule && capsule.uri) {
+    RNFS.unlink(capsule.uri)
       .then(() => {
         // ADD ANALYTICS
       })
@@ -50,6 +62,6 @@ export function cancelNewVideo(video: Video) {
   }
 
   return {
-    type: 'CANCEL_NEW_VIDEO'
+    type: 'CANCEL_NEW_CAPSULE'
   }
 }

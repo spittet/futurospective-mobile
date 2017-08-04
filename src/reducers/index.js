@@ -29,41 +29,41 @@ function nav(state = initialNavState, action) {
 }
 
 // =============================================================================
-// NEW VIDEO REDUCER
-// The new video reducer contains the info related to the video we are
+// NEW CAPSULE REDUCER
+// The new capsule reducer contains the info related to the capsule we are
 // currently trying to publish.
 // =============================================================================
 
-export type Video = {
+export type Capsule = {
   id: ?number;
   uri: string;
   isRecorded: boolean;
   isPublished: boolean
 };
 
-const initialNewVideoState = {
+const initialNewCapsuleState = {
   uri: null,
   isRecorded: false,
   isPublished: false
 }
 
-function newVideo(state = initialNewVideoState, action) {
+function newCapsule(state = initialNewCapsuleState, action) {
   switch (action.type) {
-    case 'RECORD_NEW_VIDEO':
+    case 'RECORD_NEW_CAPSULE':
       return {
         ...state,
         uri: action.uri,                  // path on disk
         isRecorded: action.isRecorded,    // value will be true
         isPublished: action.isPublished   // value will be false
       }
-    case 'PUBLISH_NEW_VIDEO':
+    case 'PUBLISH_NEW_CAPSULE':
       return {
         ...state,
         uri: action.uri,
         isPublished: true
       }
-    case 'CANCEL_NEW_VIDEO':
-      return initialNewVideoState;
+    case 'CANCEL_NEW_CAPSULE':
+      return initialNewCapsuleState;
     default:
       return state
   }
@@ -75,7 +75,7 @@ function newVideo(state = initialNewVideoState, action) {
 
 const AppReducer = combineReducers({
   nav,
-  newVideo
+  newCapsule
 });
 
 export default AppReducer;

@@ -1,7 +1,7 @@
 /**
- * This is the preview screen where we play the video after it's been recorded.
+ * Preview screen where we play the capsule after it's been recorded.
  *
- * The user should only get to this screen after recording a vidoe. They can
+ * The user should only get to this screen after recording a capsule. They can
  * then preview the result prior to saving it for real.
  * 
  * @flow
@@ -21,14 +21,16 @@ import Video from 'react-native-video';
 import styles from './styles';
 
 import { 
-  publishNewVideo,
-  cancelNewVideo 
+  publishNewCapsule,
+  cancelNewCapsule 
 } from '../actions';
 
 class PreviewScreen extends React.Component {
 
   player: any;
   
+  // We use a video object in the local state for the video player in the
+  // screen.
   state: {
     video: {
       uri: ?string,
@@ -68,7 +70,7 @@ class PreviewScreen extends React.Component {
 
     this.state = {
       video: {
-        uri: this.props.newVideo.uri || null,
+        uri: this.props.newCapsule.uri || null,
         paused: true,
         currentTime: 0.0,
         duration: 0.0,
@@ -79,8 +81,8 @@ class PreviewScreen extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
-      handlePublish: this.publishVideo,
-      handleCancel: this.cancelVideo
+      handlePublish: this.publishCapsule,
+      handleCancel: this.cancelCapsule
     });
   }
 
@@ -103,12 +105,12 @@ class PreviewScreen extends React.Component {
     });
   }
 
-  publishVideo = () => {
-    this.props.dispatch(publishNewVideo(this.props.newVideo));
+  publishCapsule = () => {
+    this.props.dispatch(publishNewCapsule(this.props.newCapsule));
   }
 
-  cancelVideo = () => {
-    this.props.dispatch(cancelNewVideo(this.props.newVideo));
+  cancelCapsule = () => {
+    this.props.dispatch(cancelNewCapsule(this.props.newCapsule));
   }
 
   onVideoEnd = () => {
@@ -175,7 +177,7 @@ class PreviewScreen extends React.Component {
     } else {
       return (
         <View style={styles.container}>
-          <Text>No recorded video found</Text>
+          <Text>No recorded capsule found</Text>
         </View>
       );
     }
@@ -185,13 +187,13 @@ class PreviewScreen extends React.Component {
 
 PreviewScreen.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  newVideo: PropTypes.object,
+  newCapsule: PropTypes.object,
   navigation: PropTypes.object
 }
 
 const mapStateToProps = (state) => {
   return {
-    newVideo: state.newVideo
+    newCapsule: state.newCapsule
   }
 }
 

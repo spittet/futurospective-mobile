@@ -19,8 +19,8 @@ import styles from './styles';
 
 import { config } from '../config';
 import { NavigationActions } from 'react-navigation';
-import { recordNewVideo } from '../actions';
-import type Video from '../reducers';
+import { recordNewCapsule } from '../actions';
+import type Capsule from '../reducers';
 
 class RecordScreen extends React.Component {
 
@@ -98,14 +98,14 @@ class RecordScreen extends React.Component {
 
       this.camera.capture(captureOptions)
         .then(async (data) => { // Record new video to global state
-          let video: Video = {
+          let capsule: Capsule = {
             id: null,
             uri: data.path,
             isRecorded: true,
             isPublished: false
           };
 
-          await this.props.dispatch(recordNewVideo(video));
+          await this.props.dispatch(recordNewCapsule(capsule));
 
           // Automatically redirects to the Preview page
           this.props.dispatch(
@@ -175,12 +175,12 @@ class RecordScreen extends React.Component {
 
 RecordScreen.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  newVideo: PropTypes.object
+  newCapsule: PropTypes.object
 }
 
 const mapStateToProps = (state) => {
   return {
-    newVideo: state.newVideo
+    newCapsule: state.newCapsule
   }
 }
 
