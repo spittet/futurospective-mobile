@@ -5,8 +5,20 @@ import type {Capsule} from '../reducers';
 import { config } from '../config';
 
 import RNFS from 'react-native-fs';
+import moment from 'moment';
 
 import { listFilesInDirsForDebugging } from '../utils';
+
+/**
+ * Sets the publishing date of the capsule.
+ * Recorded as a timestamp.
+ */
+export function setNewCapsulePublishDate(publishedAt: string){
+  return {
+    type: 'SET_NEW_CAPSULE_PUBLISH_DATE',
+    publishedAt: publishedAt
+  }
+}
 
 
 export function recordNewCapsule(capsule: Capsule) {
@@ -36,7 +48,7 @@ export function saveNewCapsule(capsule: Capsule) {
     return {
       type: 'SAVE_NEW_CAPSULE',
       uri: newVideoPath,
-      savedAt: Date.now()
+      savedAt: moment().toISOString()
     }
   } else {
     return {
@@ -54,7 +66,7 @@ export function publishNewCapsule(capsule: Capsule) {
   if (capsule && capsule.status === config.CAPSULE_STATUS_SAVED) {
     return {
       type: 'PUBLISH_NEW_CAPSULE',
-      publishedAt: Date.now()
+      publishedAt: moment().toISOString()
     }
   } else {
     return {

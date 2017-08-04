@@ -19,7 +19,10 @@ import styles from './styles';
 
 import { config } from '../config';
 import { NavigationActions } from 'react-navigation';
-import { recordNewCapsule, cancelNewCapsule } from '../actions';
+import { 
+  cancelNewCapsule,
+  recordNewCapsule, 
+} from '../actions';
 import type Capsule from '../reducers';
 
 class RecordScreen extends React.Component {

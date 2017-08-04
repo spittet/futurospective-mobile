@@ -40,8 +40,8 @@ export type Capsule = {
   id: ?number;              // ID of the capsule
   uri: string;              // Path of the video file
   status: number;            // Status of the capsule
-  savedAt: ?number;     // (timestam) When it's been published
-  publishedAt: ?number;     // (timestam) When it'll be avaible
+  savedAt: ?string;     // (timestam) When it's been published
+  publishedAt: ?string;     // (timestam) When it'll be avaible
 };
 
 const initialNewCapsuleState = {
@@ -53,6 +53,11 @@ const initialNewCapsuleState = {
 
 function newCapsule(state = initialNewCapsuleState, action) {
   switch (action.type) {
+    case 'SET_NEW_CAPSULE_PUBLISH_DATE':
+      return {
+        ...state,
+        publishedAt: action.publishedAt
+      }
     case 'RECORD_NEW_CAPSULE':
       return {
         ...state,
@@ -70,8 +75,7 @@ function newCapsule(state = initialNewCapsuleState, action) {
       return {
         ...state,
         uri: action.uri,
-        status: config.CAPSULE_STATUS_PUBLISHED,
-        publishedAt: action.publishedAt
+        status: config.CAPSULE_STATUS_PUBLISHED
       }
     case 'CANCEL_NEW_CAPSULE':
       return initialNewCapsuleState;
