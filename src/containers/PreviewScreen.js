@@ -21,7 +21,7 @@ import Video from 'react-native-video';
 import styles from './styles';
 
 import { 
-  publishNewCapsule,
+  saveNewCapsule,
   cancelNewCapsule 
 } from '../actions';
 
@@ -59,8 +59,8 @@ class PreviewScreen extends React.Component {
         ><Text>Cancel</Text></TouchableOpacity>,
       headerRight: 
         <Button 
-          title='Publish' 
-          onPress={() => navigation.state.params.handlePublish()} 
+          title='Save' 
+          onPress={() => navigation.state.params.handleSave()} 
         />
     }
   }
@@ -81,7 +81,7 @@ class PreviewScreen extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
-      handlePublish: this.publishCapsule,
+      handleSave: this.saveCapsule,
       handleCancel: this.cancelCapsule
     });
   }
@@ -105,8 +105,8 @@ class PreviewScreen extends React.Component {
     });
   }
 
-  publishCapsule = () => {
-    this.props.dispatch(publishNewCapsule(this.props.newCapsule));
+  saveCapsule = () => {
+    this.props.dispatch(saveNewCapsule(this.props.newCapsule));
   }
 
   cancelCapsule = () => {
@@ -137,7 +137,6 @@ class PreviewScreen extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     if (this.state.video.uri) {
       return (
         <View style={styles.container}>

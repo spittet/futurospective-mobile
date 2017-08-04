@@ -15,6 +15,7 @@ export function listFilesInDirsForDebugging(){
     RNFS.ExternalDirectoryPath,
     config.CAPSULES_DIR 
   ]
+  /* eslint-disable no-alert, no-console */
 
   for (let path of directories) {
     if (path) {
@@ -31,4 +32,6 @@ export function listFilesInDirsForDebugging(){
         });
     }
   }
+  
+  /* eslint-enable no-alert, no-console */
 }

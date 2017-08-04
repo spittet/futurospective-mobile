@@ -6,6 +6,8 @@ import { combineReducers } from 'redux';
 
 import { AppNavigator } from '../containers/AppNavigator';
 
+import { config } from '../config';
+
 
 // =============================================================================
 // NAV REDUCER
@@ -35,16 +37,18 @@ function nav(state = initialNavState, action) {
 // =============================================================================
 
 export type Capsule = {
-  id: ?number;
-  uri: string;
-  isRecorded: boolean;
-  isPublished: boolean
+  id: ?number;              // ID of the capsule
+  uri: string;              // Path of the video file
+  status: number;            // Status of the capsule
+  savedAt: ?number;     // (timestam) When it's been published
+  publishedAt: ?number;     // (timestam) When it'll be avaible
 };
 
 const initialNewCapsuleState = {
   uri: null,
-  isRecorded: false,
-  isPublished: false
+  status: config.CAPSULE_STATUS_NEW,
+  savedAt: null,
+  publishedAt: null
 }
 
 function newCapsule(state = initialNewCapsuleState, action) {
@@ -52,15 +56,22 @@ function newCapsule(state = initialNewCapsuleState, action) {
     case 'RECORD_NEW_CAPSULE':
       return {
         ...state,
-        uri: action.uri,                  // path on disk
-        isRecorded: action.isRecorded,    // value will be true
-        isPublished: action.isPublished   // value will be false
+        uri: action.uri,
+        status: config.CAPSULE_STATUS_RECORDED,
+      }
+    case 'SAVE_NEW_CAPSULE':
+      return {
+        ...state,
+        uri: action.uri,
+        status: config.CAPSULE_STATUS_SAVED,
+        savedAt: action.savedAt
       }
     case 'PUBLISH_NEW_CAPSULE':
       return {
         ...state,
         uri: action.uri,
-        isPublished: true
+        status: config.CAPSULE_STATUS_PUBLISHED,
+        publishedAt: action.publishedAt
       }
     case 'CANCEL_NEW_CAPSULE':
       return initialNewCapsuleState;

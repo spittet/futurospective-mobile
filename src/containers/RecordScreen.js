@@ -99,10 +99,7 @@ class RecordScreen extends React.Component {
       this.camera.capture(captureOptions)
         .then(async (data) => { // Record new video to global state
           let capsule: Capsule = {
-            id: null,
-            uri: data.path,
-            isRecorded: true,
-            isPublished: false
+            uri: data.path
           };
 
           await this.props.dispatch(recordNewCapsule(capsule));

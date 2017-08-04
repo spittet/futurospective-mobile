@@ -3,8 +3,14 @@
 import RNFS from 'react-native-fs';
 
 export const config = {
-  CAPSULES_DIR: RNFS.DocumentDirectoryPath + '/capsules', // Capsules directory
-  MAX_RECORDING_DURATION: 10000,                          // Recording timeout
+  CAPSULES_DIR:                        // Capsules directory
+    RNFS.DocumentDirectoryPath 
+    + '/capsules', 
+  MAX_RECORDING_DURATION: 10000,       // Recording timeout
+  CAPSULE_STATUS_NEW: 0,                // Initial state of a new capsule
+  CAPSULE_STATUS_RECORDED: 1,           // Recorded state for previews
+  CAPSULE_STATUS_SAVED: 2,              // Capsule is persisted
+  CAPSULE_STATUS_PUBLISHED: 3           // Capsule is available to user
 }
 
 export function locapsInit() {
@@ -16,7 +22,7 @@ function createCapsulesDirectory() {
     if (!result) {
       RNFS.mkdir(config.CAPSULES_DIR);
     } else {
-      
+      // ADD ANALYTICS
     }
   });
 }

@@ -13,22 +13,20 @@ export function recordNewCapsule(capsule: Capsule) {
   listFilesInDirsForDebugging();
   return {
     type: 'RECORD_NEW_CAPSULE',
-    uri: capsule.uri,
-    isRecorded: capsule.isRecorded,
-    isPublished: capsule.isPublished
+    uri: capsule.uri
   };
 }
 
 /**
- * Publishes the new capsule
+ * Saves the new capsule
  * Before saving the capsule data to the global state we need to move it to the
  * directory where capsules are persisted.
  */
-export function publishNewCapsule(capsule: Capsule) {
+export function saveNewCapsule(capsule: Capsule) {
   listFilesInDirsForDebugging();
-  
+
   // Avoid publishing twice
-  if (capsule && !capsule.isPublished) {
+  if (capsule && capsule.status === config.CAPSULE_STATUS_RECORDED) {
     const videoFilename = capsule.uri.replace(/^.*[\\\/]/, '');
     const newVideoPath = config.CAPSULES_DIR + '/' + videoFilename;
     
@@ -36,13 +34,32 @@ export function publishNewCapsule(capsule: Capsule) {
     RNFS.moveFile(capsule.uri, newVideoPath);
 
     return {
-      type: 'PUBLISH_NEW_CAPSULE',
-      uri: newVideoPath
+      type: 'SAVE_NEW_CAPSULE',
+      uri: newVideoPath,
+      savedAt: Date.now()
     }
   } else {
     return {
+      type: ''
+    }
+  }
+}
+
+/**
+ * Publishes the new capsule
+ */
+export function publishNewCapsule(capsule: Capsule) {
+  listFilesInDirsForDebugging();
+
+  // Avoid publishing twice
+  if (capsule && capsule.status === config.CAPSULE_STATUS_SAVED) {
+    return {
       type: 'PUBLISH_NEW_CAPSULE',
-      uri: capsule.uri
+      publishedAt: Date.now()
+    }
+  } else {
+    return {
+      type: ''
     }
   }
 }
@@ -56,7 +73,7 @@ export function cancelNewCapsule(capsule: Capsule) {
       .then(() => {
         // ADD ANALYTICS
       })
-      .catch((err) => {
+      .catch(() => {
         // ADD ANALYTICS
       });
   }
