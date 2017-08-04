@@ -48,34 +48,11 @@ $ npm install -g react-native-cli
 
 # Install dependencies
 $ yarn
-
-#Link the pluging react-native-camera
-$ react-native link react-native-camera
 ```
 
 ## Running tests
 
-The application is using [Jest](https://facebook.github.io/jest) for testing and Enzyme.
-
-Unfortunately Enzyme is not yet compatible with React 16 alpha because it's an alpha and there are some major breakages between React 15 and React 16. To fix that I forked enzyme and changed line 205 of node_modules/enzyme/build/ShallowWrapper.js in the instance function.
-
-```javascript
-  }, {
-    key: 'instance',
-    value: function () {
-      function instance() {
-        if (this.root !== this) {
-          throw new Error('ShallowWrapper::instance() can only be called on the root');
-        }
-        return this.renderer._instance ? this.renderer._instance : null;
-      }
-
-      return instance;
-    }()
-
-```
-In the tests I'm requiring the package spittet-enzyme. This will need to be changed later.
+Testing with Enzyme is broken - need to get back to simple usage of Jest
 
 ## Links
 
-TODO
