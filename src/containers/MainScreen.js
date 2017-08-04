@@ -20,6 +20,7 @@ import styles from './styles';
 import { config } from '../config';
 import { setNewCapsulePublishDate } from '../actions';
 import { NavigationActions } from 'react-navigation';
+import { getCapsules } from '../db';
 
 class MainScreen extends React.Component {
 
@@ -63,6 +64,9 @@ class MainScreen extends React.Component {
       <View style={styles.container}>
         <Text style={styles.welcome}>
           This is the main screen
+        </Text>
+        <Text style={styles.welcome}>
+          {getCapsules().length} Capsules
         </Text>
         <Button
           onPress={() =>

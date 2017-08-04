@@ -24,6 +24,7 @@ import {
   saveNewCapsule,
   cancelNewCapsule 
 } from '../actions';
+import { NavigationActions } from 'react-navigation';
 
 class PreviewScreen extends React.Component {
 
@@ -105,8 +106,22 @@ class PreviewScreen extends React.Component {
     });
   }
 
-  saveCapsule = () => {
-    this.props.dispatch(saveNewCapsule(this.props.newCapsule));
+  saveCapsule = async () => {
+    await this.props.dispatch(saveNewCapsule(this.props.newCapsule));
+
+    this.navigateBackToHome(); 
+  }
+
+  navigateBackToHome = () => {
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Main'})
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
+
+
   }
 
   cancelCapsule = () => {

@@ -4,6 +4,7 @@ import type {Capsule} from '../reducers';
 
 import { config } from '../config';
 
+import { createCapsule } from '../db';
 import RNFS from 'react-native-fs';
 import moment from 'moment';
 
@@ -45,10 +46,14 @@ export function saveNewCapsule(capsule: Capsule) {
 
     listFilesInDirsForDebugging();
 
+    capsule.savedAt = moment().toISOString();
+
+    createCapsule(capsule);
+
     return {
       type: 'SAVE_NEW_CAPSULE',
       uri: newVideoPath,
-      savedAt: moment().toISOString()
+      savedAt: capsule.savedAt
     }
   } else {
     return {
