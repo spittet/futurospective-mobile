@@ -71,6 +71,12 @@ class MainScreen extends React.Component {
         <Button
           onPress={() =>
             this.props
+              .dispatch(NavigationActions.navigate({ routeName: 'CapsuleList' }))}
+          title="Go to Capsules screen"
+        />
+        <Button
+          onPress={() =>
+            this.props
               .dispatch(NavigationActions.navigate({ routeName: 'Record' }))}
           title="Go to record screen"
         />

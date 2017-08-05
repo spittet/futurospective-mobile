@@ -5,6 +5,8 @@ import type {Capsule} from '../reducers';
 import { config } from '../config';
 
 import { createCapsule } from '../db';
+import { getCapsules } from '../db';
+
 import RNFS from 'react-native-fs';
 import moment from 'moment';
 
@@ -97,4 +99,16 @@ export function cancelNewCapsule(capsule: Capsule) {
   return {
     type: 'CANCEL_NEW_CAPSULE'
   }
+}
+
+/**
+ * Get the list of capsules
+ */
+export function getCapsulesAction() {
+  const capsules = getCapsules();
+  return {
+    type: 'GET_CAPSULES',
+    items: capsules
+  }
+
 }

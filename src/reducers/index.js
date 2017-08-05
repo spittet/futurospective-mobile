@@ -85,12 +85,38 @@ function newCapsule(state = initialNewCapsuleState, action) {
 }
 
 // =============================================================================
+// CAPSULE LIST REDUCER
+// This reducer manages the list of capsules
+// =============================================================================
+
+export type CapsuleList = {
+  items: Array<Capsule>;
+};
+
+const initialCapsuleListState = {
+  items: [],
+}
+
+function capsuleList(state = initialCapsuleListState, action) {
+  switch (action.type) {
+    case 'GET_CAPSULES':
+      return {
+        ...state,
+        items: action.items
+      }
+    default:
+      return state
+  }
+}
+
+// =============================================================================
 // Combining all reducers
 // =============================================================================
 
 const AppReducer = combineReducers({
   nav,
-  newCapsule
+  newCapsule,
+  capsuleList
 });
 
 export default AppReducer;

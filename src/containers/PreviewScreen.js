@@ -64,11 +64,15 @@ class PreviewScreen extends React.Component {
           onPress={() => navigation.state.params.handleSave()} 
         />
     }
-  }
+  };
 
   constructor(props: Object) {
     super(props);
+    this.initLocalState(props);
+    
+  }
 
+  initLocalState = (props) => {
     this.state = {
       video: {
         uri: this.props.newCapsule.uri || null,

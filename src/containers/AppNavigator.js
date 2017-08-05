@@ -16,11 +16,13 @@ import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 import MainScreen from './MainScreen';
 import RecordScreen from './RecordScreen';
 import PreviewScreen from './PreviewScreen';
+import CapsuleListScreen from './CapsuleListScreen';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: MainScreen },
   Record: { screen: RecordScreen },
-  Preview: { screen: PreviewScreen }
+  Preview: { screen: PreviewScreen },
+  CapsuleList: { screen: CapsuleListScreen }
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
