@@ -43,19 +43,22 @@ class MainScreen extends React.Component {
   }
 
   render() {
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id}).cloneWithRows(this.props.capsuleList.items);
+    const dataSource = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1.id !== r2.id
+      })
+      .cloneWithRows(this.props.capsuleItems.items);
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           This is the Capsule List screen
         </Text>
         {this.props
-          .capsuleList
+          .capsuleItems
           .items
           .length  > 0 &&
         <ListView
           dataSource={dataSource}
-          renderRow={(capsule) => <Text>{capsule.id} {capsule.publishedAt}</Text>}
+          renderRow={(capsule) => <Text>{capsule.publishedAt}</Text>}
         />
         }
       </View>
@@ -66,12 +69,12 @@ class MainScreen extends React.Component {
 
 MainScreen.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  capsuleList: PropTypes.object,
+  capsuleItems: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {
   return {
-    capsuleList: state.capsuleList
+    capsuleItems: state.capsuleItems
   }
 }
 
