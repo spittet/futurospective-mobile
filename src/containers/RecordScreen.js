@@ -79,9 +79,9 @@ class RecordScreen extends React.Component {
   }
 
   // Sets a timeout after which the recording is automatically stop
-  setRecordingTimeout = () => {
+  _setRecordingTimeout = () => {
     let recordingTimeoutID = setTimeout(() => {
-      this.stopRecording();
+      this._stopRecording();
     }, config.MAX_RECORDING_DURATION);
 
     this.setState({
@@ -90,12 +90,12 @@ class RecordScreen extends React.Component {
   }
 
   // Clears the recording timeout to prevent leaks
-  clearRecordingTimeout = () => {
+  _clearRecordingTimeout = () => {
     this.state.recordingTimeoutID &&
       clearTimeout(this.state.recordingTimeoutID);
   }
 
-  startRecording = () => {
+  _startRecording = () => {
     if (this.camera && !this.state.isRecording) {
       let captureOptions = {
         mode: this.state.camera.captureMode,
@@ -105,7 +105,7 @@ class RecordScreen extends React.Component {
       this.camera.capture(captureOptions)
         .then(async (data) => { // Record new video to global state
 
-          this.clearRecordingTimeout();
+          this._clearRecordingTimeout();
 
           let capsule: Capsule = {
             uri: data.path
@@ -124,7 +124,7 @@ class RecordScreen extends React.Component {
           }
         });
 
-      this.setRecordingTimeout();
+      this._setRecordingTimeout();
       
       this.setState({
         isRecording: true,
@@ -133,7 +133,7 @@ class RecordScreen extends React.Component {
     }
   }
 
-  stopRecording = () => {
+  _stopRecording = () => {
     if (this.camera && this.state.isRecording) {
       this.setState({ 
         isRecording: false,
@@ -172,14 +172,14 @@ class RecordScreen extends React.Component {
             <LCTouchableImage
               id="startRecordingButton"
               buttonStyle={styles.captureButton}
-              buttonAction={this.startRecording}
+              buttonAction={this._startRecording}
               imageSrc={require('../assets/ic_videocam_36pt.png')}
             />
             ||
             <LCTouchableImage 
               id="stopRecordingButton"
               buttonStyle={styles.captureButton}
-              buttonAction={this.stopRecording}
+              buttonAction={this._stopRecording}
               imageSrc={require('../assets/ic_stop_36pt.png')}
             />
           }

@@ -68,11 +68,11 @@ class PreviewScreen extends React.Component {
 
   constructor(props: Object) {
     super(props);
-    this.initLocalState();
+    this._initLocalState();
     
   }
 
-  initLocalState = () => {
+  _initLocalState = () => {
     this.state = {
       video: {
         uri: this.props.newCapsule.uri || null,
@@ -86,12 +86,12 @@ class PreviewScreen extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
-      handleSave: this.saveCapsule,
-      handleCancel: this.cancelCapsule
+      handleSave: this._saveCapsule,
+      handleCancel: this._cancelCapsule
     });
   }
 
-  onVideoLoad = (data) => {
+  _onVideoLoad = (data) => {
     this.setState({
       video: {
         ...this.state.video,
@@ -101,7 +101,7 @@ class PreviewScreen extends React.Component {
     this.player.seek(0);
   }
 
-  onVideoProgress = (data) => {
+  _onVideoProgress = (data) => {
     this.setState({
       video: {
         ...this.state.video,
@@ -110,13 +110,17 @@ class PreviewScreen extends React.Component {
     });
   }
 
-  saveCapsule = async () => {
+  _saveCapsule = async () => {
     await this.props.dispatch(saveNewCapsule(this.props.newCapsule));
 
-    this.navigateBackToHome(); 
+    this._navigateBackToHome(); 
   }
 
-  navigateBackToHome = () => {
+  _cancelCapsule = () => {
+    this.props.dispatch(cancelNewCapsule(this.props.newCapsule));
+  }
+
+  _navigateBackToHome = () => {
     const resetAction = NavigationActions.reset({
       index: 0,
       actions: [
@@ -124,19 +128,13 @@ class PreviewScreen extends React.Component {
       ]
     })
     this.props.navigation.dispatch(resetAction)
-
-
   }
 
-  cancelCapsule = () => {
-    this.props.dispatch(cancelNewCapsule(this.props.newCapsule));
+  _onVideoEnd = () => {
+    this._stopPlaying();
   }
 
-  onVideoEnd = () => {
-    this.stopPlaying();
-  }
-
-  stopPlaying = () => {
+  _stopPlaying = () => {
     this.setState({
       video: {
         ...this.state.video,
@@ -146,7 +144,7 @@ class PreviewScreen extends React.Component {
     this.player.seek(0);
   }
 
-  startPlaying = () => {
+  _startPlaying = () => {
     this.setState({
       video: {
         ...this.state.video,
@@ -165,9 +163,9 @@ class PreviewScreen extends React.Component {
             rate={1.0}
             paused={this.state.video.paused}
             resizeMode="cover"
-            onLoad={this.onVideoLoad}
-            onProgress={this.onVideoProgress}
-            onEnd={this.onVideoEnd}
+            onLoad={this._onVideoLoad}
+            onProgress={this._onVideoProgress}
+            onEnd={this._onVideoEnd}
             ref={(ref) => {
               this.player = ref
             }}
@@ -178,13 +176,13 @@ class PreviewScreen extends React.Component {
             !this.state.video.paused 
             &&
             <View style={styles.previewVideoPlayButton}>
-              <TouchableOpacity onPress={this.stopPlaying}>
+              <TouchableOpacity onPress={this._stopPlaying}>
                 <Text>Stop</Text>
               </TouchableOpacity>
             </View>
             ||
             <View style={styles.previewVideoPlayButton}>
-              <TouchableOpacity onPress={this.startPlaying}>
+              <TouchableOpacity onPress={this._startPlaying}>
                 <Text>Start</Text>
               </TouchableOpacity>
             </View>

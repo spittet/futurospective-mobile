@@ -35,10 +35,10 @@ class MainScreen extends React.Component {
   }
 
   componentWillMount() {
-    this.loadData();
+    this._loadData();
   }
 
-  loadData = () => {
+  _loadData = () => {
     this.props.dispatch(getCapsulesAction());
   }
 

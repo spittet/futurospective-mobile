@@ -28,7 +28,7 @@ class MainScreen extends React.Component {
     title: 'Home Screen',
   };
 
-  setCapsulePublishDate = async (period: string) => {
+  _setCapsulePublishDate = async (period: string) => {
     let publishedAt;
 
     switch(period) {
@@ -93,37 +93,37 @@ class MainScreen extends React.Component {
         />
         <Button
           onPress={() => {
-            this.setCapsulePublishDate(config.CAPSULE_PERIOD_1MIN);
+            this._setCapsulePublishDate(config.CAPSULE_PERIOD_1MIN);
           }}
           title="Record a 1min capsule"
         />
         <Button
           onPress={() => {
-            this.setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
+            this._setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
           }}
           title="Record a 2W capsule"
         />
         <Button
           onPress={() => {
-            this.setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
+            this._setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
           }}
           title="Record a 1M capsule"
         />
         <Button
           onPress={() => {
-            this.setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
+            this._setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
           }}
           title="Record a 3M capsule"
         />
         <Button
           onPress={() => {
-            this.setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
+            this._setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
           }}
           title="Record a 6M capsule"
         />
         <Button
           onPress={() => {
-            this.setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
+            this._setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
           }}
           title="Record a 1Y capsule"
         />
