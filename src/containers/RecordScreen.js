@@ -108,8 +108,8 @@ class RecordScreen extends React.Component {
           this.clearRecordingTimeout();
 
           let capsule: Capsule = {
-              uri: data.path
-            };
+            uri: data.path
+          };
           
           // If the users presses the back button we don't record video
           if (this.state.recordStoppedByUser) {

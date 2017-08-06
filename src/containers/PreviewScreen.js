@@ -68,11 +68,11 @@ class PreviewScreen extends React.Component {
 
   constructor(props: Object) {
     super(props);
-    this.initLocalState(props);
+    this.initLocalState();
     
   }
 
-  initLocalState = (props) => {
+  initLocalState = () => {
     this.state = {
       video: {
         uri: this.props.newCapsule.uri || null,

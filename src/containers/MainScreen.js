@@ -55,7 +55,9 @@ class MainScreen extends React.Component {
 
     }
     
-    await this.props.dispatch(setNewCapsulePublishDate(publishedAt.toISOString()));
+    await this.props.dispatch(
+      setNewCapsulePublishDate(publishedAt.toISOString())
+    );
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Record' }));
   }
 
@@ -71,7 +73,10 @@ class MainScreen extends React.Component {
         <Button
           onPress={() =>
             this.props
-              .dispatch(NavigationActions.navigate({ routeName: 'CapsuleList' }))}
+              .dispatch(NavigationActions
+                .navigate({ routeName: 'CapsuleList' })
+                )
+            }
           title="Go to Capsules screen"
         />
         <Button
