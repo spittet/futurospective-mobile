@@ -105,25 +105,25 @@ class MainScreen extends React.Component {
         />
         <Button
           onPress={() => {
-            this._setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
+            this._setCapsulePublishDate(config.CAPSULE_PERIOD_1M);
           }}
           title="Record a 1M capsule"
         />
         <Button
           onPress={() => {
-            this._setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
+            this._setCapsulePublishDate(config.CAPSULE_PERIOD_3M);
           }}
           title="Record a 3M capsule"
         />
         <Button
           onPress={() => {
-            this._setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
+            this._setCapsulePublishDate(config.CAPSULE_PERIOD_6M);
           }}
           title="Record a 6M capsule"
         />
         <Button
           onPress={() => {
-            this._setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
+            this._setCapsulePublishDate(config.CAPSULE_PERIOD_12M);
           }}
           title="Record a 1Y capsule"
         />
