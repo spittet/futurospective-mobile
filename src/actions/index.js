@@ -1,11 +1,10 @@
 //@flow
 
-import type {Capsule} from '../reducers';
+import type {Capsule} from '../reducers/newCapsule';
 
 import { config } from '../config';
 
-import { createCapsule } from '../db';
-import { getCapsules } from '../db';
+import db from '../db';
 
 import RNFS from 'react-native-fs';
 import moment from 'moment';
@@ -50,7 +49,7 @@ export function saveNewCapsule(capsule: Capsule) {
 
     capsule.savedAt = moment().toISOString();
 
-    createCapsule(capsule);
+    db.createCapsule(capsule);
 
     return {
       type: 'SAVE_NEW_CAPSULE',
@@ -105,7 +104,7 @@ export function cancelNewCapsule(capsule: Capsule) {
  * Get the list of capsules
  */
 export function getCapsulesAction() {
-  const capsules = getCapsules();
+  const capsules = db.getCapsules();
   return {
     type: 'GET_CAPSULES',
     items: capsules
