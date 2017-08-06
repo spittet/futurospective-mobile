@@ -60,6 +60,8 @@ export default function (state: Object = initialState, action: Action ) {
         uri: action.uri,
         status: config.CAPSULE_STATUS_PUBLISHED
       }
+    case 'GET_CAPSULE':
+      return action.capsule;
     case 'CANCEL_NEW_CAPSULE':
       return initialState;
     default:

@@ -191,12 +191,12 @@ class RecordScreen extends React.Component {
 
 RecordScreen.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  newCapsule: PropTypes.object
+  currentCapsule: PropTypes.object
 }
 
 const mapStateToProps = (state) => {
   return {
-    newCapsule: state.newCapsule
+    currentCapsule: state.currentCapsule
   }
 }
 

@@ -17,12 +17,14 @@ import MainScreen from './MainScreen';
 import RecordScreen from './RecordScreen';
 import PreviewScreen from './PreviewScreen';
 import CapsuleListScreen from './CapsuleListScreen';
+import CapsuleDetailsScreen from './CapsuleDetailsScreen';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: MainScreen },
   Record: { screen: RecordScreen },
   Preview: { screen: PreviewScreen },
-  CapsuleList: { screen: CapsuleListScreen }
+  CapsuleList: { screen: CapsuleListScreen },
+  CapsuleDetails: { screen: CapsuleDetailsScreen }
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

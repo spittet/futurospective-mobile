@@ -1,6 +1,6 @@
 // @flow
 
-import type {Capsule} from './capsule';
+import type {Capsule} from './currentCapsule';
 
 export type CapsuleItems = {
   items: Array<Capsule>;

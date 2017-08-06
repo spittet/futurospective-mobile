@@ -23,8 +23,12 @@ const realm = new Realm({schema: [Capsule]});
 
 export const getCapsules = () => {
   const capsules = Capsule.get().sorted('publishedAt', true);
-
   return capsules;
+}
+
+export const getCapsule = (id) => {
+  const capsule = realm.objectForPrimaryKey(Capsule, id);
+  return capsule;
 }
 
 export const createCapsule = (capsule) => {

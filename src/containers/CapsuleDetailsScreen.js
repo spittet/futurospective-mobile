@@ -20,10 +20,6 @@ import {
 import Video from 'react-native-video';
 import styles from './styles';
 
-import { 
-  saveNewCapsule,
-  cancelNewCapsule 
-} from '../actions';
 import { NavigationActions } from 'react-navigation';
 
 class PreviewScreen extends React.Component {
@@ -48,28 +44,14 @@ class PreviewScreen extends React.Component {
    * See https://github.com/react-community/react-navigation/issues/145 for
    * more details.
    */
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Preview',
-      headerLeft:
-        <TouchableOpacity
-          onPress={() => {
-            navigation.state.params.handleCancel();
-            navigation.goBack();
-          }}
-        ><Text>Cancel</Text></TouchableOpacity>,
-      headerRight: 
-        <Button 
-          title='Save' 
-          onPress={() => navigation.state.params.handleSave()} 
-        />
-    }
+  static navigationOptions = {
+    title: 'Capsule Details'
   };
 
   constructor(props: Object) {
     super(props);
     this._initLocalState();
-    
+    //this._loadData();
   }
 
   _initLocalState = () => {
@@ -82,13 +64,6 @@ class PreviewScreen extends React.Component {
       }
     }
     this.player = null;
-  }
-
-  componentDidMount() {
-    this.props.navigation.setParams({
-      handleSave: this._saveCapsule,
-      handleCancel: this._cancelCapsule
-    });
   }
 
   _onVideoLoad = (data) => {
@@ -108,26 +83,6 @@ class PreviewScreen extends React.Component {
         currentTime: data.currentTime
       }
     });
-  }
-
-  _saveCapsule = async () => {
-    await this.props.dispatch(saveNewCapsule(this.props.currentCapsule));
-
-    this._navigateBackToHome(); 
-  }
-
-  _cancelCapsule = () => {
-    this.props.dispatch(cancelNewCapsule(this.props.currentCapsule));
-  }
-
-  _navigateBackToHome = () => {
-    const resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'Main'})
-      ]
-    })
-    this.props.navigation.dispatch(resetAction)
   }
 
   _onVideoEnd = () => {

@@ -20,7 +20,8 @@ import styles from './styles';
 
 import { NavigationActions } from 'react-navigation';
 import { 
-  getCapsules
+  getCapsules,
+  getCapsule
 } from '../actions';
 
 
@@ -42,6 +43,13 @@ class MainScreen extends React.Component {
     this.props.dispatch(getCapsules());
   }
 
+  _getCapsule = async (id: string) => {
+    await this.props.dispatch(getCapsule(id));
+    this.props.dispatch(NavigationActions.navigate(
+      { routeName: 'CapsuleDetails' })
+    );
+  }
+
   render() {
     const dataSource = new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1.id !== r2.id
@@ -58,7 +66,12 @@ class MainScreen extends React.Component {
           .length  > 0 &&
         <ListView
           dataSource={dataSource}
-          renderRow={(capsule) => <Text>{capsule.publishedAt}</Text>}
+          renderRow={(capsule) => 
+            <Button 
+              onPress={() => this._getCapsule(capsule.id)} 
+              title={capsule.publishedAt + ' ' + capsule.status} 
+            />
+          }
         />
         }
       </View>

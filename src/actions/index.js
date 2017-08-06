@@ -1,6 +1,6 @@
 //@flow
 
-import type {Capsule} from '../reducers/newCapsule';
+import type {Capsule} from '../reducers/currentCapsule';
 
 import { config } from '../config';
 
@@ -47,6 +47,8 @@ export function saveNewCapsule(capsule: Capsule) {
 
     listFilesInDirsForDebugging();
 
+    capsule.uri = newVideoPath;
+    capsule.status = config.CAPSULE_STATUS_SAVED;
     capsule.savedAt = moment().toISOString();
 
     db.createCapsule(capsule);
@@ -108,6 +110,25 @@ export function getCapsules() {
   return {
     type: 'GET_CAPSULES',
     items: capsules
+  }
+
+}
+
+/**
+ * View a capsule
+ */
+export function getCapsule(id: string){
+  const result = db.getCapsule(id);
+  const capsule: Capsule = {
+    id: result.id,
+    uri: result.uri,
+    status: result.status,
+    publishedAt: result.publishedAt,
+    savedAt: result.savedAt
+  } 
+  return {
+    type: 'GET_CAPSULE',
+    capsule: capsule
   }
 
 }
