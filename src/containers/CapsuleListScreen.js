@@ -20,7 +20,7 @@ import styles from './styles';
 
 import { NavigationActions } from 'react-navigation';
 import { 
-  getCapsulesAction
+  getCapsules
 } from '../actions';
 
 
@@ -39,7 +39,7 @@ class MainScreen extends React.Component {
   }
 
   _loadData = () => {
-    this.props.dispatch(getCapsulesAction());
+    this.props.dispatch(getCapsules());
   }
 
   render() {

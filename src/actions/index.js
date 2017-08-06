@@ -103,7 +103,7 @@ export function cancelNewCapsule(capsule: Capsule) {
 /**
  * Get the list of capsules
  */
-export function getCapsulesAction() {
+export function getCapsules() {
   const capsules = db.getCapsules();
   return {
     type: 'GET_CAPSULES',
