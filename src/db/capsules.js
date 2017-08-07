@@ -1,4 +1,4 @@
-import Realm from 'realm';
+/*import Realm from 'realm';
 import uuidv1 from 'uuid/v1';
 
 class Capsule {
@@ -41,4 +41,17 @@ export const createCapsule = (capsule) => {
       publishedAt: capsule.publishedAt
     });
   });
+}
+*/
+
+export const getCapsules = () => {
+  console.log('get');
+}
+
+export const getCapsule = (id) => {
+  console.log('getCap');
+}
+
+export const createCapsule = (capsule) => {
+  console.log('create');
 }
