@@ -1,6 +1,7 @@
 // @flow
 
 import RNFS from 'react-native-fs';
+import { clearVideos } from '../utils';
 
 export const config = {
   CAPSULES_DIR:                        // Capsules directory
@@ -21,6 +22,7 @@ export const config = {
 
 export function locapsInit() {
   createCapsulesDirectory();
+  clearVideos();
 }
 
 function createCapsulesDirectory() {
