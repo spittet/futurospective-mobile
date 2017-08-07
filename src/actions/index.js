@@ -13,30 +13,6 @@ import { listFilesInDirsForDebugging } from '../utils';
 
 import PushNotification  from 'react-native-push-notification';
 
-PushNotification.configure({
-
-    // (optional) Called when Token is generated (iOS and Android)
-    onRegister: function(token) {
-        console.log( 'TOKEN:', token );
-    },
-
-    // (required) Called when a remote or local notification is opened or received
-    onNotification: function(notification) {
-        console.log( 'NOTIFICATION:', notification );
-    },
-
-    // Should the initial notification be popped automatically
-    // default: true
-    popInitialNotification: true,
-
-    /**
-      * (optional) default: true
-      * - Specified if permissions (ios) and token (android and ios) will requested or not,
-      * - if not, you must call PushNotificationsHandler.requestPermissions() later
-      */
-    requestPermissions: true,
-});
-
 /**
  * Sets the publishing date of the capsule.
  * Recorded as a timestamp.
@@ -57,6 +33,26 @@ export function recordNewCapsule(capsule: Capsule) {
   };
 }
 
+
+function scheduleNotification(ISODate: string) {
+
+  const scheduleDate = moment(ISODate).toDate();
+
+  PushNotification.localNotificationSchedule({
+    message: "A new capsule is available!",
+    date: scheduleDate
+  });
+}
+
+function persistVideoFile(uri: string) {
+  const videoFilename = uri.replace(/^.*[\\\/]/, '');
+  const newUri = config.CAPSULES_DIR + '/' + videoFilename;
+
+  RNFS.moveFile(uri, newUri);
+
+  return newUri;
+}
+
 /**
  * Saves the new capsule
  * Before saving the capsule data to the global state we need to move it to the
@@ -65,35 +61,18 @@ export function recordNewCapsule(capsule: Capsule) {
 export function saveNewCapsule(capsule: Capsule) {
   // Avoid publishing twice
   if (capsule && capsule.status === config.CAPSULE_STATUS_RECORDED) {
-    const videoFilename = capsule.uri.replace(/^.*[\\\/]/, '');
-    const newVideoPath = config.CAPSULES_DIR + '/' + videoFilename;
-    
-    // Need to handle errors
-    RNFS.moveFile(capsule.uri, newVideoPath);
-
-    listFilesInDirsForDebugging();
-
-    capsule.uri = newVideoPath;
+    capsule.uri = persistVideoFile(capsule.uri);
     capsule.status = config.CAPSULE_STATUS_SAVED;
     capsule.savedAt = moment().toISOString();
 
     db.createCapsule(capsule);
 
-    console.log('Notification to publish at ');
-    console.log(moment(capsule.publishedAt).toDate());
-    PushNotification.localNotificationSchedule({
-      message: "My Notification Message", // (required)
-      date: moment(capsule.publishedAt).toDate() // in 60 secs
-    });
-
-    PushNotification.localNotificationSchedule({
-      message: "My Notification Message", // (required)
-      date: new Date(Date.now() + (60 * 1000)) // in 60 secs
-    });
+    scheduleNotification(capsule.publishedAt);
 
     return {
       type: 'SAVE_NEW_CAPSULE',
-      uri: newVideoPath,
+      uri: capsule.uri,
+      status: capsule.status,
       savedAt: capsule.savedAt
     }
   } else {
