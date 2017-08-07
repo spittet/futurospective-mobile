@@ -61,7 +61,7 @@ class RecordScreen extends React.Component {
         captureMode: Camera.constants.CaptureMode.video,
         aspect: Camera.constants.Aspect.fill,
         captureTarget: Camera.constants.CaptureTarget.temp,
-        type: Camera.constants.Type.back,
+        type: Camera.constants.Type.front,
         orientation: Camera.constants.Orientation.auto,
         flashMode: Camera.constants.FlashMode.auto,
         captureQuality: Camera.constants.CaptureQuality.medium
