@@ -8,6 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment'
 
 import { 
   Button, 
@@ -69,6 +70,7 @@ class MainScreen extends React.Component {
             <Button 
               onPress={() => this._getCapsule(capsule.id)} 
               title={capsule.publishedAt + ' ' + capsule.status} 
+              disabled={moment().isBefore(moment(capsule.publishedAt))}
             />
           }
         />
