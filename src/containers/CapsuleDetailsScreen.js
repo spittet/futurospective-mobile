@@ -12,15 +12,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { 
-  Button, 
   Text, 
   TouchableOpacity, 
   View 
 } from 'react-native';
 import Video from 'react-native-video';
 import styles from './styles';
-
-import { NavigationActions } from 'react-navigation';
 
 class PreviewScreen extends React.Component {
 

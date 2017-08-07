@@ -8,7 +8,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import moment from 'moment';
 
 import { 
   Button, 
@@ -52,9 +51,9 @@ class MainScreen extends React.Component {
 
   render() {
     const dataSource = new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1.id !== r2.id
-      })
-      .cloneWithRows(this.props.capsuleItems.items);
+      rowHasChanged: (r1, r2) => r1.id !== r2.id
+    })
+    .cloneWithRows(this.props.capsuleItems.items);
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>

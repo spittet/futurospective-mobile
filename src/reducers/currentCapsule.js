@@ -6,8 +6,8 @@ export type Capsule = {
   id: ?number,              // ID of the capsule
   uri: string,              // Path of the video file
   status: number,           // Status of the capsule
-  savedAt: ?string,         // (timestam) When it's been published
-  publishedAt: ?string      // (timestam) When it'll be avaible
+  savedAt: string,         // (timestam) When it's been published
+  publishedAt: string      // (timestam) When it'll be avaible
 };
 
 type Action = {
@@ -19,6 +19,7 @@ type Action = {
 } | {
   type: 'SAVE_NEW_CAPSULE',
   uri: string,
+  status: string,
   savedAt: string
 } | {
   type: 'PUBLISH_NEW_CAPSULE',
@@ -51,7 +52,7 @@ export default function (state: Object = initialState, action: Action ) {
       return {
         ...state,
         uri: action.uri,
-        status: config.CAPSULE_STATUS_SAVED,
+        status: action.status,
         savedAt: action.savedAt
       }
     case 'PUBLISH_NEW_CAPSULE':
