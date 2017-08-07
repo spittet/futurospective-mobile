@@ -3,6 +3,7 @@
 import type {Capsule} from '../reducers/currentCapsule';
 
 import { config } from '../config';
+import { clearVideos } from '../utils';
 
 import db from '../db';
 
@@ -68,6 +69,9 @@ export function saveNewCapsule(capsule: Capsule) {
     db.createCapsule(capsule);
 
     scheduleNotification(capsule.publishedAt);
+
+    // Run the cleanup to make sure we keep disk space to min
+    clearVideos();
 
     return {
       type: 'SAVE_NEW_CAPSULE',
