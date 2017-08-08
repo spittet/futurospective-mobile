@@ -3,16 +3,12 @@
 import type {Capsule} from '../reducers/currentCapsule';
 
 import { config } from '../config';
-import { clearVideos } from '../utils';
 
 import db from '../db';
+import utils from '../utils';
 
 import RNFS from 'react-native-fs';
 import moment from 'moment';
-
-import { listFilesInDirsForDebugging } from '../utils';
-
-import PushNotification  from 'react-native-push-notification';
 
 /**
  * Sets the publishing date of the capsule.
@@ -27,32 +23,11 @@ export function setNewCapsulePublishDate(publishedAt: string){
 
 
 export function recordNewCapsule(capsule: Capsule) {
-  listFilesInDirsForDebugging();
+  utils.listFilesInDirsForDebugging();
   return {
     type: 'RECORD_NEW_CAPSULE',
     uri: capsule.uri
   };
-}
-
-
-function scheduleNotification(ISODate: string) {
-
-  const scheduleDate = moment(ISODate).toDate();
-
-  PushNotification.localNotificationSchedule({
-    message: "A new capsule is available!",
-    date: scheduleDate,
-    number: 1
-  });
-}
-
-function persistVideoFile(uri: string) {
-  const videoFilename = uri.replace(/^.*[\\\/]/, '');
-  const newUri = config.CAPSULES_DIR + '/' + videoFilename;
-
-  RNFS.moveFile(uri, newUri);
-
-  return newUri;
 }
 
 /**
@@ -63,16 +38,16 @@ function persistVideoFile(uri: string) {
 export function saveNewCapsule(capsule: Capsule) {
   // Avoid publishing twice
   if (capsule && capsule.status === config.CAPSULE_STATUS_RECORDED) {
-    capsule.uri = persistVideoFile(capsule.uri);
+    capsule.uri = utils.persistVideoFile(capsule.uri);
     capsule.status = config.CAPSULE_STATUS_SAVED;
     capsule.savedAt = moment().toISOString();
 
     db.createCapsule(capsule);
 
-    scheduleNotification(capsule.publishedAt);
+    utils.scheduleNotification(capsule.publishedAt);
 
     // Run the cleanup to make sure we keep disk space to min
-    clearVideos();
+    utils.clearVideos();
 
     return {
       type: 'SAVE_NEW_CAPSULE',
@@ -91,7 +66,7 @@ export function saveNewCapsule(capsule: Capsule) {
  * Publishes the new capsule
  */
 export function publishNewCapsule(capsule: Capsule) {
-  listFilesInDirsForDebugging();
+  utils.listFilesInDirsForDebugging();
   // Avoid publishing twice
   if (capsule && capsule.status === config.CAPSULE_STATUS_SAVED) {
     return {
@@ -118,7 +93,7 @@ export function cancelNewCapsule(capsule: Capsule) {
         // ADD ANALYTICS
       });
   }
-  listFilesInDirsForDebugging();
+  utils.listFilesInDirsForDebugging();
   return {
     type: 'CANCEL_NEW_CAPSULE'
   }

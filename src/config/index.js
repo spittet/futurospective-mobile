@@ -1,7 +1,7 @@
 // @flow
 
 import RNFS from 'react-native-fs';
-import { clearVideos } from '../utils';
+import utils from '../utils';
 
 import PushNotification  from 'react-native-push-notification';
 
@@ -39,7 +39,7 @@ export const config = {
 
 export function locapsInit() {
   createCapsulesDirectory();
-  clearVideos();
+  utils.clearVideos();
 }
 
 function createCapsulesDirectory() {
