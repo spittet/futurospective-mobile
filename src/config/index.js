@@ -3,6 +3,23 @@
 import RNFS from 'react-native-fs';
 import { clearVideos } from '../utils';
 
+import PushNotification  from 'react-native-push-notification';
+
+PushNotification.configure({
+  // IOS ONLY (optional): default: all - Permissions to register.
+  permissions: {
+    alert: true,
+    badge: true,
+    sound: true
+  },
+
+  // Should the initial notification be popped automatically
+  // default: true
+  popInitialNotification: true,
+
+  requestPermissions: true,
+});
+
 export const config = {
   CAPSULES_DIR:                        // Capsules directory
     RNFS.DocumentDirectoryPath 
