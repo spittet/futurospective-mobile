@@ -1,5 +1,9 @@
+// @flow
+
 import Realm from 'realm';
 import uuidv1 from 'uuid/v1';
+
+import type {Capsule as CapsuleType} from '../reducers/currentCapsule';
 
 class Capsule {
   static get() {
@@ -26,12 +30,12 @@ export const getCapsules = () => {
   return capsules;
 }
 
-export const getCapsule = (id) => {
+export const getCapsule = (id: string) => {
   const capsule = realm.objectForPrimaryKey(Capsule, id);
   return capsule;
 }
 
-export const createCapsule = (capsule) => {
+export const createCapsule = (capsule: CapsuleType) => {
   realm.write(() => {
     realm.create(Capsule.schema.name, {
       id: uuidv1(),
