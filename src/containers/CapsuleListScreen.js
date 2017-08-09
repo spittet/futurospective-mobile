@@ -70,7 +70,11 @@ class MainScreen extends React.Component {
           renderRow={(capsule) => 
             <Button 
               onPress={() => this._getCapsule(capsule.id)} 
-              title={capsule.publishedAt + ' ' + capsule.status + ' Read:' + capsule.read} 
+              title={
+                capsule.publishedAt + 
+                ' ' + capsule.status + 
+                ' Read:' + capsule.read
+              } 
               disabled={moment().isBefore(moment(capsule.publishedAt))}
             />
           }

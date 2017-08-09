@@ -1,3 +1,5 @@
+// @flow
+
 import Realm from 'realm';
 
 const schema2 = [{
