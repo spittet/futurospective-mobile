@@ -45,6 +45,8 @@ class MainScreen extends React.Component {
 
   _getCapsule = async (id: string) => {
     await this.props.dispatch(getCapsule(id));
+
+    // calling this to update the read status of capsules in state
     this.props.dispatch(getCapsules());
     this.props.dispatch(NavigationActions.navigate(
       { routeName: 'CapsuleDetails' })
