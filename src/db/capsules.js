@@ -28,3 +28,10 @@ export const createCapsule = (capsule: Capsule) => {
     });
   });
 }
+
+export const deleteAllCapsules = () => {
+  const allCapsules = realm.objects('Capsule');
+  realm.write(() => {
+    realm.delete(allCapsules);
+  });
+}

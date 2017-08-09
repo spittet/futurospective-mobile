@@ -4,11 +4,14 @@ import RNFS from 'react-native-fs';
 import { config } from '../config';
 import db from '../db';
 
+/* eslint-disable no-alert, no-console */
+
 /**
  * This function is just a debug helpers to make sure that videos are properly
  * cleaned up
  *
  */
+
 export function listFilesInDirsForDebugging(){
   const directories = [
     RNFS.DocumentDirectoryPath,
@@ -17,7 +20,7 @@ export function listFilesInDirsForDebugging(){
     RNFS.ExternalDirectoryPath,
     config.CAPSULES_DIR 
   ]
-  /* eslint-disable no-alert, no-console */
+  
 
   for (let path of directories) {
     if (path) {
@@ -34,7 +37,7 @@ export function listFilesInDirsForDebugging(){
     }
   }
 
-  /* eslint-enable no-alert, no-console */
+  
 }
 
 // Move a video from cache to the CAPSULE_DIR folder
@@ -59,13 +62,14 @@ function clearCacheDirectory(){
   RNFS.readDir(cacheDirectory)
     .then((result) => {
       for (let doc of result) {
-        RNFS.unlink(doc['path']);
+        RNFS.unlink(doc['path'])
+          .catch((err) => {
+            console.log(err);
+          });
       } 
     })
     .catch((err) => {
-      /* eslint-disable no-alert, no-console */
       console.log(err);
-      /* eslint-enable no-alert, no-console */
     }); 
 }
 
@@ -83,13 +87,28 @@ function clearCapsuleDirectory(){
       for (let doc of result) {
         // Unlink video if it's not part of the DB vids
         if (videoPaths.indexOf(doc['path']) == -1)
-          RNFS.unlink(doc['path']);
+          RNFS.unlink(doc['path'])
+            .catch((err) => {
+              console.log(err);
+            });
       } 
     })
     .catch((err) => {
-      /* eslint-disable no-alert, no-console */
       console.log(err);
-      /* eslint-enable no-alert, no-console */
     });
 
+}
+
+//Reset DB
+export function resetCapsules(){
+  const allCapsules = db.getAllCapsules();
+
+  for (let i = 0; i < allCapsules.length; i++){
+    RNFS.unlink(allCapsules[i].uri)
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  db.deleteAllCapsules();
 }
