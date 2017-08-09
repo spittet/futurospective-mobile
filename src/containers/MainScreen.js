@@ -5,19 +5,19 @@
  * @flow
  */
 
-import React                           from 'react';
-import PropTypes                       from 'prop-types';
-import { connect }                     from 'react-redux';
+import React                      from 'react';
+import PropTypes                  from 'prop-types';
+import { connect }                from 'react-redux';
 
 import { 
   Button, 
   Text, 
   View 
-}                                      from 'react-native';
-import styles                          from './styles';
+}                                 from 'react-native';
+import styles                     from './styles';
 
-import { NavigationActions }           from 'react-navigation';
-import db                              from '../db';
+import { NavigationActions }      from 'react-navigation';
+import db                         from '../db';
 
 class MainScreen extends React.Component {
 

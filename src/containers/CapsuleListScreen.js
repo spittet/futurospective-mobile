@@ -5,24 +5,24 @@
  * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import moment from 'moment'
+import React                        from 'react';
+import PropTypes                    from 'prop-types';
+import { connect }                  from 'react-redux';
+import moment                       from 'moment'
 
 import { 
   Button, 
   Text, 
   View 
-} from 'react-native';
-import { ListView } from 'realm/react-native';
-import styles from './styles';
+}                                   from 'react-native';
+import { ListView }                 from 'realm/react-native';
+import styles                       from './styles';
 
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions }        from 'react-navigation';
 import { 
   getCapsules,
   getCapsule
-} from '../actions';
+}                                   from '../actions';
 
 
 class MainScreen extends React.Component {
@@ -87,8 +87,8 @@ class MainScreen extends React.Component {
 }
 
 MainScreen.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  capsuleItems: PropTypes.object,
+  dispatch:       PropTypes.func.isRequired,
+  capsuleItems:   PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

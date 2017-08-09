@@ -8,22 +8,22 @@
  * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React                      from 'react';
+import PropTypes                  from 'prop-types';
+import { connect }                from 'react-redux';
 
-import { View } from 'react-native';
-import Camera from 'react-native-camera';
-import LCTouchableImage from '../components/LCTouchableImage';
-import styles from './styles';
+import { View }                   from 'react-native';
+import Camera                     from 'react-native-camera';
+import LCTouchableImage           from '../components/LCTouchableImage';
+import styles                     from './styles';
 
-import { config } from '../config';
-import { NavigationActions } from 'react-navigation';
+import { config }                 from '../config';
+import { NavigationActions }      from 'react-navigation';
 import { 
   cancelNewCapsule,
   recordNewCapsule, 
-} from '../actions';
-import type Capsule from '../reducers';
+}                                 from '../actions';
+import type Capsule               from '../reducers';
 
 class RecordScreen extends React.Component {
 
@@ -32,18 +32,18 @@ class RecordScreen extends React.Component {
   // Not using Redux global state because we don't need this data elsewhere.
   state: {
     camera: {
-      captureAudio: boolean,
-      captureMode: number,
-      aspect: number,
-      captureTarget: number,
-      type: number,
-      orientation: number,
-      flashMode: number,
-      captureQuality: number
+      captureAudio:               boolean,
+      captureMode:                number,
+      aspect:                     number,
+      captureTarget:              number,
+      type:                       number,
+      orientation:                number,
+      flashMode:                  number,
+      captureQuality:             number
     },
-    isRecording: boolean,
-    recordStoppedByUser: boolean,
-    recordingTimeoutID: ?number
+    isRecording:                  boolean,
+    recordStoppedByUser:          boolean,
+    recordingTimeoutID:           ?number
   };
 
   static navigationOptions = {
@@ -57,18 +57,18 @@ class RecordScreen extends React.Component {
 
     this.state = {
       camera: {
-        captureAudio: true,
-        captureMode: Camera.constants.CaptureMode.video,
-        aspect: Camera.constants.Aspect.fill,
-        captureTarget: Camera.constants.CaptureTarget.temp,
-        type: Camera.constants.Type.front,
-        orientation: Camera.constants.Orientation.auto,
-        flashMode: Camera.constants.FlashMode.auto,
-        captureQuality: Camera.constants.CaptureQuality.medium
+        captureAudio:             true,
+        captureMode:              Camera.constants.CaptureMode.video,
+        aspect:                   Camera.constants.Aspect.fill,
+        captureTarget:            Camera.constants.CaptureTarget.temp,
+        type:                     Camera.constants.Type.front,
+        orientation:              Camera.constants.Orientation.auto,
+        flashMode:                Camera.constants.FlashMode.auto,
+        captureQuality:           Camera.constants.CaptureQuality.medium
       },
-      isRecording: false,
-      recordStoppedByUser: false,
-      recordingTimeoutID: null
+      isRecording:                false,
+      recordStoppedByUser:        false,
+      recordingTimeoutID:         null
     };
   }
 
@@ -152,17 +152,17 @@ class RecordScreen extends React.Component {
           ref={(cam) => {
             this.camera = cam;
           }}
-          style={styles.preview}
-          aspect={this.state.camera.aspect}
-          captureTarget={this.state.camera.captureTarget}
-          type={this.state.camera.type}
-          flashMode={this.state.camera.flashMode}
-          captureAudio={this.state.camera.captureAudio}
-          captureQuality={this.state.camera.captureQuality}
-          onFocusChanged={() => {}}
-          onZoomChanged={() => {}}
+          style=                  {styles.preview}
+          aspect=                 {this.state.camera.aspect}
+          captureTarget=          {this.state.camera.captureTarget}
+          type=                   {this.state.camera.type}
+          flashMode=              {this.state.camera.flashMode}
+          captureAudio=           {this.state.camera.captureAudio}
+          captureQuality=         {this.state.camera.captureQuality}
+          onFocusChanged=         {() => {}}
+          onZoomChanged=          {() => {}}
           defaultTouchToFocus
-          mirrorImage={false}
+          mirrorImage=            {false}
         />
         <View style={[styles.overlay, styles.bottomOverlay]}>
           <View style={styles.buttonsSpace} />
@@ -170,17 +170,17 @@ class RecordScreen extends React.Component {
             !this.state.isRecording
             &&
             <LCTouchableImage
-              id="startRecordingButton"
-              buttonStyle={styles.captureButton}
-              buttonAction={this._startRecording}
-              imageSrc={require('../assets/ic_videocam_36pt.png')}
+              id=                 "startRecordingButton"
+              buttonStyle=        {styles.captureButton}
+              buttonAction=       {this._startRecording}
+              imageSrc=           {require('../assets/ic_videocam_36pt.png')}
             />
             ||
             <LCTouchableImage 
-              id="stopRecordingButton"
-              buttonStyle={styles.captureButton}
-              buttonAction={this._stopRecording}
-              imageSrc={require('../assets/ic_stop_36pt.png')}
+              id=                 "stopRecordingButton"
+              buttonStyle=        {styles.captureButton}
+              buttonAction=       {this._stopRecording}
+              imageSrc=           {require('../assets/ic_stop_36pt.png')}
             />
           }
         </View>
@@ -190,8 +190,8 @@ class RecordScreen extends React.Component {
 }
 
 RecordScreen.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  currentCapsule: PropTypes.object
+  dispatch:                       PropTypes.func.isRequired,
+  currentCapsule:                 PropTypes.object
 }
 
 const mapStateToProps = (state) => {

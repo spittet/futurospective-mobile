@@ -8,26 +8,26 @@
  * @flow
  **/
 
-import React                  from 'react';
-import PropTypes              from 'prop-types';
-import { connect }            from 'react-redux';
+import React                    from 'react';
+import PropTypes                from 'prop-types';
+import { connect }              from 'react-redux';
 import { addNavigationHelpers, 
-  StackNavigator }            from 'react-navigation';
+  StackNavigator }              from 'react-navigation';
 
-import MainScreen             from './MainScreen';
+import MainScreen               from './MainScreen';
 import CapsuleDurationScreen    from './CapsuleDurationScreen';
-import RecordScreen           from './RecordScreen';
-import PreviewScreen          from './PreviewScreen';
-import CapsuleListScreen      from './CapsuleListScreen';
-import CapsuleDetailsScreen   from './CapsuleDetailsScreen';
+import RecordScreen             from './RecordScreen';
+import PreviewScreen            from './PreviewScreen';
+import CapsuleListScreen        from './CapsuleListScreen';
+import CapsuleDetailsScreen     from './CapsuleDetailsScreen';
 
 export const AppNavigator = StackNavigator({
-  Main:                   { screen: MainScreen },
-  CapsuleDuration:          { screen: CapsuleDurationScreen },
-  Record:                 { screen: RecordScreen },
-  Preview:                { screen: PreviewScreen },
-  CapsuleList:            { screen: CapsuleListScreen },
-  CapsuleDetails:         { screen: CapsuleDetailsScreen }
+  Main:                         { screen: MainScreen },
+  CapsuleDuration:              { screen: CapsuleDurationScreen },
+  Record:                       { screen: RecordScreen },
+  Preview:                      { screen: PreviewScreen },
+  CapsuleList:                  { screen: CapsuleListScreen },
+  CapsuleDetails:               { screen: CapsuleDetailsScreen }
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

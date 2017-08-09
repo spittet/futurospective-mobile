@@ -7,24 +7,24 @@
  * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React                      from 'react';
+import PropTypes                  from 'prop-types';
+import { connect }                from 'react-redux';
 
 import { 
   Button, 
   Text, 
   TouchableOpacity, 
   View 
-} from 'react-native';
-import Video from 'react-native-video';
-import styles from './styles';
+}                                 from 'react-native';
+import Video                      from 'react-native-video';
+import styles                     from './styles';
 
 import { 
   saveNewCapsule,
   cancelNewCapsule 
-} from '../actions';
-import { NavigationActions } from 'react-navigation';
+}                                 from '../actions';
+import { NavigationActions }      from 'react-navigation';
 
 class PreviewScreen extends React.Component {
 
@@ -34,10 +34,10 @@ class PreviewScreen extends React.Component {
   // screen.
   state: {
     video: {
-      uri: ?string,
-      paused: boolean,
-      currentTime: number,
-      duration: number,
+      uri:            ?string,
+      paused:         boolean,
+      currentTime:    number,
+      duration:       number,
     }
   }
 
@@ -75,10 +75,10 @@ class PreviewScreen extends React.Component {
   _initLocalState = () => {
     this.state = {
       video: {
-        uri: this.props.currentCapsule.uri || null,
-        paused: true,
-        currentTime: 0.0,
-        duration: 0.0,
+        uri:          this.props.currentCapsule.uri || null,
+        paused:       true,
+        currentTime:  0.0,
+        duration:     0.0,
       }
     }
     this.player = null;
@@ -158,18 +158,16 @@ class PreviewScreen extends React.Component {
       return (
         <View style={styles.container}>
           <Video 
-            source={{uri:this.state.video.uri}} 
-            volume={1.0}
-            rate={1.0}
-            paused={this.state.video.paused}
-            resizeMode="cover"
-            onLoad={this._onVideoLoad}
-            onProgress={this._onVideoProgress}
-            onEnd={this._onVideoEnd}
-            ref={(ref) => {
-              this.player = ref
-            }}
-            style={styles.previewVideoBackground}
+            source=       {{uri:this.state.video.uri}} 
+            volume=       {1.0}
+            rate=         {1.0}
+            paused=       {this.state.video.paused}
+            resizeMode=   "cover"
+            onLoad=       {this._onVideoLoad}
+            onProgress=   {this._onVideoProgress}
+            onEnd=        {this._onVideoEnd}
+            ref=          {(ref) => {this.player = ref}}
+            style=        {styles.previewVideoBackground}
           />
           <View style={styles.previewVideoControls}>
           { 
@@ -202,9 +200,9 @@ class PreviewScreen extends React.Component {
 }
 
 PreviewScreen.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  currentCapsule: PropTypes.object,
-  navigation: PropTypes.object
+  dispatch:         PropTypes.func.isRequired,
+  currentCapsule:   PropTypes.object,
+  navigation:       PropTypes.object
 }
 
 const mapStateToProps = (state) => {
