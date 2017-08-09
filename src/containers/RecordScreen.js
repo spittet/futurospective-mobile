@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 
 import { View } from 'react-native';
 import Camera from 'react-native-camera';
-import LCTouchableImage from '../components/LCTouchableImage'
+import LCTouchableImage from '../components/LCTouchableImage';
 import styles from './styles';
 
 import { config } from '../config';

@@ -14,10 +14,33 @@ import moment from 'moment';
  * Sets the publishing date of the capsule.
  * Recorded as a timestamp.
  */
-export function setNewCapsulePublishDate(publishedAt: string){
+export function setNewCapsulePublishDate(period: string){
+  let publishedAt;
+  switch(period) {
+    case config.CAPSULE_PERIOD_1MIN:
+      publishedAt = moment().add(1, 'm');
+      break;
+    case config.CAPSULE_PERIOD_2W:
+      publishedAt = moment().add(2, 'w');
+      break;
+    case config.CAPSULE_PERIOD_1M:
+      publishedAt = moment().add(1, 'M');
+      break;
+    case config.CAPSULE_PERIOD_3M:
+      publishedAt = moment().add(3, 'M');
+      break;
+    case config.CAPSULE_PERIOD_6M:
+      publishedAt = moment().add(6, 'M');
+      break;
+    case config.CAPSULE_PERIOD_12M:
+      publishedAt = moment().add(12, 'M');
+      break;
+    default:
+      publishedAt = moment();
+  }
   return {
     type: 'SET_NEW_CAPSULE_PUBLISH_DATE',
-    publishedAt: publishedAt
+    publishedAt: publishedAt.toISOString()
   }
 }
 
