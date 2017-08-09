@@ -103,7 +103,7 @@ export function cancelNewCapsule(capsule: Capsule) {
  * Get the list of capsules
  */
 export function getCapsules() {
-  const capsules = db.getCapsules();
+  const capsules = db.getAllCapsules();
   return {
     type: 'GET_CAPSULES',
     items: capsules
@@ -115,17 +115,20 @@ export function getCapsules() {
  * View a capsule
  */
 export function getCapsule(id: string){
-  const result = db.getCapsule(id);
+  const result = db.getOneCapsule(id);
   const capsule: Capsule = {
     id: result.id,
     uri: result.uri,
     status: result.status,
     publishedAt: result.publishedAt,
-    savedAt: result.savedAt
+    savedAt: result.savedAt,
+    read: true
   } 
+
+  db.updateCapsule(capsule);
+
   return {
     type: 'GET_CAPSULE',
     capsule: capsule
   }
-
 }

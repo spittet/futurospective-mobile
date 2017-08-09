@@ -68,7 +68,7 @@ class MainScreen extends React.Component {
           This is the main screen
         </Text>
         <Text style={styles.welcome}>
-          {db.getCapsules().length} Capsules
+          {db.getAllCapsules().length} Capsules
         </Text>
         <Button
           onPress={() =>

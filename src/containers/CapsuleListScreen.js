@@ -45,6 +45,7 @@ class MainScreen extends React.Component {
 
   _getCapsule = async (id: string) => {
     await this.props.dispatch(getCapsule(id));
+    this.props.dispatch(getCapsules());
     this.props.dispatch(NavigationActions.navigate(
       { routeName: 'CapsuleDetails' })
     );
@@ -69,7 +70,7 @@ class MainScreen extends React.Component {
           renderRow={(capsule) => 
             <Button 
               onPress={() => this._getCapsule(capsule.id)} 
-              title={capsule.publishedAt + ' ' + capsule.status} 
+              title={capsule.publishedAt + ' ' + capsule.status + ' Read:' + capsule.read} 
               disabled={moment().isBefore(moment(capsule.publishedAt))}
             />
           }

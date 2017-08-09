@@ -71,10 +71,11 @@ function clearCacheDirectory(){
 
 // Remove videos that are not saved in the DB
 function clearCapsuleDirectory(){
-  const allCapsules = db.getCapsules();
+  const allCapsules = db.getAllCapsules();
+  
   const videoPaths = [];
-  for (let capsule of allCapsules){
-    videoPaths.push(capsule.uri);
+  for (let i = 0; i < allCapsules.length; i++){
+    videoPaths.push(allCapsules[i].uri);
   }
   
   RNFS.readDir(config.CAPSULES_DIR)
