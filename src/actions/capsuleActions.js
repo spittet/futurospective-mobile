@@ -1,14 +1,14 @@
 //@flow
 
-import type {Capsule} from '../reducers/currentCapsule';
+import type {Capsule}             from '../reducers/currentCapsule';
 
-import { config } from '../config';
+import { config }                 from '../config';
 
-import db from '../db';
-import utils from '../utils';
+import db                         from '../db';
+import utils                      from '../utils';
 
-import RNFS from 'react-native-fs';
-import moment from 'moment';
+import RNFS                       from 'react-native-fs';
+import moment                     from 'moment';
 
 /**
  * Sets the publishing date of the capsule.
@@ -39,8 +39,8 @@ export function setNewCapsulePublishDate(period: string){
       publishedAt = moment();
   }
   return {
-    type: 'SET_NEW_CAPSULE_PUBLISH_DATE',
-    publishedAt: publishedAt.toISOString()
+    type:             'SET_NEW_CAPSULE_PUBLISH_DATE',
+    publishedAt:      publishedAt.toISOString()
   }
 }
 
@@ -48,8 +48,8 @@ export function setNewCapsulePublishDate(period: string){
 export function recordNewCapsule(capsule: Capsule) {
   utils.listFilesInDirsForDebugging();
   return {
-    type: 'RECORD_NEW_CAPSULE',
-    uri: capsule.uri
+    type:             'RECORD_NEW_CAPSULE',
+    uri:              capsule.uri
   };
 }
 
@@ -61,9 +61,9 @@ export function recordNewCapsule(capsule: Capsule) {
 export function saveNewCapsule(capsule: Capsule) {
   // Avoid publishing twice
   if (capsule && capsule.status === config.CAPSULE_STATUS_RECORDED) {
-    capsule.uri = utils.persistVideoFile(capsule.uri);
-    capsule.status = config.CAPSULE_STATUS_SAVED;
-    capsule.savedAt = moment().toISOString();
+    capsule.uri =       utils.persistVideoFile(capsule.uri);
+    capsule.status =    config.CAPSULE_STATUS_SAVED;
+    capsule.savedAt =   moment().toISOString();
 
     db.createCapsule(capsule);
 
@@ -73,10 +73,10 @@ export function saveNewCapsule(capsule: Capsule) {
     utils.clearVideos();
 
     return {
-      type: 'SAVE_NEW_CAPSULE',
-      uri: capsule.uri,
-      status: capsule.status,
-      savedAt: capsule.savedAt
+      type:           'SAVE_NEW_CAPSULE',
+      uri:            capsule.uri,
+      status:         capsule.status,
+      savedAt:        capsule.savedAt
     }
   } else {
     return {
@@ -93,8 +93,8 @@ export function publishNewCapsule(capsule: Capsule) {
   // Avoid publishing twice
   if (capsule && capsule.status === config.CAPSULE_STATUS_SAVED) {
     return {
-      type: 'PUBLISH_NEW_CAPSULE',
-      publishedAt: moment().toISOString()
+      type:           'PUBLISH_NEW_CAPSULE',
+      publishedAt:    moment().toISOString()
     }
   } else {
     return {
@@ -118,7 +118,7 @@ export function cancelNewCapsule(capsule: Capsule) {
   }
   utils.listFilesInDirsForDebugging();
   return {
-    type: 'CANCEL_NEW_CAPSULE'
+    type:             'CANCEL_NEW_CAPSULE'
   }
 }
 
@@ -128,8 +128,8 @@ export function cancelNewCapsule(capsule: Capsule) {
 export function getCapsules() {
   const capsules = db.getAllCapsules();
   return {
-    type: 'GET_CAPSULES',
-    items: capsules
+    type:             'GET_CAPSULES',
+    items:            capsules
   }
 
 }
@@ -140,18 +140,18 @@ export function getCapsules() {
 export function getCapsule(id: string){
   const result = db.getOneCapsule(id);
   const capsule: Capsule = {
-    id: result.id,
-    uri: result.uri,
-    status: result.status,
-    publishedAt: result.publishedAt,
-    savedAt: result.savedAt,
-    read: true
+    id:               result.id,
+    uri:              result.uri,
+    status:           result.status,
+    publishedAt:      result.publishedAt,
+    savedAt:          result.savedAt,
+    read:             true
   } 
 
   db.updateCapsule(capsule);
 
   return {
-    type: 'GET_CAPSULE',
-    capsule: capsule
+    type:             'GET_CAPSULE',
+    capsule:          capsule
   }
 }

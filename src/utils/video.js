@@ -1,8 +1,8 @@
 // @flow
 
-import RNFS from 'react-native-fs';
-import { config } from '../config';
-import db from '../db';
+import RNFS                       from 'react-native-fs';
+import { config }                 from '../config';
+import db                         from '../db';
 
 /* eslint-disable no-alert, no-console */
 

@@ -1,6 +1,6 @@
 // @flow
 
-import { AppNavigator } from '../containers/AppNavigator';
+import { AppNavigator }           from '../containers/AppNavigator';
 
 const firstAction = AppNavigator.router.getActionForPathAndParams('Main');
 const initialNavState = AppNavigator.router.getStateForAction(firstAction);

@@ -1,14 +1,14 @@
 // @flow
 
-import type {Capsule} from './currentCapsule';
+import type {Capsule}             from './currentCapsule';
 
 export type CapsuleItems = {
-  items: Array<Capsule>;
+  items:              Array<Capsule>;
 };
 
 type Action = {
-  type: 'GET_CAPSULES',
-  items: Array<Capsule>
+  type:               'GET_CAPSULES',
+  items:              Array<Capsule>
 };
 
 const initialState = {

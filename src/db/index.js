@@ -1,5 +1,5 @@
 // @flow
-import * as capsules from './capsules';
+import * as capsules              from './capsules';
 
 export default {
   ...capsules

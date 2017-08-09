@@ -8,12 +8,12 @@
  * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React                      from 'react';
+import PropTypes                  from 'prop-types';
 import { 
   TouchableOpacity, 
   Image 
-} from 'react-native';
+}                                 from 'react-native';
 
 const LCTouchableImage = ({ buttonStyle, buttonAction, imageSrc }: any) => (
   <TouchableOpacity
@@ -25,9 +25,9 @@ const LCTouchableImage = ({ buttonStyle, buttonAction, imageSrc }: any) => (
 );
 
 LCTouchableImage.propTypes = {
-  buttonStyle: PropTypes.any,
-  buttonAction: PropTypes.func.isRequired,
-  imageSrc: PropTypes.number.isRequired
+  buttonStyle:                    PropTypes.any,
+  buttonAction:                   PropTypes.func.isRequired,
+  imageSrc:                       PropTypes.number.isRequired
 }
 
 export default LCTouchableImage;

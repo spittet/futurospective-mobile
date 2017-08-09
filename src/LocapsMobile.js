@@ -5,15 +5,18 @@
  * @flow
  */
 
-import React from 'react';
-import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
-import logger from 'redux-logger';
+import React                      from 'react';
+import { Provider }               from 'react-redux';
+import { 
+  applyMiddleware, 
+  createStore 
+}                                 from 'redux';
+import logger                     from 'redux-logger';
 
-import AppReducer from './reducers';
-import AppWithNavigationState from './containers/AppNavigator';
+import AppReducer                 from './reducers';
+import AppWithNavigationState     from './containers/AppNavigator';
 
-import { locapsInit } from './config';
+import { locapsInit }             from './config';
 
 locapsInit();
 

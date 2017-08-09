@@ -1,1 +1,1 @@
-export * from './capsuleActions';
+export *                          from './capsuleActions';

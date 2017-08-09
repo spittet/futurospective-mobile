@@ -1,8 +1,7 @@
 // @flow
-import uuidv1 from 'uuid/v1';
-import realm from '../config/realm';
-
-import type {Capsule} from '../reducers/currentCapsule';
+import uuidv1                     from 'uuid/v1';
+import realm                      from '../config/realm';
+import type {Capsule}             from '../reducers/currentCapsule';
 
 export const getAllCapsules = () => {
   const capsules = realm.objects('Capsule').sorted('publishedAt', true);

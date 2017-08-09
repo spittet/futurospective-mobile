@@ -1,7 +1,7 @@
 // @flow
 
-import PushNotification  from 'react-native-push-notification';
-import moment from 'moment';
+import PushNotification           from 'react-native-push-notification';
+import moment                     from 'moment';
 /**
  * Schedules a local notification in the future.
  * This function takes an ISODate as parameter because this is the format
@@ -13,8 +13,8 @@ export function scheduleNotification(ISODate: string) {
   const scheduleDate = moment(ISODate).toDate();
 
   PushNotification.localNotificationSchedule({
-    message: "A new capsule is available!",
-    date: scheduleDate,
-    number: 1
+    message:          "A new capsule is available!",
+    date:             scheduleDate,
+    number:           1
   });
 }
