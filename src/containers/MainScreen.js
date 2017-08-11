@@ -8,8 +8,8 @@
 import React                      from 'react';
 import PropTypes                  from 'prop-types';
 import { connect }                from 'react-redux';
-import Icon                       from 'react-native-vector-icons/Ionicons';
 
+import Icon                       from 'react-native-vector-icons/Ionicons';
 import { 
   Text,
   View 
@@ -29,14 +29,11 @@ class MainScreen extends React.Component {
       <View style={styles.container}>
         <View style={styles.homeCapsules}>
           <View style={styles.homeCapsulesNoCapsules}>
-            <Text style={styles.homeCapsulesNoCapsulesText}>
+            <Text style={[styles.bigText, styles.homeTitle]}>
               Futurospective lets you record a time capsule for your future 
               self.
             </Text>
-            <Text style={[
-              styles.homeCapsulesNoCapsulesText, 
-              styles.lightText
-            ]}>
+            <Text style={[styles.bigText, styles.lightText]}>
               Aka let-current-you-remind-future-you-what-past-you-thought.
             </Text>
           </View>

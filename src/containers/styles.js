@@ -13,6 +13,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff'
   },
+  screenWithMargin: {
+    margin: 30,
+    flex: 1,
+    justifyContent: 'center'
+  },
   lightText: {
     color: '#999999'
   },
@@ -38,23 +43,32 @@ const styles = StyleSheet.create({
   homeCapsulesNoCapsules: {
     margin: 30,
   },
-  homeCapsulesNoCapsulesText: {
+  homeTitle: {
+    marginBottom: 30,
+  },
+  bigText: {
     fontSize: 30,
     fontWeight: '600',
     textAlign: 'left',
     color: '#333333',
-    marginBottom: 30
   },
-  homeFirstCapsuleButton: {
+  durationButton: {
     backgroundColor: '#007AFF',
     borderRadius: 10
   },
-  homeFirstCapsuleText: {
+  durationButtonText: {
     fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
     padding: 20,
     textAlign: 'center',
+  },
+  bordered: {
+    borderWidth: 1
+  },
+  separator: {
+    marginTop: 10,
+    marginBottom: 10
   },
   welcome: {
     fontSize: 20,
