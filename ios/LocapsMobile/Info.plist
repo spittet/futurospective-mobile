@@ -52,12 +52,17 @@
 			</dict>
 		</dict>
 	</dict>
-  <!-- Requesting permission to use the camera and microphone --> 
-  <key>NSCameraUsageDescription</key>
-  <string>This app needs access to the camera to take videos.</string>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>Your message to user when the photo library is accessed for the first time</string>
-  <key>NSMicrophoneUsageDescription</key>
-  <string>This app needs access to the microphone to take videos.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs access to the camera to take videos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your message to user when the photo library is accessed for the first time</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FontAwesome.ttf</string>
+		<string>Foundation.ttf</string>
+		<string>Ionicons.ttf</string>
+	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs access to the microphone to take videos.</string>
 </dict>
 </plist>

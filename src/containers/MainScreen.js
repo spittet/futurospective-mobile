@@ -8,6 +8,7 @@
 import React                      from 'react';
 import PropTypes                  from 'prop-types';
 import { connect }                from 'react-redux';
+import Icon                       from 'react-native-vector-icons/Foundation';
 
 import { 
   Button, 
@@ -28,28 +29,35 @@ class MainScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          This is the main screen
-        </Text>
-        <Text style={styles.welcome}>
-          {db.getAllCapsules().length} Capsules
-        </Text>
-        <Button
-          onPress={() =>
-            this.props
-              .dispatch(NavigationActions
-                .navigate({ routeName: 'CapsuleList' })
-                )
-            }
-          title="Go to Capsules screen"
-        />
-        <Button
-          onPress={() =>
-            this.props
-              .dispatch(NavigationActions
-                .navigate({ routeName: 'CapsuleDuration' }))}
-          title="Go to capsule duration screen"
-        />
+        <View>
+          <Text style={styles.welcome}>
+            This is the main screen - Hello Ryan!
+          </Text>
+          <Text style={styles.welcome}>
+            {db.getAllCapsules().length} Capsules
+          </Text>
+        </View>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-between'}}>
+          
+          <Icon size={50} style={{padding:20}} />
+          <Icon name="record" size={50} style={{padding:20}}
+            onPress={() =>
+              this.props
+                .dispatch(NavigationActions
+                  .navigate({ routeName: 'CapsuleDuration' }))}
+            title="Record"
+          />
+          <Icon name="list" size={50} style={{padding:20}}
+            onPress={() =>
+              this.props
+                .dispatch(NavigationActions
+                  .navigate({ routeName: 'CapsuleList' })
+                  )
+              }
+            title="Capsules"
+          />
+          
+        </View>
       </View>
     );
   }
