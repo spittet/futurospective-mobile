@@ -12,10 +12,12 @@ import moment                       from 'moment'
 
 import { 
   Button, 
-  Text, 
+  Text,
+  TouchableHighlight,
   View 
 }                                   from 'react-native';
 import { ListView }                 from 'realm/react-native';
+import Icon                         from 'react-native-vector-icons/Ionicons';
 import styles                       from './styles';
 
 import { NavigationActions }        from 'react-navigation';
@@ -28,7 +30,7 @@ import {
 class CapsuleListScreen extends React.Component {
 
   static navigationOptions = {
-    title: 'Capsules Screen',
+    title: 'Your capsules',
   };
 
   constructor(props: Object) {
@@ -60,9 +62,6 @@ class CapsuleListScreen extends React.Component {
     .cloneWithRows(this.props.capsuleItems.items);
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          This is the Capsule List screen
-        </Text>
         {this.props
           .capsuleItems
           .items
@@ -70,16 +69,61 @@ class CapsuleListScreen extends React.Component {
         <ListView
           dataSource={dataSource}
           renderRow={(capsule) => 
-            <Button 
-              onPress={() => this._getCapsule(capsule.id)} 
-              title={
-                capsule.publishedAt + 
-                ' ' + capsule.status + 
-                ' Read:' + capsule.read
-              } 
-              disabled={moment().isBefore(moment(capsule.publishedAt))}
-            />
-          }
+          {
+            if (moment(capsule.publishedAt).isBefore()){
+              return(
+                <TouchableHighlight
+                  onPress={() => this._getCapsule(capsule.id)} 
+                >
+                  <View style={styles.capsuleListItem}>
+                    {capsule.read && 
+                    <View>
+                      <Icon 
+                        name="ios-film-outline" 
+                        size={30}
+                      />
+                    </View>
+                    ||
+                    <View>
+                      <Icon 
+                        name="ios-film" 
+                        size={30}
+                      />
+                    </View>
+                    }
+                    <View style={styles.capsuleItemText}>
+                      <Text style={styles.capsuleListItemPublished}>
+                        Published {moment(capsule.publishedAt).fromNow()}
+                      </Text>
+                      <Text style={styles.capsuleListItemCreated}>
+                        Created {moment(capsule.savedAt).fromNow()}
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableHighlight>
+              );
+            } else {
+              return (
+                <View style={styles.capsuleListItem}>
+                  <View>
+                    <Icon 
+                      name="ios-film" 
+                      size={30}
+                      style={styles.capsuleIconDisabled}
+                    />
+                  </View>
+                  <View style={styles.capsuleItemText}>
+                    <Text style={styles.capsuleListItemPublished}>
+                      Published {moment(capsule.publishedAt).fromNow()}
+                    </Text>
+                    <Text style={styles.capsuleListItemCreated}>
+                      Created {moment(capsule.savedAt).fromNow()}
+                    </Text>
+                  </View>
+                </View>
+              );
+            }
+          }}
         />
         }
       </View>

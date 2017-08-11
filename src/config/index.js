@@ -40,7 +40,8 @@ export const config = {
 export function locapsInit() {
   createCapsulesDirectory();
   utils.clearVideos();
-  utils.resetCapsules();
+  //utils.resetCapsules();
+  //utils.generateFakeCapsules();
 }
 
 function createCapsulesDirectory() {

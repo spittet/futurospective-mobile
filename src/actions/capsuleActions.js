@@ -86,24 +86,6 @@ export function saveNewCapsule(capsule: Capsule) {
 }
 
 /**
- * Publishes the new capsule
- */
-export function publishNewCapsule(capsule: Capsule) {
-  utils.listFilesInDirsForDebugging();
-  // Avoid publishing twice
-  if (capsule && capsule.status === config.CAPSULE_STATUS_SAVED) {
-    return {
-      type:           'PUBLISH_NEW_CAPSULE',
-      publishedAt:    moment().toISOString()
-    }
-  } else {
-    return {
-      type: ''
-    }
-  }
-}
-
-/**
  * Cancels a capsule and deletes the file from disk
  */
 export function cancelNewCapsule(capsule: Capsule) {

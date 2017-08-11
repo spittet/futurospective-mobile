@@ -3,6 +3,7 @@
 import RNFS                       from 'react-native-fs';
 import { config }                 from '../config';
 import db                         from '../db';
+import moment                     from 'moment';
 
 /* eslint-disable no-alert, no-console */
 
@@ -53,6 +54,42 @@ export function persistVideoFile(uri: string) {
 export function clearVideos(){
   clearCacheDirectory();
   clearCapsuleDirectory();
+}
+
+export function generateFakeCapsules(){
+  const futureCapsule = {
+    id: null,
+    uri:              'bla',
+    status:           2,
+    publishedAt:      moment().add(1, 'M').toISOString(),
+    savedAt:          moment().subtract(1, 'M').toISOString(),
+    read:             false
+  }
+  const pastUnreadCapsule = {
+    id: null,
+    uri:              'bla',
+    status:           2,
+    publishedAt:      moment().subtract(1, 'M').toISOString(),
+    savedAt:          moment().subtract(23, 'd').toISOString(),
+    read:             false
+  }
+  const pastReadCapsule = {
+    id: null,
+    uri:              'bla',
+    status:           2,
+    publishedAt:      moment().subtract(2, 'Y').toISOString(),
+    savedAt:          moment().subtract(13, 'd').toISOString(),
+    read:             true
+  }
+  db.createCapsule(futureCapsule);
+  db.createCapsule(futureCapsule);
+  db.createCapsule(futureCapsule);
+  db.createCapsule(pastUnreadCapsule);
+  db.createCapsule(pastUnreadCapsule);
+  db.createCapsule(pastUnreadCapsule);
+  db.createCapsule(pastReadCapsule);
+  db.createCapsule(pastReadCapsule);
+  db.createCapsule(pastReadCapsule);
 }
 
 // Remove videos from the cached dir

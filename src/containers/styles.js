@@ -150,6 +150,24 @@ const styles = StyleSheet.create({
   },
   previewVideoPlayButton: {
   },
+  capsuleListItem: {
+    padding: 10,
+    flexDirection: 'row',
+  },
+  capsuleListItemCreated: {
+    fontSize: 15,
+    color: '#999999',
+  },
+  capsuleListItemPublished: {
+    fontSize: 18
+  },
+  capsuleItemText: {
+    flex: 1,
+    paddingLeft: 10
+  },
+  capsuleIconDisabled:{
+    color: "#cccccc",
+  }
 });
 
 export default styles;
