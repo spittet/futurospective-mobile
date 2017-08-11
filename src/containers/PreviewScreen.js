@@ -17,6 +17,7 @@ import {
   TouchableOpacity, 
   View 
 }                                 from 'react-native';
+import Icon                       from 'react-native-vector-icons/Ionicons';
 import Video                      from 'react-native-video';
 import styles                     from './styles';
 
@@ -48,21 +49,27 @@ class PreviewScreen extends React.Component {
    * See https://github.com/react-community/react-navigation/issues/145 for
    * more details.
    */
+  
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Preview',
       headerLeft:
-        <TouchableOpacity
+        <Icon
+          name="ios-close"
+          size={40}
+          style={styles.previewTopButton}
           onPress={() => {
             navigation.state.params.handleCancel();
-            navigation.goBack();
+            navigation.goBack(); 
           }}
-        ><Text>Cancel</Text></TouchableOpacity>,
+        />,
       headerRight: 
-        <Button 
-          title='Save' 
-          onPress={() => navigation.state.params.handleSave()} 
-        />
+        <View style={styles.previewTopButton}>
+          <Button 
+            title='Save' 
+            onPress={() => navigation.state.params.handleSave()} 
+          />
+        </View>
     }
   };
 
@@ -167,24 +174,27 @@ class PreviewScreen extends React.Component {
             onProgress=   {this._onVideoProgress}
             onEnd=        {this._onVideoEnd}
             ref=          {(ref) => {this.player = ref}}
-            style=        {styles.previewVideoBackground}
+            style=        {styles.preview}
           />
-          <View style={styles.previewVideoControls}>
-          { 
-            !this.state.video.paused 
-            &&
-            <View style={styles.previewVideoPlayButton}>
-              <TouchableOpacity onPress={this._stopPlaying}>
-                <Text>Stop</Text>
-              </TouchableOpacity>
-            </View>
-            ||
-            <View style={styles.previewVideoPlayButton}>
-              <TouchableOpacity onPress={this._startPlaying}>
-                <Text>Start</Text>
-              </TouchableOpacity>
-            </View>
-          }
+          <View style={[styles.overlay, styles.bottomOverlay]}>
+            <View style={styles.buttonsSpace} />
+            { 
+              !this.state.video.paused 
+              &&
+              <Icon 
+                name="ios-square" 
+                size={50} 
+                style={styles.stopIcon}
+                onPress={() => this._stopPlaying()}
+              />
+              ||
+              <Icon 
+                name="ios-play-outline" 
+                size={50} 
+                style={styles.stopIcon}
+                onPress={() => this._startPlaying()}
+              />
+            }
           </View>
         </View>
       );

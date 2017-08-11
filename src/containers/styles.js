@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   stopIcon: {
     padding: 0,
-    color: '#666666',
+    color: '#cccccc',
     textAlign: 'center',
   },
   welcome: {
@@ -129,9 +129,12 @@ const styles = StyleSheet.create({
   buttonsSpace: {
     width: 10,
   },
+  previewTopButton: {
+    marginLeft: 20,
+    marginRight: 20,
+  },
   previewVideoBackground: {
     position: 'absolute',
-    flex: 1,
     top: 0,
     left: 0,
     bottom: 0,
