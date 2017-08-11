@@ -8,46 +8,57 @@
 import React                      from 'react';
 import PropTypes                  from 'prop-types';
 import { connect }                from 'react-redux';
-import Icon                       from 'react-native-vector-icons/Foundation';
+import Icon                       from 'react-native-vector-icons/Ionicons';
 
 import { 
-  Button, 
-  Text, 
+  Text,
   View 
 }                                 from 'react-native';
 import styles                     from './styles';
 
 import { NavigationActions }      from 'react-navigation';
-import db                         from '../db';
 
 class MainScreen extends React.Component {
 
   static navigationOptions = {
-    title: 'Home Screen',
+    title: 'Home',
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <View>
-          <Text style={styles.welcome}>
-            This is the main screen - Hello Ryan!
-          </Text>
-          <Text style={styles.welcome}>
-            {db.getAllCapsules().length} Capsules
-          </Text>
+        <View style={styles.homeCapsules}>
+          <View style={styles.homeCapsulesNoCapsules}>
+            <Text style={styles.homeCapsulesNoCapsulesText}>
+              Futurospective lets you record a time capsule for your future 
+              self.
+            </Text>
+            <Text style={[
+              styles.homeCapsulesNoCapsulesText, 
+              styles.lightText
+            ]}>
+              Aka let-current-you-remind-future-you-what-past-you-thought.
+            </Text>
+          </View>
         </View>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-between'}}>
+        
+        <View style={styles.homeToolbar}>
           
-          <Icon size={50} style={{padding:20}} />
-          <Icon name="record" size={50} style={{padding:20}}
+          <Icon size={40} style={styles.homeToolBarIcon} />
+          <Icon 
+            name="ios-add-circle-outline" 
+            size={40} 
+            style={styles.homeToolBarIcon}
             onPress={() =>
               this.props
                 .dispatch(NavigationActions
                   .navigate({ routeName: 'CapsuleDuration' }))}
             title="Record"
           />
-          <Icon name="list" size={50} style={{padding:20}}
+          <Icon 
+            name="ios-mail-outline" 
+            size={40} 
+            style={styles.homeToolBarIcon}
             onPress={() =>
               this.props
                 .dispatch(NavigationActions
@@ -65,7 +76,7 @@ class MainScreen extends React.Component {
 }
 
 MainScreen.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch:       PropTypes.func.isRequired,
 };
 
 export default connect()(MainScreen);

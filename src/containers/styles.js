@@ -10,8 +10,53 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  },welcome: {
+    flex: 1,
+    backgroundColor: '#ffffff'
+  },
+  lightText: {
+    color: '#999999'
+  },
+  homeCapsules:{
+    flex: 1,
+    justifyContent: 'center'
+  },
+  homeToolbar:{
+    height: 60,
+    flexDirection: 'row',
+    alignItems:'stretch',
+    borderTopWidth: 1,
+    borderTopColor: '#cccccc',
+  },
+  homeToolBarIcon:{
+    borderColor: '#000000',
+    borderWidth: 0,
+    flex: 1,
+    padding: 10,
+    color: '#666666',
+    textAlign: 'center',
+  },
+  homeCapsulesNoCapsules: {
+    margin: 30,
+  },
+  homeCapsulesNoCapsulesText: {
+    fontSize: 30,
+    fontWeight: '600',
+    textAlign: 'left',
+    color: '#333333',
+    marginBottom: 30
+  },
+  homeFirstCapsuleButton: {
+    backgroundColor: '#007AFF',
+    borderRadius: 10
+  },
+  homeFirstCapsuleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    padding: 20,
+    textAlign: 'center',
+  },
+  welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
