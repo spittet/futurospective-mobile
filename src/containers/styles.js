@@ -70,6 +70,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10
   },
+  recordIcon: {
+    padding: 0,
+    color: '#E46778',
+    textAlign: 'center',
+  },
+  stopIcon: {
+    padding: 0,
+    color: '#666666',
+    textAlign: 'center',
+  },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
@@ -89,10 +99,14 @@ const styles = StyleSheet.create({
   },
   topOverlay: {
     top: 0,
-    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.4)',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
+  },
+  recordHelpText: {
+    color: 'white',
+    fontSize: 20
   },
   bottomOverlay: {
     bottom: 0,
@@ -117,6 +131,7 @@ const styles = StyleSheet.create({
   },
   previewVideoBackground: {
     position: 'absolute',
+    flex: 1,
     top: 0,
     left: 0,
     bottom: 0,

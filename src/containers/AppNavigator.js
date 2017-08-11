@@ -16,7 +16,7 @@ import { addNavigationHelpers,
 
 import MainScreen               from './MainScreen';
 import CapsuleDurationScreen    from './CapsuleDurationScreen';
-import RecordScreen             from './RecordScreen';
+import CapsuleRecordScreen      from './CapsuleRecordScreen';
 import PreviewScreen            from './PreviewScreen';
 import CapsuleListScreen        from './CapsuleListScreen';
 import CapsuleDetailsScreen     from './CapsuleDetailsScreen';
@@ -24,7 +24,7 @@ import CapsuleDetailsScreen     from './CapsuleDetailsScreen';
 export const AppNavigator = StackNavigator({
   Main:                         { screen: MainScreen },
   CapsuleDuration:              { screen: CapsuleDurationScreen },
-  Record:                       { screen: RecordScreen },
+  Record:                       { screen: CapsuleRecordScreen },
   Preview:                      { screen: PreviewScreen },
   CapsuleList:                  { screen: CapsuleListScreen },
   CapsuleDetails:               { screen: CapsuleDetailsScreen }
