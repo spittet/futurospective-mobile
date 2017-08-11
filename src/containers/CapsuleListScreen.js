@@ -25,7 +25,7 @@ import {
 }                                   from '../actions';
 
 
-class MainScreen extends React.Component {
+class CapsuleListScreen extends React.Component {
 
   static navigationOptions = {
     title: 'Capsules Screen',
@@ -88,7 +88,7 @@ class MainScreen extends React.Component {
 
 }
 
-MainScreen.propTypes = {
+CapsuleListScreen.propTypes = {
   dispatch:       PropTypes.func.isRequired,
   capsuleItems:   PropTypes.object,
 };
@@ -99,4 +99,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(MainScreen);
+export default connect(mapStateToProps)(CapsuleListScreen);
