@@ -64,6 +64,7 @@ export function saveNewCapsule(capsule: Capsule) {
     capsule.uri =       utils.persistVideoFile(capsule.uri);
     capsule.status =    config.CAPSULE_STATUS_SAVED;
     capsule.savedAt =   moment().toISOString();
+    capsule.read =      false;
 
     db.createCapsule(capsule);
 
@@ -76,7 +77,8 @@ export function saveNewCapsule(capsule: Capsule) {
       type:           'SAVE_NEW_CAPSULE',
       uri:            capsule.uri,
       status:         capsule.status,
-      savedAt:        capsule.savedAt
+      savedAt:        capsule.savedAt,
+      read:           capsule.read
     }
   } else {
     return {
