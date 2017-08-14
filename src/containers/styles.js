@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   lightText: {
-    color: '#999999'
+    color: '#6DB8A9'
   },
   homeCapsules:{
     flex: 1,
@@ -159,6 +159,10 @@ const styles = StyleSheet.create({
     color: '#999999',
   },
   capsuleListItemPublished: {
+    fontSize: 18,
+    color: '#6DB8A9'
+  },
+  capsuleListItemNotPublished: {
     fontSize: 18
   },
   capsuleItemText: {
@@ -167,6 +171,9 @@ const styles = StyleSheet.create({
   },
   capsuleIconDisabled:{
     color: "#cccccc",
+  },
+  capsuleIconEnabled:{
+    color: '#6DB8A9'
   }
 });
 

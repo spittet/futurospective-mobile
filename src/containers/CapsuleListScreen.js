@@ -81,6 +81,7 @@ class CapsuleListScreen extends React.Component {
                       <Icon 
                         name="ios-film-outline" 
                         size={30}
+                        style={styles.capsuleIconEnabled}
                       />
                     </View>
                     ||
@@ -88,6 +89,7 @@ class CapsuleListScreen extends React.Component {
                       <Icon 
                         name="ios-film" 
                         size={30}
+                        style={styles.capsuleIconEnabled}
                       />
                     </View>
                     }
@@ -113,7 +115,7 @@ class CapsuleListScreen extends React.Component {
                     />
                   </View>
                   <View style={styles.capsuleItemText}>
-                    <Text style={styles.capsuleListItemPublished}>
+                    <Text style={styles.capsuleListItemNotPublished}>
                       Published {moment(capsule.publishedAt).fromNow()}
                     </Text>
                     <Text style={styles.capsuleListItemCreated}>
