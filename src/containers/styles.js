@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     flex: 1,
     padding: 10,
-    color: '#666666',
+    color: '#6DB8A9',
     textAlign: 'center',
   },
   homeCapsulesNoCapsules: {

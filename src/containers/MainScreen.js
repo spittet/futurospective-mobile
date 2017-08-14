@@ -43,7 +43,7 @@ class MainScreen extends React.Component {
           
           <Icon size={40} style={styles.homeToolBarIcon} />
           <Icon 
-            name="ios-add-circle-outline" 
+            name="ios-add-circle" 
             size={40} 
             style={styles.homeToolBarIcon}
             onPress={() =>
