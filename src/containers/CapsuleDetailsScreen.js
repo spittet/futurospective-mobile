@@ -16,6 +16,7 @@ import {
   TouchableOpacity, 
   View 
 }                               from 'react-native';
+import Icon                     from 'react-native-vector-icons/Ionicons';
 import Video                    from 'react-native-video';
 import styles                   from './styles';
 
@@ -34,13 +35,6 @@ class PreviewScreen extends React.Component {
     }
   }
 
-  /**
-   * Changing the default header
-   * React Navigation doesn't allow you to use the state right away so this is
-   * a workaround. 
-   * See https://github.com/react-community/react-navigation/issues/145 for
-   * more details.
-   */
   static navigationOptions = {
     title: 'Capsule Details'
   };
@@ -125,17 +119,19 @@ class PreviewScreen extends React.Component {
           { 
             !this.state.video.paused 
             &&
-            <View style={styles.previewVideoPlayButton}>
-              <TouchableOpacity onPress={this._stopPlaying}>
-                <Text>Stop</Text>
-              </TouchableOpacity>
-            </View>
+            <Icon 
+              name="ios-square" 
+              size={50} 
+              style={styles.stopIcon}
+              onPress={() => this._stopPlaying()}
+            />
             ||
-            <View style={styles.previewVideoPlayButton}>
-              <TouchableOpacity onPress={this._startPlaying}>
-                <Text>Start</Text>
-              </TouchableOpacity>
-            </View>
+            <Icon 
+              name="ios-play-outline" 
+              size={50} 
+              style={styles.stopIcon}
+              onPress={() => this._startPlaying()}
+            />
           }
           </View>
         </View>
