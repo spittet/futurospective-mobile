@@ -53,7 +53,7 @@ class MainScreen extends React.Component {
             title="Record"
           />
           <Icon 
-            name="ios-mail-outline" 
+            name="ios-archive-outline" 
             size={40} 
             style={styles.homeToolBarIcon}
             onPress={() =>

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   lightText: {
-    color: '#6DB8A9'
+    color: '#cccccc'
   },
   homeCapsules:{
     flex: 1,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     flex: 1,
     padding: 10,
-    color: '#6DB8A9',
+    color: '#5586BD',
     textAlign: 'center',
   },
   homeCapsulesNoCapsules: {
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     color: '#333333',
   },
   durationButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#5586BD',
     borderRadius: 10
   },
   durationButtonText: {
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   },
   capsuleListItemPublished: {
     fontSize: 18,
-    color: '#6DB8A9'
+    color: '#5586BD'
   },
   capsuleListItemNotPublished: {
     fontSize: 18
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     color: "#cccccc",
   },
   capsuleIconEnabled:{
-    color: '#6DB8A9'
+    color: '#5586BD'
   }
 });
 
