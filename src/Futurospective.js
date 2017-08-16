@@ -22,7 +22,7 @@ import { analyticsLogger }        from './middleware';
 
 locapsInit();
 
-export default class LocapsMobileApp extends React.Component {
+export default class FuturospectiveApp extends React.Component {
   
   store = createStore(AppReducer, applyMiddleware(logger, analyticsLogger));
 

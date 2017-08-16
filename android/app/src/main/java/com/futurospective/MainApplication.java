@@ -1,4 +1,4 @@
-package com.locapsmobile;
+package com.futurospective;
 
 import android.app.Application;
 

@@ -5,8 +5,8 @@ import {
   AppRegistry,
 } from 'react-native';
 
-import LocapsMobileApp from './src/LocapsMobile';
+import FuturospectiveApp from './src/Futurospective';
 
-AppRegistry.registerComponent('LocapsMobile', () => LocapsMobileApp);
+AppRegistry.registerComponent('Futurospective', () => FuturospectiveApp);
 
-export default LocapsMobileApp;
+export default FuturospectiveApp;
