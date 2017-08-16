@@ -27,7 +27,7 @@ class MainScreen extends React.Component {
   };
 
   componentDidMount() {
-    utils.trackScreenView('Main');
+    utils.trackEvent('app', 'opened');
   }
 
   render() {

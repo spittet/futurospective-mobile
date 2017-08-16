@@ -39,10 +39,6 @@ class CapsuleRecordScreen extends React.Component {
     };
   }
 
-  componentDidMount() {
-    utils.trackScreenView('CapsuleDuration');
-  }
-
   _updateDuration = (duration) => {
     this.setState({duration: duration});
   }

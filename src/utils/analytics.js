@@ -10,16 +10,16 @@ import {
   GoogleAnalyticsSettings, 
 } from 'react-native-google-analytics-bridge';
 
-GoogleAnalyticsSettings.setDispatchInterval(3);
+GoogleAnalyticsSettings.setDispatchInterval(20);
 
 export function trackScreenView(screen: string){
   const tracker = new GoogleAnalyticsTracker(config.GA_TRACKING_ID);
-  GoogleAnalyticsSettings.setDispatchInterval(3);
+  tracker.setAnonymizeIp(true);
   tracker.trackScreenView(screen);
 }
 
 export function trackEvent(category: string, action: string, options: ?Object) {
   const tracker = new GoogleAnalyticsTracker(config.GA_TRACKING_ID);
-  GoogleAnalyticsSettings.setDispatchInterval(3);
+  tracker.setAnonymizeIp(true);
   tracker.trackEvent(category, action, options);
 }

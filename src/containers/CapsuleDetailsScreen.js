@@ -47,10 +47,6 @@ class PreviewScreen extends React.Component {
     //this._loadData();
   }
 
-  componentDidMount() {
-    utils.trackScreenView('CapsuleDetails');
-  }
-
   _initLocalState = () => {
     this.state = {
       video: {

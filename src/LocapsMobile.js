@@ -18,11 +18,13 @@ import AppWithNavigationState     from './containers/AppNavigator';
 
 import { locapsInit }             from './config';
 
+import { analyticsLogger }        from './middleware';
+
 locapsInit();
 
 export default class LocapsMobileApp extends React.Component {
   
-  store = createStore(AppReducer, applyMiddleware(logger));
+  store = createStore(AppReducer, applyMiddleware(logger, analyticsLogger));
 
   render() {
     return (

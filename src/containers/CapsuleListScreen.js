@@ -43,10 +43,6 @@ class CapsuleListScreen extends React.Component {
     this._loadData();
   }
 
-  componentDidMount() {
-    utils.trackScreenView('CapsuleList');
-  }
-
   _loadData = () => {
     this.props.dispatch(getCapsules());
   }

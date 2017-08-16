@@ -75,10 +75,6 @@ class CapsuleRecordScreen extends React.Component {
     };
   }
 
-  componentDidMount() {
-    utils.trackScreenView('CapsuleRecord');
-  }
-
   // Sets a timeout after which the recording is automatically stop
   _setRecordingTimeout = () => {
     let recordingTimeoutID = setTimeout(() => {

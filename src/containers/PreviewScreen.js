@@ -98,8 +98,6 @@ class PreviewScreen extends React.Component {
       handleSave: this._saveCapsule,
       handleCancel: this._cancelCapsule
     });
-
-    utils.trackScreenView('Preview');
   }
 
   _onVideoLoad = (data) => {
