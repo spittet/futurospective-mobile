@@ -5,113 +5,73 @@
  * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import moment from 'moment';
+import React                      from 'react';
+import PropTypes                  from 'prop-types';
+import { connect }                from 'react-redux';
 
+import Icon                       from 'react-native-vector-icons/Ionicons';
 import { 
-  Button, 
-  Text, 
+  Text,
   View 
-} from 'react-native';
-import styles from './styles';
+}                                 from 'react-native';
+import styles                     from './styles';
 
-import { config } from '../config';
-import { setNewCapsulePublishDate } from '../actions';
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions }      from 'react-navigation';
+
+import utils                      from '../utils';
 
 class MainScreen extends React.Component {
 
   static navigationOptions = {
-    title: 'Home Screen',
+    title: 'Home',
   };
 
-  setCapsulePublishDate = async (period: string) => {
-    let publishedAt;
-
-    switch(period) {
-      case config.CAPSULE_PERIOD_1MIN:
-        publishedAt = moment().add(1, 'm');
-        break;
-      case config.CAPSULE_PERIOD_2W:
-        publishedAt = moment().add(2, 'w');
-        break;
-      case config.CAPSULE_PERIOD_1M:
-        publishedAt = moment().add(1, 'M');
-        break;
-      case config.CAPSULE_PERIOD_3M:
-        publishedAt = moment().add(3, 'M');
-        break;
-      case config.CAPSULE_PERIOD_6M:
-        publishedAt = moment().add(6, 'M');
-        break;
-      case config.CAPSULE_PERIOD_12M:
-        publishedAt = moment().add(12, 'M');
-        break;
-      default:
-        publishedAt = moment();
-
-    }
-    
-    await this.props.dispatch(setNewCapsulePublishDate(publishedAt.toISOString()));
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'Record' }));
+  componentDidMount() {
+    utils.trackEvent('app', 'opened');
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          This is the main screen
-        </Text>
-        <Button
-          onPress={() =>
-            this.props
-              .dispatch(NavigationActions.navigate({ routeName: 'Record' }))}
-          title="Go to record screen"
-        />
-        <Button
-          onPress={() =>
-            this.props
-              .dispatch(NavigationActions.navigate({ routeName: 'Preview' }))}
-          title="Go to preview screen"
-        />
-        <Button
-          onPress={() => {
-            this.setCapsulePublishDate(config.CAPSULE_PERIOD_1MIN);
-          }}
-          title="Record a 1min capsule"
-        />
-        <Button
-          onPress={() => {
-            this.setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
-          }}
-          title="Record a 2W capsule"
-        />
-        <Button
-          onPress={() => {
-            this.setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
-          }}
-          title="Record a 1M capsule"
-        />
-        <Button
-          onPress={() => {
-            this.setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
-          }}
-          title="Record a 3M capsule"
-        />
-        <Button
-          onPress={() => {
-            this.setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
-          }}
-          title="Record a 6M capsule"
-        />
-        <Button
-          onPress={() => {
-            this.setCapsulePublishDate(config.CAPSULE_PERIOD_2W);
-          }}
-          title="Record a 1Y capsule"
-        />
+        <View style={styles.homeCapsules}>
+          <View style={styles.homeCapsulesNoCapsules}>
+            <Text style={[styles.bigText, styles.homeTitle]}>
+              Futurospective lets you record a time capsule for your future 
+              self.
+            </Text>
+            <Text style={[styles.bigText, styles.lightText]}>
+              Aka let-current-you-remind-future-you-what-past-you-thought.
+            </Text>
+          </View>
+        </View>
+        
+        <View style={styles.homeToolbar}>
+          
+          <Icon size={40} style={styles.homeToolBarIcon} />
+          <Icon 
+            name="ios-add-circle" 
+            size={40} 
+            style={styles.homeToolBarIcon}
+            onPress={() =>
+              this.props
+                .dispatch(NavigationActions
+                  .navigate({ routeName: 'CapsuleDuration' }))}
+            title="Record"
+          />
+          <Icon 
+            name="ios-archive-outline" 
+            size={40} 
+            style={styles.homeToolBarIcon}
+            onPress={() =>
+              this.props
+                .dispatch(NavigationActions
+                  .navigate({ routeName: 'CapsuleList' })
+                  )
+              }
+            title="Capsules"
+          />
+          
+        </View>
       </View>
     );
   }
@@ -119,7 +79,7 @@ class MainScreen extends React.Component {
 }
 
 MainScreen.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch:       PropTypes.func.isRequired,
 };
 
 export default connect()(MainScreen);

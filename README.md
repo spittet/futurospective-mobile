@@ -56,3 +56,7 @@ Testing with Enzyme is broken - need to get back to simple usage of Jest
 
 ## Links
 
+- https://github.com/bosung90/RNStorage/ for repo structure inspiration
+- https://realm.io/docs/javascript/latest/
+- https://medium.com/dailyjs/11-mistakes-ive-made-during-react-native-redux-app-development-8544e2be9a9
+

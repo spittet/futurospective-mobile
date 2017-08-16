@@ -7,23 +7,27 @@
  * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React                      from 'react';
+import PropTypes                  from 'prop-types';
+import { connect }                from 'react-redux';
 
 import { 
   Button, 
   Text, 
   TouchableOpacity, 
   View 
-} from 'react-native';
-import Video from 'react-native-video';
-import styles from './styles';
+}                                 from 'react-native';
+import Icon                       from 'react-native-vector-icons/Ionicons';
+import Video                      from 'react-native-video';
+import styles                     from './styles';
 
 import { 
   saveNewCapsule,
   cancelNewCapsule 
-} from '../actions';
+}                                 from '../actions';
+import { NavigationActions }      from 'react-navigation';
+
+import utils                      from '../utils';
 
 class PreviewScreen extends React.Component {
 
@@ -33,10 +37,10 @@ class PreviewScreen extends React.Component {
   // screen.
   state: {
     video: {
-      uri: ?string,
-      paused: boolean,
-      currentTime: number,
-      duration: number,
+      uri:            ?string,
+      paused:         boolean,
+      currentTime:    number,
+      duration:       number,
     }
   }
 
@@ -47,33 +51,43 @@ class PreviewScreen extends React.Component {
    * See https://github.com/react-community/react-navigation/issues/145 for
    * more details.
    */
+  
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Preview',
       headerLeft:
-        <TouchableOpacity
+        <Icon
+          name="ios-close"
+          size={40}
+          style={styles.previewTopButton}
           onPress={() => {
             navigation.state.params.handleCancel();
-            navigation.goBack();
+            navigation.goBack(); 
           }}
-        ><Text>Cancel</Text></TouchableOpacity>,
+        />,
       headerRight: 
-        <Button 
-          title='Save' 
-          onPress={() => navigation.state.params.handleSave()} 
-        />
+        <View style={styles.previewTopButton}>
+          <Button 
+            title='Save' 
+            onPress={() => navigation.state.params.handleSave()} 
+          />
+        </View>
     }
-  }
+  };
 
   constructor(props: Object) {
     super(props);
+    this._initLocalState();
+    
+  }
 
+  _initLocalState = () => {
     this.state = {
       video: {
-        uri: this.props.newCapsule.uri || null,
-        paused: true,
-        currentTime: 0.0,
-        duration: 0.0,
+        uri:          this.props.currentCapsule.uri || null,
+        paused:       true,
+        currentTime:  0.0,
+        duration:     0.0,
       }
     }
     this.player = null;
@@ -81,12 +95,12 @@ class PreviewScreen extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
-      handleSave: this.saveCapsule,
-      handleCancel: this.cancelCapsule
+      handleSave: this._saveCapsule,
+      handleCancel: this._cancelCapsule
     });
   }
 
-  onVideoLoad = (data) => {
+  _onVideoLoad = (data) => {
     this.setState({
       video: {
         ...this.state.video,
@@ -96,7 +110,7 @@ class PreviewScreen extends React.Component {
     this.player.seek(0);
   }
 
-  onVideoProgress = (data) => {
+  _onVideoProgress = (data) => {
     this.setState({
       video: {
         ...this.state.video,
@@ -105,19 +119,31 @@ class PreviewScreen extends React.Component {
     });
   }
 
-  saveCapsule = () => {
-    this.props.dispatch(saveNewCapsule(this.props.newCapsule));
+  _saveCapsule = async () => {
+    await this.props.dispatch(saveNewCapsule(this.props.currentCapsule));
+
+    this._navigateBackToHome(); 
   }
 
-  cancelCapsule = () => {
-    this.props.dispatch(cancelNewCapsule(this.props.newCapsule));
+  _cancelCapsule = () => {
+    this.props.dispatch(cancelNewCapsule(this.props.currentCapsule));
   }
 
-  onVideoEnd = () => {
-    this.stopPlaying();
+  _navigateBackToHome = () => {
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Main'})
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
   }
 
-  stopPlaying = () => {
+  _onVideoEnd = () => {
+    this._stopPlaying();
+  }
+
+  _stopPlaying = () => {
     this.setState({
       video: {
         ...this.state.video,
@@ -127,7 +153,7 @@ class PreviewScreen extends React.Component {
     this.player.seek(0);
   }
 
-  startPlaying = () => {
+  _startPlaying = () => {
     this.setState({
       video: {
         ...this.state.video,
@@ -141,35 +167,36 @@ class PreviewScreen extends React.Component {
       return (
         <View style={styles.container}>
           <Video 
-            source={{uri:this.state.video.uri}} 
-            volume={1.0}
-            rate={1.0}
-            paused={this.state.video.paused}
-            resizeMode="cover"
-            onLoad={this.onVideoLoad}
-            onProgress={this.onVideoProgress}
-            onEnd={this.onVideoEnd}
-            ref={(ref) => {
-              this.player = ref
-            }}
-            style={styles.previewVideoBackground}
+            source=       {{uri:this.state.video.uri}} 
+            volume=       {1.0}
+            rate=         {1.0}
+            paused=       {this.state.video.paused}
+            resizeMode=   "cover"
+            onLoad=       {this._onVideoLoad}
+            onProgress=   {this._onVideoProgress}
+            onEnd=        {this._onVideoEnd}
+            ref=          {(ref) => {this.player = ref}}
+            style=        {styles.preview}
           />
-          <View style={styles.previewVideoControls}>
-          { 
-            !this.state.video.paused 
-            &&
-            <View style={styles.previewVideoPlayButton}>
-              <TouchableOpacity onPress={this.stopPlaying}>
-                <Text>Stop</Text>
-              </TouchableOpacity>
-            </View>
-            ||
-            <View style={styles.previewVideoPlayButton}>
-              <TouchableOpacity onPress={this.startPlaying}>
-                <Text>Start</Text>
-              </TouchableOpacity>
-            </View>
-          }
+          <View style={[styles.overlay, styles.bottomOverlay]}>
+            <View style={styles.buttonsSpace} />
+            { 
+              !this.state.video.paused 
+              &&
+              <Icon 
+                name="ios-square" 
+                size={50} 
+                style={styles.stopIcon}
+                onPress={() => this._stopPlaying()}
+              />
+              ||
+              <Icon 
+                name="ios-play-outline" 
+                size={50} 
+                style={styles.stopIcon}
+                onPress={() => this._startPlaying()}
+              />
+            }
           </View>
         </View>
       );
@@ -185,14 +212,14 @@ class PreviewScreen extends React.Component {
 }
 
 PreviewScreen.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  newCapsule: PropTypes.object,
-  navigation: PropTypes.object
+  dispatch:         PropTypes.func.isRequired,
+  currentCapsule:   PropTypes.object,
+  navigation:       PropTypes.object
 }
 
 const mapStateToProps = (state) => {
   return {
-    newCapsule: state.newCapsule
+    currentCapsule: state.currentCapsule
   }
 }
 
