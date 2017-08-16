@@ -4863,6 +4863,10 @@ react-native-fs@^2.3.3:
     base-64 "^0.1.0"
     utf8 "^2.1.1"
 
+react-native-google-analytics-bridge@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-google-analytics-bridge/-/react-native-google-analytics-bridge-5.2.2.tgz#a50550f07c65c20fb69d0b4ca9cde494d58403ce"
+
 react-native-push-notification@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-3.0.0.tgz#00282ea656443e89df6057f14b10500e7b89551f"

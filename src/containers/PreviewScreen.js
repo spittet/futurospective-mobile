@@ -27,6 +27,8 @@ import {
 }                                 from '../actions';
 import { NavigationActions }      from 'react-navigation';
 
+import utils                      from '../utils';
+
 class PreviewScreen extends React.Component {
 
   player: any;
@@ -96,6 +98,8 @@ class PreviewScreen extends React.Component {
       handleSave: this._saveCapsule,
       handleCancel: this._cancelCapsule
     });
+
+    utils.trackScreenView('Preview');
   }
 
   _onVideoLoad = (data) => {

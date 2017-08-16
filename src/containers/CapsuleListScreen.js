@@ -26,6 +26,8 @@ import {
   getCapsule
 }                                   from '../actions';
 
+import utils                        from '../utils';
+
 
 class CapsuleListScreen extends React.Component {
 
@@ -39,6 +41,10 @@ class CapsuleListScreen extends React.Component {
 
   componentWillMount() {
     this._loadData();
+  }
+
+  componentDidMount() {
+    utils.trackScreenView('CapsuleList');
   }
 
   _loadData = () => {

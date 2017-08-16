@@ -19,6 +19,8 @@ import { config }                     from '../config';
 import { setNewCapsulePublishDate }   from '../actions';
 import { NavigationActions }          from 'react-navigation';
 
+import utils                          from '../utils';
+
 class CapsuleRecordScreen extends React.Component {
 
   static navigationOptions = {
@@ -35,6 +37,10 @@ class CapsuleRecordScreen extends React.Component {
     this.state = {
       duration: config.CAPSULE_PERIOD_1M
     };
+  }
+
+  componentDidMount() {
+    utils.trackScreenView('CapsuleDuration');
   }
 
   _updateDuration = (duration) => {

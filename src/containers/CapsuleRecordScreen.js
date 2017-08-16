@@ -26,6 +26,8 @@ import {
 }                                 from '../actions';
 import type Capsule               from '../reducers';
 
+import utils                      from '../utils';
+
 class CapsuleRecordScreen extends React.Component {
 
   camera: any;
@@ -71,6 +73,10 @@ class CapsuleRecordScreen extends React.Component {
       recordStoppedByUser:        false,
       recordingTimeoutID:         null
     };
+  }
+
+  componentDidMount() {
+    utils.trackScreenView('CapsuleRecord');
   }
 
   // Sets a timeout after which the recording is automatically stop

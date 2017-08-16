@@ -34,7 +34,8 @@ export const config = {
   CAPSULE_PERIOD_1M:              'CAPSULE_PERIOD_1M',
   CAPSULE_PERIOD_3M:              'CAPSULE_PERIOD_3M',
   CAPSULE_PERIOD_6M:              'CAPSULE_PERIOD_6M',
-  CAPSULE_PERIOD_12M:             'CAPSULE_PERIOD_12M', 
+  CAPSULE_PERIOD_12M:             'CAPSULE_PERIOD_12M',
+  GA_TRACKING_ID:                 'UA-104685259-1',
 }
 
 export function locapsInit() {

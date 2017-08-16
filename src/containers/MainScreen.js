@@ -18,11 +18,17 @@ import styles                     from './styles';
 
 import { NavigationActions }      from 'react-navigation';
 
+import utils                      from '../utils';
+
 class MainScreen extends React.Component {
 
   static navigationOptions = {
     title: 'Home',
   };
+
+  componentDidMount() {
+    utils.trackScreenView('Main');
+  }
 
   render() {
     return (

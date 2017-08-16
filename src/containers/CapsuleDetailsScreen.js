@@ -20,6 +20,8 @@ import Icon                     from 'react-native-vector-icons/Ionicons';
 import Video                    from 'react-native-video';
 import styles                   from './styles';
 
+import utils                    from '../utils';
+
 class PreviewScreen extends React.Component {
 
   player: any;
@@ -43,6 +45,10 @@ class PreviewScreen extends React.Component {
     super(props);
     this._initLocalState();
     //this._loadData();
+  }
+
+  componentDidMount() {
+    utils.trackScreenView('CapsuleDetails');
   }
 
   _initLocalState = () => {
