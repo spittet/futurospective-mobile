@@ -24,7 +24,7 @@ PushNotification.configure({
 // TODO: AFAIK the capsule status should be removable - at least for published.
 export const config = {
   CAPSULES_DIR:                   RNFS.DocumentDirectoryPath + '/capsules',
-  MAX_RECORDING_DURATION:         10000,      // Recording timeout
+  MAX_RECORDING_DURATION:         10 * 60 * 1000,  // Recording timeout in ms
   CAPSULE_STATUS_NEW:             0,          // Initial state of a new capsule
   CAPSULE_STATUS_RECORDED:        1,          // Recorded state for previews
   CAPSULE_STATUS_SAVED:           2,          // Capsule is persisted
