@@ -8,7 +8,9 @@ For more details go to http://futurospective.com.
 
 ## About this repo
 
-This is a React Native application built with Node 6. 
+This is a React Native application built with Node 6.
+
+The Delorean icon is a [free Vector Graphics by Vecteezy.com](https://www.vecteezy.com/vector-art/136991-free-delorean-vector-illustration).
 
 ## Installation
 
