@@ -21,6 +21,33 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="22" />
 
+    <compatible-screens>
+      <screen android:screenSize="small" android:screenDensity="ldpi" />
+      <screen android:screenSize="small" android:screenDensity="mdpi" />
+      <screen android:screenSize="small" android:screenDensity="hdpi" />
+      <screen android:screenSize="small" android:screenDensity="xhdpi" />
+      <screen android:screenSize="small" android:screenDensity="420" />
+      <screen android:screenSize="small" android:screenDensity="480" />
+      <screen android:screenSize="small" android:screenDensity="560" />
+      <screen android:screenSize="small" android:screenDensity="640" />
+      <screen android:screenSize="normal" android:screenDensity="ldpi" />
+      <screen android:screenSize="normal" android:screenDensity="mdpi" />
+      <screen android:screenSize="normal" android:screenDensity="hdpi" />
+      <screen android:screenSize="normal" android:screenDensity="xhdpi" />
+      <screen android:screenSize="normal" android:screenDensity="420" />
+      <screen android:screenSize="normal" android:screenDensity="480" />
+      <screen android:screenSize="normal" android:screenDensity="560" />
+      <screen android:screenSize="normal" android:screenDensity="640" />
+      <screen android:screenSize="large" android:screenDensity="ldpi" />
+      <screen android:screenSize="large" android:screenDensity="mdpi" />
+      <screen android:screenSize="large" android:screenDensity="hdpi" />
+      <screen android:screenSize="large" android:screenDensity="xhdpi" />
+      <screen android:screenSize="large" android:screenDensity="420" />
+      <screen android:screenSize="large" android:screenDensity="480" />
+      <screen android:screenSize="large" android:screenDensity="560" />
+      <screen android:screenSize="large" android:screenDensity="640" />
+    </compatible-screens>
+
     <application
       android:name=".MainApplication"
       android:allowBackup="true"
@@ -32,7 +59,8 @@
         android:label="@string/app_name" 
         android:theme="@style/SplashTheme"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-        android:windowSoftInputMode="adjustResize">
+        android:windowSoftInputMode="adjustResize"
+        android:screenOrientation="portrait">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
