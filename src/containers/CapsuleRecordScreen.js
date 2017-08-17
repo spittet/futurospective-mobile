@@ -45,8 +45,7 @@ class CapsuleRecordScreen extends React.Component {
       captureQuality:             number
     },
     isRecording:                  boolean,
-    recordStoppedByUser:          boolean,
-    recordingTimeoutID:           ?number
+    recordStoppedByUser:          boolean
   };
 
   static navigationOptions = {
@@ -70,26 +69,8 @@ class CapsuleRecordScreen extends React.Component {
         captureQuality:           Camera.constants.CaptureQuality.medium
       },
       isRecording:                false,
-      recordStoppedByUser:        false,
-      recordingTimeoutID:         null
+      recordStoppedByUser:        false
     };
-  }
-
-  // Sets a timeout after which the recording is automatically stop
-  _setRecordingTimeout = () => {
-    let recordingTimeoutID = setTimeout(() => {
-      this._stopRecording();
-    }, config.MAX_RECORDING_DURATION);
-
-    this.setState({
-      recordingTimeoutID: recordingTimeoutID
-    });
-  }
-
-  // Clears the recording timeout to prevent leaks
-  _clearRecordingTimeout = () => {
-    this.state.recordingTimeoutID &&
-      clearTimeout(this.state.recordingTimeoutID);
   }
 
   _startRecording = () => {
@@ -97,13 +78,12 @@ class CapsuleRecordScreen extends React.Component {
       
       let captureOptions = {
         mode: this.state.camera.captureMode,
-        audio: this.state.camera.captureAudio
+        audio: this.state.camera.captureAudio,
+        totalSeconds: config.MAX_RECORDING_DURATION,
       }
 
       this.camera.capture(captureOptions)
         .then(async (data) => { // Record new video to global state
-
-          this._clearRecordingTimeout();
 
           let capsule: Capsule = {
             uri: data.path
@@ -121,8 +101,6 @@ class CapsuleRecordScreen extends React.Component {
             this.props.dispatch(cancelNewCapsule(capsule));
           }
         });
-
-      this._setRecordingTimeout();
       
       this.setState({
         isRecording: true,
