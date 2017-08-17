@@ -11,7 +11,6 @@ import { connect }                  from 'react-redux';
 import moment                       from 'moment'
 
 import { 
-  Button, 
   Text,
   TouchableHighlight,
   View 
@@ -25,8 +24,6 @@ import {
   getCapsules,
   getCapsule
 }                                   from '../actions';
-
-import utils                        from '../utils';
 
 
 class CapsuleListScreen extends React.Component {

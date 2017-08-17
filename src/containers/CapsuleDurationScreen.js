@@ -5,9 +5,7 @@ import React                          from 'react';
 import PropTypes                      from 'prop-types';
 import { connect }                    from 'react-redux';
 
-import Icon                           from 'react-native-vector-icons/Ionicons';
 import { 
-  Button,
   Picker, 
   Text,
   TouchableHighlight,
@@ -18,8 +16,6 @@ import styles                         from './styles';
 import { config }                     from '../config';
 import { setNewCapsulePublishDate }   from '../actions';
 import { NavigationActions }          from 'react-navigation';
-
-import utils                          from '../utils';
 
 class CapsuleRecordScreen extends React.Component {
 

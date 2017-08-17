@@ -14,7 +14,6 @@ import { connect }                from 'react-redux';
 
 import { View }                   from 'react-native';
 import Camera                     from 'react-native-camera';
-import LCTouchableImage           from '../components/LCTouchableImage';
 import Icon                       from 'react-native-vector-icons/Ionicons';
 import styles                     from './styles';
 
@@ -25,8 +24,6 @@ import {
   recordNewCapsule, 
 }                                 from '../actions';
 import type Capsule               from '../reducers';
-
-import utils                      from '../utils';
 
 class CapsuleRecordScreen extends React.Component {
 

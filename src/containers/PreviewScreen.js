@@ -14,7 +14,6 @@ import { connect }                from 'react-redux';
 import { 
   Button, 
   Text, 
-  TouchableOpacity, 
   View 
 }                                 from 'react-native';
 import Icon                       from 'react-native-vector-icons/Ionicons';
@@ -26,8 +25,6 @@ import {
   cancelNewCapsule 
 }                                 from '../actions';
 import { NavigationActions }      from 'react-navigation';
-
-import utils                      from '../utils';
 
 class PreviewScreen extends React.Component {
 
