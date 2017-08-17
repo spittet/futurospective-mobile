@@ -55,7 +55,6 @@ class CapsuleRecordScreen extends React.Component {
             style={[styles.separator]}
             selectedValue={this.state.duration}
             onValueChange={(duration) => this._updateDuration(duration)}>
-            <Picker.Item label="1 minute" value={config.CAPSULE_PERIOD_1MIN} />
             <Picker.Item label="2 weeks"  value={config.CAPSULE_PERIOD_2W} />
             <Picker.Item label="1 month"  value={config.CAPSULE_PERIOD_1M} />
             <Picker.Item label="3 months" value={config.CAPSULE_PERIOD_3M} />
