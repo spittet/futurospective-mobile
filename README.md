@@ -1,15 +1,14 @@
-# Locaps Mobile Client
+# Futurospective Mobile Client
 
-This repository contains the code for the mobile client of locaps.
+This repository contains the code for the mobile client of futurospective.
 
-Locaps is an self-chat time-capsule app that allows users to talk to future version of themselves.
+Futurospective is a time-capsule app that lets users leave messages to themselves in the future.
+
+For more details go to http://futurospective.com.
 
 ## About this repo
 
 This is a React Native application built with Node 6. 
-
-Current hopes:
-The application sends video straight to S3 and records the metadata to the Rails backend
 
 ## Installation
 
@@ -26,10 +25,10 @@ To clone and run this application you'll need [Git](https://git-scm.com/), [Home
 
 ```bash
 # Clone the repository
-$ git clone ssh://git@bitbucket.org/locaps/locaps-mobile.git
+$ git clone git@bitbucket.org:futurospective/futurospective-mobile.git
 
 # Go into the repository
-$ cd locaps-mobile
+$ cd futurospective-mobile
 
 # Install Node via NVM. This will install the version mentioned in the .nvmrc file.
 $ nvm install
@@ -52,11 +51,16 @@ $ yarn
 
 ## Running tests
 
-Testing with Enzyme is broken - need to get back to simple usage of Jest
+```bash
+# Static type checking with flow
+$ npm run flow
+# Linting
+$ npm run lint
+```
 
-## Links
+Testing with _npm test_ is currently broken - haven't had the time to get my head around this yet as Enzyme does not support react v16-alpha (which makes total sense).
 
-- https://github.com/bosung90/RNStorage/ for repo structure inspiration
-- https://realm.io/docs/javascript/latest/
-- https://medium.com/dailyjs/11-mistakes-ive-made-during-react-native-redux-app-development-8544e2be9a9
+## License
+
+Released under MIT License
 
