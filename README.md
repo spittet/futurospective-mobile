@@ -62,6 +62,13 @@ $ npm run lint
 
 Testing with _npm test_ is currently broken - haven't had the time to get my head around this yet as Enzyme does not support react v16-alpha (which makes total sense).
 
+## Contributing
+
+  1. Fork the repo.
+  2. Make changes on the develop branch.
+  3. Please write a meaningful commit message, try to use 80 chars lines.
+  4. Submit a pull request.
+
 ## License
 
 Released under MIT License
