@@ -4,7 +4,7 @@ This repository contains the code for the mobile client of futurospective.
 
 Futurospective is a time-capsule app that lets users leave messages to themselves in the future.
 
-For more details go to http://futurospective.com.
+For more details go to http://futurospective.bitbucket.io.
 
 ## About this repo
 
