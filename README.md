@@ -73,3 +73,4 @@ Testing with _npm test_ is currently broken - haven't had the time to get my hea
 
 Released under MIT License
 
+Thanks!
